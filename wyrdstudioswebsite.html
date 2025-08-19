@@ -88,6 +88,33 @@
             }
         }
 
+        /* Custom Scrollbar Styling */
+        /* Webkit browsers (Chrome, Safari, Edge) */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+            border-radius: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 6px;
+            border: 2px solid var(--bg-secondary);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-primary);
+        }
+
+        /* Firefox */
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: var(--border-color) var(--bg-secondary);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -448,7 +475,8 @@
             justify-content: center;
             gap: 1rem;
             flex-wrap: wrap;
-            margin-top: 1rem;
+            margin-top: auto;
+            padding-top: 1.5rem;
         }
 
         .primary-cta,
@@ -1684,13 +1712,16 @@
         }
 
         .workshop-category {
-            padding: 1rem;
+            padding: 1.5rem;
             background: linear-gradient(135deg, var(--card-bg) 0%, var(--bg-secondary) 100%);
             border-radius: 16px;
             border-left: 4px solid #D7C10C;
             transition: all 0.2s ease;
             position: relative;
             text-align: left;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
 
         .workshop-category:hover {
@@ -1721,7 +1752,7 @@
             font-size: 0.9rem;
             color: var(--text-secondary);
             line-height: 1.6;
-            margin-bottom: 0.75rem;
+            margin-bottom: 1rem;
             text-align: left;
         }
 
@@ -1844,7 +1875,7 @@
             border: 1px solid var(--border-color);
             border-radius: 12px;
             padding: 1.25rem;
-            margin: 1rem 0;
+            margin: 1.5rem 0;
             text-align: left;
         }
 
@@ -2663,14 +2694,14 @@
                                     <strong>Perfect for:</strong> Ambitious founders and agile teams ready to leverage AI for immediate efficiency and a powerful competitive edge.
                                 </p>
                                 <p class="workshop-description">
-                                    This is more than an introduction; it's a fundamental training in applied AI. In this concentrated, hands-on session, we'll move from AI curiosity to AI capability. Your team will learn to leverage core AI tools for everyday business applications and walk away with a custom-built roadmap for immediate impact.
+                                    This is more than an introduction; it's a fundamental training in applied AI. In this concentrated, hands-on session, we translate theory into practice, moving you from AI curiosity to AI capability. We focus on mastering core AI tools for powerful business applications. Your team will leave with a clear understanding and a custom-built roadmap to integrate AI into your daily operations for immediate impact and efficiency.
                                 </p>
                                 <div class="workshop-pricing">
                                     <h5>Your Investment in a Smarter Future: $5,000</h5>
                                     <p>Think of it not as a cost, but as your first and most important step towards scalable growth and reclaiming countless hours of manual work.</p>
                                 </div>
                                 <div class="cta-container">
-                                    <a href="#" class="primary-cta">[BOOK YOUR SPARK SESSION]</a>
+                                    <a href="#" class="primary-cta">Book Spark</a>
                                 </div>
                             </div>
 
@@ -2685,14 +2716,14 @@
                                     <strong>Perfect for:</strong> Organizations ready to systematize their operations and scale effectively with advanced AI and automation.
                                 </p>
                                 <p class="workshop-description">
-                                    Go beyond the basics and start building intelligent systems. In this immersive session, we'll work with your entire team to master advanced AI applications and no-code platforms. You'll learn to design and implement custom AI workflows, automate complex internal processes, and unlock new operational efficiencies. We don't just teach the tools; we help you weave them into the fabric of your business for team-wide adoption and a tangible return on investment.
+                                    Go beyond the basics and start building intelligent, automated systems. In this immersive session, your team will master advanced AI applications and no-code platforms to design and implement custom workflows. We focus on automating complex internal processes to unlock new operational efficiencies. Our goal is to weave these capabilities into the fabric of your business, ensuring team-wide adoption and a tangible return on investment.
                                 </p>
                                 <div class="workshop-pricing">
                                     <h5>Your Investment in Team-Wide Amplification: $10,000</h5>
                                     <p>Empower your entire core team for a fraction of the cost of a single new specialized hire. You're not just buying a workshop; you're investing in a more efficient, innovative, and collaborative workforce.</p>
                                 </div>
                                 <div class="cta-container">
-                                    <a href="#" class="primary-cta">[SCHEDULE THE ACCELERATOR]</a>
+                                    <a href="#" class="primary-cta">Book Accelerator</a>
                                 </div>
                             </div>
 
@@ -2707,14 +2738,14 @@
                                     <strong>Perfect for:</strong> Established organizations committed to leading their industry and embedding AI as a long-term, strategic advantage.
                                 </p>
                                 <p class="workshop-description">
-                                    This is a bespoke partnership to deeply embed AI into your company's DNA. We become an extension of your team, conducting a deep analysis of your organization's needs and opportunities. Together, we co-design and implement enterprise-grade AI systems and train your team not just to use AI, but to think with it. This is about fostering a culture of innovation that will serve as a competitive advantage for years to come.
+                                    This bespoke partnership deeply embeds AI into your company's DNA. We become an extension of your team to co-design and implement enterprise-grade AI systems tailored to your unique needs. More than just installing tools, we train your team to operate with an AI-first mindset, turning this technology into a core business function. The outcome is a sustainable culture of innovation and a powerful, long-term competitive advantage.
                                 </p>
                                 <div class="workshop-pricing">
                                     <h5>A Custom Partnership for Transformational Results: Starting at $25,000</h5>
                                     <p>Scaled to organization size and scope. This is a strategic investment in the long-term resilience and intelligence of your entire organization. Let's build your future, together.</p>
                                 </div>
                                 <div class="cta-container">
-                                    <a href="#" class="primary-cta">[REQUEST A CONSULTATION]</a>
+                                    <a href="#" class="primary-cta">Book Transformation</a>
                                 </div>
                             </div>
                         </div>
@@ -2746,7 +2777,7 @@
                             Stop letting the future happen to you. Let's build it together.
                         </p>
                         <div class="cta-container">
-                            <a href="#" class="primary-cta">Get In Touch</a>
+                            <a href="#contact" class="primary-cta" onclick="showSection('contact')">Get In Touch</a>
                         </div>
                     </div>
                 </div>
