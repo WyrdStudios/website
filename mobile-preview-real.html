@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Preview - Real Wyrd Studios Website</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        
+        .preview-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .preview-title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #2E2E2E;
+            margin: 0 0 10px 0;
+        }
+        
+        .preview-subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            margin: 0;
+        }
+        
+        .phone-frame {
+            width: 375px;
+            height: 812px;
+            margin: 0 auto;
+            background: #333;
+            border-radius: 30px;
+            padding: 8px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            position: relative;
+        }
+        
+        .phone-frame::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 6px;
+            background: #666;
+            border-radius: 3px;
+        }
+        
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            border-radius: 22px;
+            overflow: hidden;
+            background: white;
+        }
+        
+        .website-iframe {
+            width: 375px;
+            height: 812px;
+            border: none;
+            transform: scale(1);
+            transform-origin: 0 0;
+        }
+        
+        .responsive-info {
+            background: #e3f2fd;
+            border: 1px solid #2196f3;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 30px auto;
+            max-width: 600px;
+            text-align: center;
+        }
+        
+        .responsive-info h3 {
+            color: #1976d2;
+            margin: 0 0 15px 0;
+            font-size: 1.3rem;
+        }
+        
+        .responsive-info p {
+            margin: 10px 0;
+            font-size: 1rem;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .responsive-features {
+            background: #f3e5f5;
+            border: 1px solid #9c27b0;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 30px auto;
+            max-width: 600px;
+        }
+        
+        .responsive-features h3 {
+            color: #7b1fa2;
+            margin: 0 0 15px 0;
+            font-size: 1.3rem;
+            text-align: center;
+        }
+        
+        .responsive-features ul {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+        
+        .responsive-features li {
+            margin: 8px 0;
+            font-size: 1rem;
+            color: #333;
+            line-height: 1.5;
+        }
+        
+        .device-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .device-btn {
+            background: #D7C10C;
+            color: #2E2E2E;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .device-btn:hover {
+            background: #c4b009;
+            transform: translateY(-2px);
+        }
+        
+        .device-btn.active {
+            background: #2E2E2E;
+            color: #D7C10C;
+        }
+        
+        .iframe-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        
+        .desktop-preview {
+            width: 100%;
+            max-width: 1200px;
+            height: 600px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            display: none;
+        }
+        
+        .desktop-preview.active {
+            display: block;
+        }
+        
+        .phone-frame.active {
+            display: block;
+        }
+        
+        .phone-frame.hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="preview-header">
+        <h1 class="preview-title">📱 Mobile Preview - Wyrd Studios Website</h1>
+        <p class="pretitle">See how your actual website looks on different devices</p>
+    </div>
+    
+    <div class="responsive-info">
+        <h3>✅ Your Website IS Mobile Responsive!</h3>
+        <p><strong>I found these responsive features in your HTML:</strong></p>
+        <ul style="text-align: left; max-width: 500px; margin: 15px auto;">
+            <li>Proper viewport meta tag for mobile scaling</li>
+            <li>CSS media queries for tablets (1024px) and mobile (768px)</li>
+            <li>Responsive grid layouts that stack on mobile</li>
+            <li>Mobile-optimized typography and spacing</li>
+            <li>Touch-friendly navigation and buttons</li>
+        </ul>
+    </div>
+    
+    <div class="device-buttons">
+        <button class="device-btn active" onclick="showDevice('mobile')">📱 Mobile (iPhone)</button>
+        <button class="device-btn" onclick="showDevice('desktop')">💻 Desktop</button>
+    </div>
+    
+    <div class="iframe-container">
+        <div class="phone-frame active" id="mobile-frame">
+            <div class="phone-screen">
+                <iframe src="wyrdstudioswebsite.html" class="website-iframe"></iframe>
+            </div>
+        </div>
+        
+        <iframe src="wyrdstudioswebsite.html" class="desktop-preview" id="desktop-frame"></iframe>
+    </div>
+    
+    <div class="responsive-features">
+        <h3>🔧 How Your Responsive Design Works</h3>
+        <ul>
+            <li><strong>Mobile First:</strong> Your CSS includes media queries that adapt the layout for different screen sizes</li>
+            <li><strong>Grid Flexibility:</strong> Multi-column grids automatically stack into single columns on mobile</li>
+            <li><strong>Typography Scaling:</strong> Font sizes adjust from desktop (2.75rem) to mobile (1.75rem)</li>
+            <li><strong>Touch Optimization:</strong> Buttons and interactive elements are sized for mobile interaction</li>
+            <li><strong>Content Adaptation:</strong> Text alignment and spacing optimize for mobile reading</li>
+        </ul>
+        <p style="text-align: center; margin-top: 20px; font-weight: 600; color: #7b1fa2;">
+            Your website automatically adapts to provide the best experience on any device! 🎉
+        </p>
+    </div>
+    
+    <script>
+        function showDevice(device) {
+            const mobileFrame = document.getElementById('mobile-frame');
+            const desktopFrame = document.getElementById('desktop-frame');
+            const buttons = document.querySelectorAll('.device-btn');
+            
+            // Update button states
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Show/hide appropriate preview
+            if (device === 'mobile') {
+                mobileFrame.classList.remove('hidden');
+                mobileFrame.classList.add('active');
+                desktopFrame.classList.remove('active');
+            } else {
+                mobileFrame.classList.add('hidden');
+                mobileFrame.classList.remove('active');
+                desktopFrame.classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>
