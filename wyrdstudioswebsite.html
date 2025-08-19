@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 
 <head>
     <meta charset="UTF-8">
@@ -10,6 +10,84 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne+Mono&display=swap"
         rel="stylesheet">
     <style>
+        /* CSS Custom Properties for Theme Management */
+        :root {
+            /* Light theme (default) */
+            --bg-primary: #FBFBFB;
+            --bg-secondary: #ffffff;
+            --bg-container: linear-gradient(180deg, #FBFBFB 0%, #ffffff 50%, #FBFBFB 100%);
+            --text-primary: #2E2E2E;
+            --text-secondary: #666;
+            --text-muted: #B0B0B0;
+            --border-color: #EAEAEA;
+            --border-dark: #404040;
+            --accent-primary: #D7C10C;
+            --accent-secondary: #D09FB6;
+            --shadow-color: rgba(215, 193, 12, 0.3);
+            --shadow-hover: rgba(215, 193, 12, 0.4);
+            --overlay-light: rgba(215, 193, 12, 0.03);
+            --overlay-medium: rgba(215, 193, 12, 0.05);
+            --overlay-heavy: rgba(215, 193, 12, 0.08);
+            --card-bg: rgba(215, 193, 12, 0.08);
+            --card-bg-hover: rgba(215, 193, 12, 0.12);
+            --icon-bg: rgba(102, 102, 102, 0.1);
+            --icon-color: #666;
+            --nav-bg: rgba(251, 251, 251, 0.95);
+            --nav-bg-secondary: rgba(255, 255, 255, 0.95);
+        }
+
+        [data-theme="dark"] {
+            /* Dark theme overrides */
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #2E2E2E;
+            --bg-container: linear-gradient(180deg, #1a1a1a 0%, #2E2E2E 50%, #1a1a1a 100%);
+            --text-primary: #FBFBFB;
+            --text-secondary: #B0B0B0;
+            --text-muted: #B0B0B0;
+            --border-color: #404040;
+            --border-dark: #404040;
+            --accent-primary: #D7C10C;
+            --accent-secondary: #D09FB6;
+            --shadow-color: rgba(215, 193, 12, 0.4);
+            --shadow-hover: rgba(215, 193, 12, 0.5);
+            --overlay-light: rgba(215, 193, 12, 0.08);
+            --overlay-medium: rgba(215, 193, 12, 0.05);
+            --overlay-heavy: rgba(215, 193, 12, 0.08);
+            --card-bg: rgba(215, 193, 12, 0.12);
+            --card-bg-hover: rgba(215, 193, 12, 0.18);
+            --icon-bg: rgba(176, 176, 176, 0.15);
+            --icon-color: #B0B0B0;
+            --nav-bg: rgba(26, 26, 26, 0.95);
+            --nav-bg-secondary: rgba(46, 46, 46, 0.95);
+        }
+
+        /* System preference fallback */
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme]) {
+                --bg-primary: #1a1a1a;
+                --bg-secondary: #2E2E2E;
+                --bg-container: linear-gradient(180deg, #1a1a1a 0%, #2E2E2E 50%, #1a1a1a 100%);
+                --text-primary: #FBFBFB;
+                --text-secondary: #B0B0B0;
+                --text-muted: #B0B0B0;
+                --border-color: #404040;
+                --border-dark: #404040;
+                --accent-primary: #D7C10C;
+                --accent-secondary: #D09FB6;
+                --shadow-color: rgba(215, 193, 12, 0.4);
+                --shadow-hover: rgba(215, 193, 12, 0.5);
+                --overlay-light: rgba(215, 193, 12, 0.08);
+                --overlay-medium: rgba(215, 193, 12, 0.05);
+                --overlay-heavy: rgba(215, 193, 12, 0.08);
+                --card-bg: rgba(215, 193, 12, 0.12);
+                --card-bg-hover: rgba(215, 193, 12, 0.18);
+                --icon-bg: rgba(176, 176, 176, 0.15);
+                --icon-color: #B0B0B0;
+                --nav-bg: rgba(26, 26, 26, 0.95);
+                --nav-bg-secondary: rgba(46, 46, 46, 0.95);
+            }
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -19,19 +97,21 @@
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.5;
-            color: #2E2E2E;
-            background: linear-gradient(135deg, #FBFBFB 0%, #ffffff 100%);
+            color: var(--text-primary);
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
             font-weight: 400;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            transition: color 0.3s ease, background 0.3s ease;
         }
 
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            background: linear-gradient(180deg, #FBFBFB 0%, #ffffff 50%, #FBFBFB 100%);
+            background: var(--bg-container);
             min-height: 100vh;
             position: relative;
+            transition: background 0.3s ease;
         }
 
         .container::before {
@@ -42,18 +122,18 @@
             right: 0;
             bottom: 0;
             background:
-                radial-gradient(circle at 20% 80%, rgba(74, 154, 154, 0.03) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(74, 154, 154, 0.02) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(74, 154, 154, 0.01) 0%, transparent 50%);
+                radial-gradient(circle at 20% 80%, var(--overlay-light) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, var(--overlay-medium) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, var(--overlay-light) 0%, transparent 50%);
             pointer-events: none;
             z-index: -1;
         }
 
         /* Navigation */
         .navigation {
-            background: linear-gradient(90deg, rgba(251, 251, 251, 0.95) 0%, rgba(255, 255, 255, 0.95) 100%);
+            background: linear-gradient(90deg, var(--nav-bg) 0%, var(--nav-bg-secondary) 100%);
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid #EAEAEA;
+            border-bottom: 1px solid var(--border-color);
             padding: 1.5rem 0;
             position: fixed;
             top: 0;
@@ -61,6 +141,7 @@
             right: 0;
             z-index: 1000;
             border-radius: 0 0 20px 20px;
+            transition: background 0.3s ease, border-color 0.3s ease;
         }
 
         .nav-container {
@@ -76,12 +157,27 @@
             font-family: 'Syne Mono', monospace;
             font-size: 1.75rem;
             font-weight: 400;
-            background: linear-gradient(135deg, #2E2E2E 0%, #4A9A9A 100%);
+            background: linear-gradient(135deg, #D7C10C 0%, #D09FB6 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             text-decoration: none;
             letter-spacing: 0.02em;
+        }
+
+        .brand {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            line-height: 1.1;
+        }
+
+        .brand-subtitle {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            margin-top: 0.25rem;
         }
 
         .nav-items {
@@ -95,7 +191,7 @@
             cursor: pointer;
             transition: all 0.2s ease;
             text-decoration: none;
-            color: #666;
+            color: var(--text-secondary);
             font-weight: 500;
             font-size: 0.9rem;
             text-transform: uppercase;
@@ -105,13 +201,13 @@
         }
 
         .nav-item:hover {
-            color: #2E2E2E;
-            background: rgba(74, 154, 154, 0.05);
+            color: var(--text-primary);
+            background: rgba(215, 193, 12, 0.05);
         }
 
         .nav-item.active {
-            color: #2E2E2E;
-            background: rgba(74, 154, 154, 0.08);
+            color: var(--text-primary);
+            background: rgba(215, 193, 12, 0.08);
         }
 
         .nav-item.active::after {
@@ -122,18 +218,77 @@
             transform: translateX(-50%);
             width: 20px;
             height: 2px;
-            background: linear-gradient(90deg, #4A9A9A 0%, #2E2E2E 100%);
+            background: linear-gradient(90deg, #D7C10C 0%, #D09FB6 100%);
             border-radius: 2px;
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 0.4rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            opacity: 0.7;
+        }
+
+        .theme-toggle:hover {
+            background: var(--overlay-light);
+            color: var(--text-primary);
+            border-color: var(--accent-primary);
+            opacity: 1;
+            transform: none;
+        }
+
+        /* Mobile Navigation Hamburger Menu */
+        .mobile-nav-toggle {
+            display: none;
+            flex-direction: column;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            gap: 0.25rem;
+            z-index: 1001;
+        }
+
+        .hamburger-line {
+            width: 25px;
+            height: 3px;
+            background: var(--text-primary);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-nav-toggle.active .hamburger-line:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .mobile-nav-toggle.active .hamburger-line:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-nav-toggle.active .hamburger-line:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
         }
 
         /* Header */
         .header {
-            background: linear-gradient(135deg, #FBFBFB 0%, #ffffff 50%, #FBFBFB 100%);
-            color: #2E2E2E;
+            background: var(--bg-container);
+            color: var(--text-primary);
             padding: 8rem 2rem 4rem;
-            text-align: center;
+            text-align: left;
             position: relative;
             border-radius: 0 0 20px 20px;
+            transition: background 0.3s ease, color 0.3s ease;
         }
 
         .header::before {
@@ -144,8 +299,8 @@
             right: 0;
             bottom: 0;
             background:
-                radial-gradient(circle at 30% 70%, rgba(74, 154, 154, 0.04) 0%, transparent 60%),
-                radial-gradient(circle at 70% 30%, rgba(74, 154, 154, 0.02) 0%, transparent 60%);
+                radial-gradient(circle at 30% 70%, var(--overlay-medium) 0%, transparent 60%),
+                radial-gradient(circle at 70% 30%, var(--overlay-light) 0%, transparent 60%);
             pointer-events: none;
             border-radius: 0 0 20px 20px;
         }
@@ -157,7 +312,7 @@
             margin-bottom: 1rem;
             letter-spacing: -0.03em;
             line-height: 1.1;
-            background: linear-gradient(135deg, #2E2E2E 0%, #4A9A9A 100%);
+            background: linear-gradient(135deg, #D7C10C 0%, #D09FB6 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -165,15 +320,15 @@
 
         .subtitle {
             font-size: 1.25rem;
-            color: #666;
+            color: var(--text-secondary);
             font-weight: 400;
             max-width: 600px;
-            margin: 0 auto;
+            margin: 0;
         }
 
         /* Content */
         .content {
-            padding: 0 2rem 4rem;
+            padding: 7rem 2rem 4rem;
         }
 
         .section {
@@ -184,7 +339,7 @@
             font-family: 'Syne Mono', monospace;
             font-size: 2.25rem;
             font-weight: 400;
-            color: #2E2E2E;
+            color: var(--text-primary);
             margin-bottom: 3rem;
             letter-spacing: -0.02em;
             line-height: 1.2;
@@ -198,15 +353,16 @@
             left: 0;
             width: 60px;
             height: 3px;
-            background: linear-gradient(90deg, #4A9A9A 0%, #2E2E2E 100%);
+            background: linear-gradient(90deg, #D7C10C 0%, #D09FB6 100%);
             border-radius: 4px;
         }
 
         .section-text {
             font-size: 1.125rem;
-            color: #666;
+            color: var(--text-secondary);
             line-height: 1.6;
             max-width: 800px;
+            text-align: left;
         }
 
         /* Hero Section */
@@ -220,7 +376,7 @@
             font-family: 'Syne Mono', monospace;
             font-size: 3.5rem;
             font-weight: 400;
-            color: #2E2E2E;
+            color: var(--text-primary);
             margin-bottom: 2rem;
             line-height: 1.1;
             letter-spacing: -0.03em;
@@ -238,13 +394,13 @@
             transform: translateX(-50%);
             width: 100px;
             height: 4px;
-            background: linear-gradient(90deg, #4A9A9A 0%, #2E2E2E 100%);
+            background: linear-gradient(90deg, #D7C10C 0%, #D09FB6 100%);
             border-radius: 4px;
         }
 
         .hero-subheadline {
             font-size: 1.5rem;
-            color: #666;
+            color: var(--text-secondary);
             line-height: 1.5;
             margin-bottom: 3rem;
             max-width: 700px;
@@ -256,8 +412,9 @@
         .cta-container {
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
+            gap: 1rem;
             flex-wrap: wrap;
+            margin-top: 1rem;
         }
 
         .primary-cta,
@@ -273,22 +430,22 @@
         }
 
         .primary-cta {
-            background: linear-gradient(135deg, #4A9A9A 0%, #2E2E2E 100%);
-            color: #ffffff;
-            box-shadow: 0 4px 15px rgba(74, 154, 154, 0.3);
+            background: linear-gradient(135deg, #D7C10C 0%, #D09FB6 100%);
+            color: var(--bg-primary);
+            box-shadow: 0 4px 15px var(--shadow-color);
             border-radius: 12px;
         }
 
         .primary-cta:hover {
-            background: linear-gradient(135deg, #2E2E2E 0%, #4A9A9A 100%);
+            background: linear-gradient(135deg, #D09FB6 0%, #D7C10C 100%);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(74, 154, 154, 0.4);
+            box-shadow: 0 6px 20px var(--shadow-hover);
         }
 
         .secondary-cta {
-            background: linear-gradient(135deg, transparent 0%, rgba(74, 154, 154, 0.1) 100%);
-            color: #2E2E2E;
-            border: 2px solid #4A9A9A;
+            background: linear-gradient(135deg, transparent 0%, rgba(208, 159, 182, 0.1) 100%);
+            color: var(--text-primary);
+            border: 2px solid #D7C10C;
             border-radius: 12px;
             position: relative;
         }
@@ -300,16 +457,16 @@
             left: -2px;
             right: -2px;
             bottom: -2px;
-            background: linear-gradient(135deg, #4A9A9A 0%, #2E2E2E 100%);
+            background: linear-gradient(135deg, #D7C10C 0%, #D09FB6 100%);
             border-radius: 12px;
             z-index: -1;
         }
 
         .secondary-cta:hover {
-            background: linear-gradient(135deg, #4A9A9A 0%, #2E2E2E 100%);
-            color: #ffffff;
+            background: linear-gradient(135deg, #D7C10C 0%, #D09FB6 100%);
+            color: var(--bg-primary);
             transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(74, 154, 154, 0.3);
+            box-shadow: 0 4px 15px var(--shadow-color);
         }
 
         /* Grid Layouts */
@@ -340,13 +497,13 @@
         }
 
         .value-prop {
-            text-align: center;
+            text-align: left;
         }
 
         .value-prop-number {
             font-size: 3rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #4A9A9A 0%, #2E2E2E 100%);
+            background: linear-gradient(135deg, #D7C10C 0%, #D09FB6 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -357,14 +514,14 @@
         .value-prop-title {
             font-size: 1.25rem;
             font-weight: 600;
-            color: #2E2E2E;
+            color: var(--text-primary);
             margin-bottom: 1rem;
             letter-spacing: -0.01em;
         }
 
         .value-prop-text {
             font-size: 1rem;
-            color: #666;
+            color: var(--text-secondary);
             line-height: 1.6;
         }
 
@@ -377,7 +534,7 @@
 
         .focus-area {
             padding: 2rem 0 2rem 2rem;
-            border-bottom: 1px solid #EAEAEA;
+            border-bottom: 1px solid var(--border-color);
             position: relative;
         }
 
@@ -388,7 +545,7 @@
             top: 0;
             bottom: 0;
             width: 4px;
-            background: linear-gradient(180deg, #4A9A9A 0%, #2E2E2E 100%);
+            background: linear-gradient(180deg, #D7C10C 0%, #D09FB6 100%);
             border-radius: 4px;
         }
 
@@ -399,15 +556,16 @@
         .focus-area-title {
             font-size: 1.5rem;
             font-weight: 600;
-            color: #1a1a1a;
+            color: var(--text-primary);
             margin-bottom: 1rem;
             letter-spacing: -0.01em;
         }
 
         .focus-area-text {
             font-size: 1.125rem;
-            color: #666;
+            color: var(--text-secondary);
             line-height: 1.6;
+            text-align: left;
         }
 
         /* Don't Build List */
@@ -422,17 +580,17 @@
             align-items: flex-start;
             gap: 1rem;
             padding: 1.5rem;
-            background: linear-gradient(135deg, rgba(74, 154, 154, 0.08) 0%, rgba(251, 251, 251, 0.9) 100%);
+            background: linear-gradient(135deg, var(--card-bg) 0%, var(--bg-secondary) 100%);
             border-radius: 12px;
-            border-left: 4px solid #4A9A9A;
+            border-left: 4px solid #D7C10C;
             position: relative;
             transition: all 0.2s ease;
         }
 
         .dont-build-item:hover {
-            background: linear-gradient(135deg, rgba(74, 154, 154, 0.12) 0%, rgba(251, 251, 251, 0.95) 100%);
+            background: linear-gradient(135deg, var(--card-bg-hover) 0%, var(--bg-secondary) 100%);
             transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(74, 154, 154, 0.15);
+            box-shadow: 0 4px 12px var(--shadow-color);
         }
 
         .dont-build-icon {
@@ -443,9 +601,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(102, 102, 102, 0.1);
+            background: var(--icon-bg);
             border-radius: 12px;
-            color: #666;
+            color: var(--icon-color);
         }
 
         .dont-build-content {
@@ -455,16 +613,17 @@
         .dont-build-title {
             font-size: 1.125rem;
             font-weight: 600;
-            color: #2E2E2E;
+            color: var(--text-primary);
             margin-bottom: 0.5rem;
             letter-spacing: -0.01em;
         }
 
         .dont-build-text {
             font-size: 1rem;
-            color: #666;
+            color: var(--text-secondary);
             line-height: 1.5;
             margin: 0;
+            text-align: left;
         }
 
         .dont-build-item::after {
@@ -473,7 +632,7 @@
             top: 1.5rem;
             right: calc(1.5rem + 50px);
             font-size: 1.25rem;
-            color: #666;
+            color: var(--text-secondary);
             font-weight: bold;
             opacity: 0.6;
         }
@@ -482,7 +641,7 @@
         .founder-card {
             margin-bottom: 4rem;
             padding: 2rem 0 2rem 2rem;
-            border-bottom: 1px solid #EAEAEA;
+            border-bottom: 1px solid var(--border-color);
             position: relative;
         }
 
@@ -493,7 +652,7 @@
             top: 0;
             bottom: 0;
             width: 4px;
-            background: linear-gradient(180deg, #4A9A9A 0%, #2E2E2E 100%);
+            background: linear-gradient(180deg, #D7C10C 0%, #D09FB6 100%);
             border-radius: 4px;
         }
 
@@ -501,17 +660,77 @@
             border-bottom: none;
         }
 
+        /* Founders Grid Layout */
+        .founders-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .founder-column {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+        }
+
+        .founder-image {
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--card-bg) 0%, var(--bg-secondary) 100%);
+            padding: 1rem;
+            box-shadow: 0 4px 15px var(--shadow-color);
+            transition: all 0.2s ease;
+            align-self: center;
+        }
+
+        .founder-image:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px var(--shadow-hover);
+        }
+
+        .founder-image svg {
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+        }
+
+        .founder-content {
+            max-width: 500px;
+        }
+
+        .shared-vision {
+            text-align: left;
+            border-left: none;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--card-bg) 0%, var(--bg-secondary) 100%);
+            border-radius: 16px;
+            margin-top: 2rem;
+        }
+
+        .shared-vision::before {
+            display: none;
+        }
+
+        .shared-vision .section-title {
+            margin-bottom: 1.5rem;
+        }
+
         .founder-name {
             font-size: 2.5rem;
             font-weight: 700;
-            color: #1a1a1a;
+            color: var(--text-primary);
             margin-bottom: 0.5rem;
             letter-spacing: -0.02em;
         }
 
         .founder-title {
             font-size: 1rem;
-            color: #666;
+            color: var(--text-secondary);
             margin-bottom: 2rem;
             font-weight: 500;
             text-transform: uppercase;
@@ -520,41 +739,44 @@
 
         .founder-bio {
             font-size: 1.125rem;
-            color: #666;
+            color: var(--text-secondary);
             line-height: 1.6;
             margin-bottom: 2rem;
             max-width: 800px;
+            text-align: left;
         }
 
         .founder-quote {
             font-size: 1.25rem;
-            color: #2E2E2E;
+            color: var(--text-primary);
             font-style: italic;
             line-height: 1.5;
             margin-bottom: 2rem;
             padding: 2rem;
-            background: linear-gradient(135deg, rgba(74, 154, 154, 0.05) 0%, rgba(251, 251, 251, 0.8) 100%);
+            background: linear-gradient(135deg, var(--overlay-heavy) 0%, var(--bg-secondary) 100%);
             border-radius: 12px;
             max-width: 700px;
             border-left: 4px solid;
-            border-image: linear-gradient(180deg, #4A9A9A 0%, #2E2E2E 100%) 1;
+            border-image: linear-gradient(180deg, #D7C10C 0%, #D09FB6 100%) 1;
+            text-align: left;
         }
 
         .founder-expertise {
             font-size: 1rem;
-            color: #666;
+            color: var(--text-secondary);
             line-height: 1.6;
+            text-align: left;
         }
 
         .expertise-title {
             font-weight: 600;
-            color: #1a1a1a;
+            color: var(--text-primary);
         }
 
         /* Contact Button */
         .contact-button {
-            background: linear-gradient(135deg, #4A9A9A 0%, #2E2E2E 100%);
-            color: #ffffff;
+            background: linear-gradient(135deg, #D7C10C 0%, #D09FB6 100%);
+            color: var(--bg-primary);
             padding: 1rem 2rem;
             text-decoration: none;
             font-weight: 600;
@@ -564,14 +786,14 @@
             text-transform: uppercase;
             letter-spacing: 0.05em;
             font-size: 0.9rem;
-            box-shadow: 0 4px 15px rgba(74, 154, 154, 0.3);
+            box-shadow: 0 4px 15px var(--shadow-color);
             border-radius: 12px;
         }
 
         .contact-button:hover {
-            background: linear-gradient(135deg, #2E2E2E 0%, #4A9A9A 100%);
+            background: linear-gradient(135deg, #D09FB6 0%, #D7C10C 100%);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(74, 154, 154, 0.4);
+            box-shadow: 0 6px 20px var(--shadow-hover);
         }
 
         /* Responsive Design */
@@ -585,10 +807,78 @@
             .dont-build-list {
                 grid-template-columns: 1fr;
                 gap: 2rem;
+                text-align: left;
+            }
+
+            .founders-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .workshop-categories {
+                grid-template-columns: 1fr; /* Single column for tablets and below */
+                gap: 2rem;
+                margin: 2rem 0;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
             }
         }
 
         @media (max-width: 768px) {
+            /* Mobile Navigation */
+            .mobile-nav-toggle {
+                display: flex;
+            }
+
+            .nav-items {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--nav-bg);
+                backdrop-filter: blur(10px);
+                border-top: 1px solid var(--border-color);
+                border-radius: 0 0 20px 20px;
+                box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+                flex-direction: column;
+                padding: 1rem 0;
+                gap: 0;
+                z-index: 1000;
+            }
+
+            .nav-items.active {
+                display: flex;
+            }
+
+            .nav-item {
+                padding: 1rem 2rem;
+                border-bottom: 1px solid var(--border-color);
+                margin: 0;
+                border-radius: 0;
+                min-height: 48px;
+                display: flex;
+                align-items: center;
+                width: 100%;
+                text-align: left;
+            }
+
+            .nav-item:last-child {
+                border-bottom: none;
+            }
+
+            .theme-toggle {
+                margin: 1rem 2rem;
+                width: 48px;
+                height: 48px;
+                font-size: 1.2rem;
+                align-self: flex-start;
+            }
+
+            /* Typography */
             .hero-headline {
                 font-size: 2.25rem;
             }
@@ -608,22 +898,72 @@
 
             .nav-container {
                 padding: 0 1rem;
-            }
-
-            .nav-items {
-                gap: 1rem;
+                position: relative;
             }
 
             .content {
-                padding: 0 1rem 2rem;
-            }
-
-            .header {
-                padding: 6rem 1rem 2rem;
+                padding: 8rem 1rem 2rem; /* Increased top padding for mobile */
             }
 
             .hero-section {
-                padding: 2rem 0;
+                padding: 3rem 0; /* Increased hero section padding */
+            }
+
+            /* Add extra spacing below header for mobile */
+            .header {
+                padding-left: 2.5rem; /* Increased left padding to avoid yellow bar */
+                padding-right: 1.5rem;
+                margin-bottom: 1rem;
+            }
+
+            .founders-grid {
+                gap: 2rem;
+            }
+
+            .founder-image {
+                width: 150px;
+                height: 150px;
+            }
+
+            .founder-name {
+                font-size: 2rem;
+            }
+
+            /* Workshop tiles mobile optimization */
+            .workshop-categories {
+                grid-template-columns: 1fr !important; /* Force single column on mobile */
+                gap: 1.5rem;
+                margin: 1.5rem 0;
+            }
+
+            .workshop-category {
+                padding: 1rem;
+                max-width: none;
+            }
+
+            .workshop-icon {
+                font-size: 2rem;
+            }
+
+            .workshop-title {
+                font-size: 1rem;
+            }
+
+            .workshop-description {
+                font-size: 0.85rem;
+            }
+
+            /* Ensure left alignment on mobile for better readability */
+            .section-text,
+            .workshop-description,
+            .founder-bio,
+            .founder-quote,
+            .founder-expertise,
+            .work-text,
+            .philosophy-text,
+            .focus-area-text,
+            .dont-build-text {
+                text-align: left;
             }
         }
 
@@ -640,6 +980,743 @@
         html {
             scroll-behavior: smooth;
         }
+
+        /* Philosophy Section Styling */
+        .philosophy-mission {
+            margin-bottom: 4rem;
+            text-align: left;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--card-bg) 0%, var(--bg-secondary) 100%);
+            border-radius: 16px;
+            border-left: 6px solid #D7C10C;
+        }
+
+        .philosophy-subtitle {
+            font-family: 'Syne Mono', monospace;
+            font-size: 1.75rem;
+            font-weight: 400;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.01em;
+            line-height: 1.3;
+            text-align: left;
+        }
+
+        .philosophy-text {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            max-width: 900px;
+            margin-left: 0;
+            margin-right: 0;
+            text-align: left;
+        }
+
+        .philosophy-section {
+            margin-bottom: 4rem;
+            padding: 2rem 0;
+        }
+
+        .founder-philosophy {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .founder-philosophy-item {
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--card-bg) 0%, var(--bg-secondary) 100%);
+            border-radius: 16px;
+            border-left: 4px solid #D7C10C;
+            transition: all 0.2s ease;
+        }
+
+        .founder-philosophy-item:hover {
+            background: linear-gradient(135deg, var(--card-bg-hover) 0%, var(--bg-secondary) 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px var(--shadow-color);
+        }
+
+        .founder-philosophy-name {
+            font-family: 'Syne Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            letter-spacing: -0.01em;
+        }
+
+        .founder-philosophy-text {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin: 0;
+            text-align: left;
+        }
+
+        /* Responsive adjustments for philosophy section */
+        @media (max-width: 768px) {
+            .founder-philosophy {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .philosophy-subtitle {
+                font-size: 1.5rem;
+            }
+
+            .philosophy-mission,
+            .founder-philosophy-item {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Small Mobile Devices (iPhone SE, small Android phones) */
+        @media (max-width: 480px) {
+            /* Typography Optimization */
+            .hero-headline {
+                font-size: 2rem;
+                line-height: 1.1;
+            }
+
+            .title {
+                font-size: 2.25rem;
+                line-height: 1.0;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .hero-subheadline {
+                font-size: 1.25rem;
+                line-height: 1.3;
+            }
+
+            .section-text {
+                font-size: 1rem;
+                line-height: 1.4; /* Tighter line spacing for small mobile */
+            }
+
+            /* Additional line-height adjustments for small mobile */
+            .value-prop-text,
+            .focus-area-text,
+            .workshop-description {
+                line-height: 1.4; /* Slightly tighter for small screens */
+            }
+
+            /* Layout Optimization */
+            .nav-container {
+                padding: 0 0.75rem;
+            }
+
+            .content {
+                padding: 7rem 0.75rem 2rem; /* Increased top padding for small mobile */
+            }
+
+            .header {
+                padding: 8rem 2rem 4rem 2rem; /* Increased left padding to avoid yellow bar */
+                margin-bottom: 1.5rem; /* Extra spacing below header */
+            }
+
+            .hero-section {
+                padding: 3.5rem 0; /* Increased hero padding for small mobile */
+            }
+
+            /* Grid and Component Spacing */
+            .workshop-categories,
+            .value-props,
+            .focus-areas,
+            .founder-philosophy {
+                gap: 1rem;
+            }
+
+            .workshop-categories {
+                grid-template-columns: 1fr !important; /* Ensure single column on small mobile */
+            }
+
+            .value-prop,
+            .focus-area,
+            .workshop-category,
+            .philosophy-mission,
+            .founder-philosophy-item {
+                padding: 1rem;
+            }
+
+            .workshop-category {
+                padding: 1.25rem; /* Extra padding for better touch targets */
+                text-align: center;
+            }
+
+            /* Button Optimization */
+            .primary-cta, .secondary-cta {
+                padding: 0.875rem 1.5rem;
+                font-size: 0.85rem;
+                min-height: 48px;
+            }
+
+            .cta-container {
+                gap: 0.75rem;
+            }
+        }
+
+        /* Extra Small Mobile Devices */
+        @media (max-width: 375px) {
+            /* Ultra-compact typography */
+            .hero-headline {
+                font-size: 1.75rem;
+            }
+
+            .title {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.375rem;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .brand-subtitle {
+                font-size: 0.75rem;
+            }
+
+            /* Ultra-compact layout */
+            .nav-container,
+            .content {
+                padding-left: 0.75rem;
+                padding-right: 0.75rem;
+            }
+
+            .header {
+                padding-left: 1.5rem; /* Increased to avoid yellow bar overlap */
+                padding-right: 1rem;
+            }
+
+            .content {
+                padding-top: 6.5rem; /* Ensure adequate spacing from header */
+            }
+
+            .hero-section {
+                padding: 3rem 0; /* Maintain hero spacing on ultra-small */
+            }
+
+            .nav-item {
+                padding: 0.875rem 1.5rem;
+                font-size: 0.85rem;
+            }
+
+            .primary-cta, .secondary-cta {
+                padding: 0.75rem 1.25rem;
+                font-size: 0.8rem;
+            }
+
+            /* Reduce visual complexity on very small screens */
+            .value-prop-number {
+                font-size: 2.5rem;
+            }
+
+            .workshop-icon {
+                font-size: 1.75rem;
+            }
+        }
+
+        /* Mobile Touch Target Optimization */
+        @media (max-width: 768px) {
+            /* Ensure all interactive elements meet touch target minimum sizes */
+            .nav-item,
+            .primary-cta,
+            .secondary-cta,
+            .theme-toggle,
+            .mobile-nav-toggle {
+                min-height: 48px; /* Google's recommended minimum */
+                min-width: 48px;
+            }
+
+            /* Contact button optimization */
+            .contact-button {
+                min-height: 48px;
+                padding: 1rem 2rem;
+                font-size: 1rem;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            /* Workshop category touch targets */
+            .workshop-category {
+                min-height: 120px;
+                padding: 1.5rem;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                text-align: center;
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            .workshop-category:hover,
+            .workshop-category:focus {
+                transform: translateY(-2px);
+                box-shadow: 0 8px 24px var(--shadow-color);
+            }
+
+            /* Value proposition touch optimization */
+            .value-prop {
+                padding: 1.5rem;
+                border-radius: 12px;
+                transition: all 0.2s ease;
+            }
+
+            /* Focus area touch optimization */
+            .focus-area {
+                padding: 1.5rem 1.5rem 1.5rem 2rem;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                border-radius: 12px;
+            }
+
+            .focus-area:hover,
+            .focus-area:focus {
+                background: var(--overlay-light);
+                transform: translateX(8px);
+            }
+
+            /* Improve spacing between touch targets */
+            .cta-container {
+                gap: 1rem;
+                margin: 2rem 0;
+            }
+
+            .nav-items {
+                padding: 0.5rem 0;
+            }
+
+            /* Add visual feedback for touch interactions */
+            .nav-item:active,
+            .primary-cta:active,
+            .secondary-cta:active {
+                transform: scale(0.98);
+                opacity: 0.8;
+            }
+
+            /* Mobile Layout Flow Optimization */
+            .hero-section {
+                text-align: center;
+                padding: 2rem 0;
+            }
+
+            .hero-headline,
+            .hero-subheadline {
+                text-align: center;
+            }
+
+            /* Mobile Typography Line-Height Optimization */
+            .section-text,
+            .hero-subheadline,
+            .value-prop-text,
+            .focus-area-text,
+            .workshop-description,
+            .founder-bio,
+            .founder-quote,
+            .founder-expertise,
+            .philosophy-text,
+            .founder-philosophy-text {
+                line-height: 1.5; /* Tighter line spacing for mobile */
+            }
+
+            .hero-headline {
+                line-height: 1.1; /* Keep headlines tight */
+            }
+
+            .section-title,
+            .value-prop-title,
+            .focus-area-title,
+            .workshop-title,
+            .founder-name,
+            .philosophy-subtitle {
+                line-height: 1.2; /* Compact heading spacing */
+            }
+
+            /* Optimize founder section for mobile */
+            .founders-grid {
+                text-align: center;
+                gap: 3rem;
+            }
+
+            .founder-image {
+                margin: 0 auto 1.5rem;
+            }
+
+            .founder-name,
+            .founder-title,
+            .founder-bio,
+            .founder-quote,
+            .founder-expertise {
+                text-align: center;
+            }
+
+            /* Mobile grid spacing optimization */
+            .section {
+                margin-bottom: 4rem;
+            }
+
+            .value-props,
+            .focus-areas,
+            .workshop-categories {
+                margin: 2rem 0;
+            }
+
+            /* Ensure proper vertical rhythm on mobile */
+            .section-title {
+                margin-bottom: 2rem;
+                text-align: center;
+            }
+
+            .section-text {
+                text-align: center;
+                margin: 0 auto 2rem;
+                max-width: none;
+            }
+
+            /* Mobile card layout improvements */
+            .value-prop,
+            .focus-area,
+            .workshop-category {
+                text-align: center;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+                border: 1px solid var(--border-color);
+            }
+
+            /* Philosophy section mobile optimization */
+            .philosophy-mission {
+                text-align: center;
+                margin-bottom: 3rem;
+            }
+
+            .philosophy-subtitle {
+                text-align: center;
+            }
+
+            .philosophy-text {
+                text-align: center;
+                margin: 0 auto 1.5rem;
+            }
+
+            .founder-philosophy-item {
+                text-align: center;
+            }
+
+            .founder-philosophy-text {
+                text-align: center;
+            }
+        }
+
+        /* Mobile Performance Optimizations */
+        @media (max-width: 768px) {
+            /* Reduce complex visual effects on mobile for better performance */
+            .container::before {
+                opacity: 0.3; /* Reduce background gradient complexity */
+            }
+
+            .header::before {
+                opacity: 0.4; /* Simplify header gradients */
+            }
+
+            /* Optimize animations for mobile performance */
+            * {
+                transition: none; /* Disable most transitions on mobile */
+            }
+
+            /* Keep essential transitions only */
+            .nav-items,
+            .mobile-nav-toggle,
+            .hamburger-line,
+            .nav-item:active,
+            .primary-cta:active,
+            .secondary-cta:active {
+                transition: all 0.3s ease;
+            }
+
+            /* Theme transitions for essential elements */
+            .theme-toggle,
+            .nav-item,
+            .primary-cta,
+            .secondary-cta {
+                transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+            }
+
+            /* Reduce shadow complexity on mobile */
+            .workshop-category:hover,
+            .workshop-category:focus,
+            .founder-philosophy-item:hover {
+                box-shadow: 0 4px 12px var(--shadow-color); /* Simpler shadows */
+            }
+
+            /* Optimize backdrop filters for mobile */
+            .navigation {
+                backdrop-filter: blur(8px); /* Reduce blur intensity */
+            }
+
+            .nav-items {
+                backdrop-filter: blur(8px);
+            }
+
+            /* Reduce visual complexity for better mobile performance */
+            .value-prop-number {
+                background: var(--accent-primary);
+                -webkit-background-clip: unset;
+                -webkit-text-fill-color: var(--bg-primary);
+                background-clip: unset;
+                color: var(--bg-primary);
+                border-radius: 8px;
+                padding: 0.5rem;
+                display: inline-block;
+                min-width: 60px;
+                text-align: center;
+            }
+        }
+
+        /* Theme transition animations (desktop only) */
+        @media (min-width: 769px) {
+            * {
+                transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            }
+        }
+
+        /* Workshops Section Styling */
+        .workshop-categories {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .workshop-category {
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--card-bg) 0%, var(--bg-secondary) 100%);
+            border-radius: 16px;
+            border-left: 4px solid #D7C10C;
+            transition: all 0.2s ease;
+            position: relative;
+            text-align: left;
+        }
+
+        .workshop-category:hover {
+            background: linear-gradient(135deg, var(--card-bg-hover) 0%, var(--bg-secondary) 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px var(--shadow-color);
+        }
+
+        .workshop-icon {
+            font-size: 2.25rem;
+            margin-bottom: 0.75rem;
+            display: block;
+            text-align: center;
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        .workshop-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.01em;
+            text-align: left;
+        }
+
+        .workshop-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 0.75rem;
+            text-align: left;
+        }
+
+        .workshop-details {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            text-align: left;
+        }
+
+        .workshop-duration,
+        .workshop-audience {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            text-align: left;
+        }
+
+        .workshop-benefits {
+            margin: 4rem 0;
+            text-align: left;
+        }
+
+        .workshop-subtitle {
+            font-family: 'Syne Mono', monospace;
+            font-size: 1.75rem;
+            font-weight: 400;
+            color: var(--text-primary);
+            margin-bottom: 2rem;
+            letter-spacing: -0.01em;
+            text-align: left;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+            text-align: left;
+        }
+
+        .benefit-item {
+            text-align: left;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, var(--overlay-light) 0%, var(--bg-secondary) 100%);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        .benefit-item h5 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.01em;
+            text-align: left;
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        .benefit-item p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin: 0;
+            text-align: left;
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        /* Work Section Styling */
+        .work-intro {
+            margin-bottom: 3rem;
+            text-align: left;
+        }
+
+        .work-text {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            max-width: 800px;
+            margin-left: 0;
+            margin-right: 0;
+            text-align: left;
+        }
+
+        .work-section {
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+        }
+
+        .work-subtitle {
+            font-family: 'Syne Mono', monospace;
+            font-size: 1.75rem;
+            font-weight: 400;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.01em;
+            line-height: 1.3;
+            text-align: left;
+        }
+
+        .work-section .work-text {
+            margin-left: 0;
+            margin-right: 0;
+            text-align: left;
+        }
+
+        .work-section:not(:last-child) {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 2rem;
+        }
+
+        /* Workshop Pricing Styling */
+        .workshop-pricing {
+            background: linear-gradient(135deg, var(--overlay-light) 0%, var(--bg-secondary) 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin: 1rem 0;
+            text-align: left;
+        }
+
+        .workshop-pricing h5 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.01em;
+        }
+
+        .workshop-pricing p {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* FAQ Section Styling */
+        .faq-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .faq-item {
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--card-bg) 0%, var(--bg-secondary) 100%);
+            border-radius: 16px;
+            border-left: 4px solid #D7C10C;
+            transition: all 0.2s ease;
+            text-align: left;
+        }
+
+        .faq-item:hover {
+            background: linear-gradient(135deg, var(--card-bg-hover) 0%, var(--bg-secondary) 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px var(--shadow-color);
+        }
+
+        .faq-question {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            letter-spacing: -0.01em;
+        }
+
+        .faq-answer {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin: 0;
+        }
     </style>
 </head>
 
@@ -648,23 +1725,30 @@
         <!-- Navigation -->
         <nav class="navigation">
             <div class="nav-container">
-                <a href="#" class="logo">Wyrd Studios</a>
+                <div class="brand">
+                    <a href="#" class="logo">Wyrd Studios</a>
+                    <div class="brand-subtitle">Human-Centered Technology Products</div>
+                </div>
+                <button class="mobile-nav-toggle" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
                 <div class="nav-items">
                     <a href="#" class="nav-item active" onclick="showSection('home')">Home</a>
                     <a href="#" class="nav-item" onclick="showSection('work')">Work</a>
                     <a href="#" class="nav-item" onclick="showSection('founders')">Founders</a>
                     <a href="#" class="nav-item" onclick="showSection('philosophy')">Philosophy</a>
-                    <a href="#" class="nav-item" onclick="showSection('news')">News</a>
+                    <a href="#" class="nav-item" onclick="showSection('workshops')">Workshops</a>
                     <a href="#" class="nav-item" onclick="showSection('contact')">Contact</a>
+                    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" title="Toggle theme">
+                        🌙
+                    </button>
                 </div>
             </div>
         </nav>
 
-        <!-- Header -->
-        <header class="header">
-            <h1 class="title">Wyrd Studios</h1>
-            <p class="subtitle">Human-Centered Technology Products</p>
-        </header>
+        
 
         <!-- Content Sections -->
         <main class="content">
@@ -782,57 +1866,124 @@
                 <div class="section">
                     <h3 class="section-title">Meet the Founders</h3>
 
-                    <!-- Randy Olson -->
-                    <div class="founder-card">
-                        <h4 class="founder-name">Randy Olson, Ph.D.</h4>
-                        <p class="founder-title">Co-Founder</p>
-                        <p class="founder-bio">
-                            Randy brings 15+ years of AI research and application experience, with a Ph.D. from
-                            Michigan State University focused on digitally recreating the evolutionary path to
-                            human-level intelligence. As Principal AI Strategy Architect at AE Studio, he helped
-                            organizations identify high-ROI AI opportunities through systematic problem-solving
-                            and data-driven approaches.
-                        </p>
-                        <p class="founder-quote">
-                            "The most sustainable businesses solve real problems, not chase moonshots. We focus
-                            on AI that amplifies human capabilities and gives people more control over their
-                            digital lives."
-                        </p>
-                        <p class="founder-expertise">
-                            <span class="expertise-title">Key Expertise:</span> AI Strategy & Architecture,
-                            Data-Driven Decision Making, Human-Centered Technology Design
-                        </p>
-                    </div>
+                    <div class="founders-grid">
+                        <!-- Randy Olson -->
+                        <div class="founder-column">
+                            <div class="founder-image">
+                                <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                                    <defs>
+                                        <linearGradient id="beardGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#8B4513;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#654321;stop-opacity:1" />
+                                        </linearGradient>
+                                        <linearGradient id="skinGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#F4D03F;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#E67E22;stop-opacity:1" />
+                                        </linearGradient>
+                                    </defs>
+                                    <!-- Head -->
+                                    <circle cx="100" cy="80" r="50" fill="url(#skinGradient)" stroke="#8B4513" stroke-width="2"/>
+                                    <!-- Eyes -->
+                                    <circle cx="85" cy="70" r="4" fill="#2C3E50"/>
+                                    <circle cx="115" cy="70" r="4" fill="#2C3E50"/>
+                                    <!-- Nose -->
+                                    <ellipse cx="100" cy="80" rx="3" ry="2" fill="#E67E22"/>
+                                    <!-- Mouth -->
+                                    <path d="M 90 90 Q 100 95 110 90" stroke="#8B4513" stroke-width="2" fill="none"/>
+                                    <!-- Beard -->
+                                    <path d="M 60 80 Q 100 120 140 80" fill="url(#beardGradient)"/>
+                                    <path d="M 70 85 Q 100 130 130 85" fill="url(#beardGradient)"/>
+                                    <path d="M 80 90 Q 100 140 120 90" fill="url(#beardGradient)"/>
+                                    <!-- Hair -->
+                                    <path d="M 50 30 Q 100 20 150 30 Q 140 60 100 50 Q 60 60 50 30" fill="#2C3E50"/>
+                                </svg>
+                            </div>
+                            <div class="founder-content">
+                                <h4 class="founder-name">Randy Olson, Ph.D.</h4>
+                                <p class="founder-title">Co-Founder</p>
+                                <p class="founder-bio">
+                                    Randy brings 15+ years of AI research and application experience, with a Ph.D. from
+                                    Michigan State University focused on digitally recreating the evolutionary path to
+                                    human-level intelligence. As Principal AI Strategy Architect at AE Studio, he helped
+                                    organizations identify high-ROI AI opportunities through systematic problem-solving
+                                    and data-driven approaches.
+                                </p>
+                                <p class="founder-quote">
+                                    "The most sustainable businesses solve real problems, not chase moonshots. We focus
+                                    on AI that amplifies human capabilities and gives people more control over their
+                                    digital lives."
+                                </p>
+                                <p class="founder-expertise">
+                                    <span class="expertise-title">Key Expertise:</span> AI Strategy & Architecture,
+                                    Data-Driven Decision Making, Human-Centered Technology Design
+                                </p>
+                            </div>
+                        </div>
 
-                    <!-- Olivia Olson -->
-                    <div class="founder-card">
-                        <h4 class="founder-name">Olivia Rose Olson</h4>
-                        <p class="founder-title">Co-Founder</p>
-                        <p class="founder-bio">
-                            Olivia brings extensive customer experience and service design expertise, with an M.S.
-                            in Human-Computer Interaction Design from the University of Washington. Her career
-                            spans transformational work across government and private sector, specializing in
-                            strategic consultation on policies and organizational change.
-                        </p>
-                        <p class="founder-bio">
-                            Her expertise encompasses the full spectrum of user-centered design—from ethnographic
-                            research and usability testing to complex information architectures and cross-platform
-                            design systems. Her background in behavioral science enables her to drive organizational
-                            change with minimal resistance, while her multilingual abilities (German, Portuguese,
-                            Spanish, Swiss German) inform her approach to designing inclusive experiences.
-                        </p>
-                        <p class="founder-quote">
-                            "Technology should serve human intellect, not exploit human attention. Every product
-                            we build starts with understanding real human needs and respecting people's autonomy."
-                        </p>
-                        <p class="founder-expertise">
-                            <span class="expertise-title">Key Expertise:</span> Strategic CX Leadership,
-                            Service Design & Modernization, Cross-Cultural UX Research, Behavioral Science Applications
-                        </p>
+                        <!-- Olivia Olson -->
+                        <div class="founder-column">
+                            <div class="founder-image">
+                                <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                                    <defs>
+                                        <linearGradient id="hairGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#8B4513;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#654321;stop-opacity:1" />
+                                        </linearGradient>
+                                        <linearGradient id="skinGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#F4D03F;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#E67E22;stop-opacity:1" />
+                                        </linearGradient>
+                                    </defs>
+                                    <!-- Head -->
+                                    <circle cx="100" cy="80" r="50" fill="url(#skinGradient2)" stroke="#8B4513" stroke-width="2"/>
+                                    <!-- Eyes -->
+                                    <circle cx="85" cy="70" r="4" fill="#2C3E50"/>
+                                    <circle cx="115" cy="70" r="4" fill="#2C3E50"/>
+                                    <!-- Nose -->
+                                    <ellipse cx="100" cy="80" rx="3" ry="2" fill="#E67E22"/>
+                                    <!-- Mouth -->
+                                    <path d="M 90 90 Q 100 95 110 90" stroke="#8B4513" stroke-width="2" fill="none"/>
+                                    <!-- Curly Hair -->
+                                    <path d="M 50 30 Q 100 15 150 30 Q 140 50 100 40 Q 60 50 50 30" fill="url(#hairGradient)"/>
+                                    <path d="M 45 35 Q 100 25 155 35 Q 145 55 100 45 Q 55 55 45 35" fill="url(#hairGradient)"/>
+                                    <path d="M 40 40 Q 100 30 160 40 Q 150 60 100 50 Q 50 60 40 40" fill="url(#hairGradient)"/>
+                                    <!-- Curls -->
+                                    <circle cx="60" cy="25" r="8" fill="url(#hairGradient)"/>
+                                    <circle cx="140" cy="25" r="8" fill="url(#hairGradient)"/>
+                                    <circle cx="70" cy="20" r="6" fill="url(#hairGradient)"/>
+                                    <circle cx="130" cy="20" r="6" fill="url(#hairGradient)"/>
+                                </svg>
+                            </div>
+                            <div class="founder-content">
+                                <h4 class="founder-name">Olivia Rose Olson</h4>
+                                <p class="founder-title">Co-Founder</p>
+                                <p class="founder-bio">
+                                    Olivia brings extensive customer experience and service design expertise, with an M.S.
+                                    in Human-Computer Interaction Design from the University of Washington. Her career
+                                    spans transformational work across government and private sector, specializing in
+                                    strategic consultation on policies and organizational change.
+                                </p>
+                                <p class="founder-bio">
+                                    Her expertise encompasses the full spectrum of user-centered design—from ethnographic
+                                    research and usability testing to complex information architectures and cross-platform
+                                    design systems. Her background in behavioral science enables her to drive organizational
+                                    change with minimal resistance, while her multilingual abilities (German, Portuguese,
+                                    Spanish, Swiss German) inform her approach to designing inclusive experiences.
+                                </p>
+                                <p class="founder-quote">
+                                    "Technology should serve human intellect, not exploit human attention. Every product
+                                    we build starts with understanding real human needs and respecting people's autonomy."
+                                </p>
+                                <p class="founder-expertise">
+                                    <span class="expertise-title">Key Expertise:</span> Strategic CX Leadership,
+                                    Service Design & Modernization, Cross-Cultural UX Research, Behavioral Science Applications
+                                </p>
+                            </div>
+                        </div>
                     </div>
 
                     <!-- Shared Vision -->
-                    <div class="founder-card">
+                    <div class="founder-card shared-vision">
                         <h3 class="section-title">Shared Vision</h3>
                         <p class="founder-bio">
                             Randy and Olivia founded Wyrd Studios on shared growth mindsets and the conviction
@@ -847,10 +1998,51 @@
             <!-- Work Section -->
             <div id="work" class="section-content">
                 <div class="section">
-                    <h3 class="section-title">Our Work</h3>
-                    <p class="section-text">
-                        Portfolio of products and projects coming soon...
-                    </p>
+                    <h3 class="section-title">Our Work: Building Technology That Serves</h3>
+                    
+                    <div class="work-intro">
+                        <p class="work-text">
+                            Our work at Wyrd Studios begins with a single, focused answer to a massive problem. But it doesn't end there. Each project we undertake is a deliberate step toward a better digital world, guided by a core philosophy and an invitation to build the future with us.
+                        </p>
+                    </div>
+
+                    <!-- Our Guiding Philosophy -->
+                    <div class="work-section">
+                        <h4 class="work-subtitle">Our Guiding Philosophy</h4>
+                        <p class="work-text">
+                            Technology is not neutral, and neither are we. At Wyrd Studios, every product is connected by a philosophical approach first and foremost. We lead with our values, building privacy-first, human-centered tools designed to amplify human potential.
+                        </p>
+                        <p class="work-text">
+                            We are here to solve the universal problems of the modern digital world—the frustrating, draining, and dehumanizing experiences that have become strangely common. We build tools to combat the forces that hinder our self-expression, damage our trust in ourselves, erode our psychological safety, and diminish our personal agency and confidence.
+                        </p>
+                    </div>
+
+                    <!-- Our First Answer: Iris -->
+                    <div class="work-section">
+                        <h4 class="work-subtitle">Our First Answer: Iris</h4>
+                        <p class="work-text">
+                            Our first product, Iris, is the cornerstone of our mission. It is a private, intelligent space to search, learn, and explore your curiosity on your own terms.
+                        </p>
+                        <p class="work-text">
+                            Iris is built on a subscription model, which guarantees that you are our customer, not the product we sell to advertisers. It is our definitive statement that technology can and should serve the human mind, not exploit it.
+                        </p>
+                    </div>
+
+                    <!-- An Invitation to Co-Create -->
+                    <div class="work-section">
+                        <h4 class="work-subtitle">An Invitation to Co-Create</h4>
+                        <p class="work-text">
+                            We know we can't do this alone. We believe in a boutique software revolution, where thoughtful, well-crafted solutions can challenge the monolithic, data-hungry models of Big Tech.
+                        </p>
+                        <p class="work-text">
+                            We are always looking for partners in what we call "the good work." If you are a founder, researcher, creator, or company that shares our vision for a more humane digital future, we want to hear from you. We are interested in co-creating with people who are passionate about building technology that empowers, respects, and enriches people's lives.
+                        </p>
+                    </div>
+
+                    <div class="cta-container">
+                        <a href="#" class="primary-cta">Learn More About Iris</a>
+                        <a href="#" class="secondary-cta" onclick="showSection('contact')">Partner With Us</a>
+                    </div>
                 </div>
             </div>
 
@@ -858,21 +2050,201 @@
             <div id="philosophy" class="section-content">
                 <div class="section">
                     <h3 class="section-title">Our Philosophy</h3>
-                    <p class="section-text">
-                        Our approach to building technology focuses on human-centered design, privacy-first
-                        principles, and sustainable innovation that amplifies human potential rather than
-                        exploiting attention.
-                    </p>
+                    
+                    <!-- Mission Statement -->
+                    <div class="philosophy-mission">
+                        <h4 class="philosophy-subtitle">Our First Mission: Reclaiming the Mind</h4>
+                        <p class="philosophy-text">
+                            Before you can amplify human potential, you must first reclaim it.
+                        </p>
+                    </div>
+
+                    <!-- The Problem -->
+                    <div class="philosophy-section">
+                        <h4 class="philosophy-subtitle">The Problem: An Internet Built for Distraction</h4>
+                        <p class="philosophy-text">
+                            We started with a foundational problem we both saw in our own lives and in the world: 
+                            the modern internet, with its relentless focus on ads and engagement, has broken our 
+                            ability to think deeply. What was meant to be a tool for empowerment has instead become 
+                            a battleground for our attention, designed to serve advertisers, not people.
+                        </p>
+                    </div>
+
+                    <!-- The Founders -->
+                    <div class="philosophy-section">
+                        <h4 class="philosophy-subtitle">The Founders: A Shared Vision</h4>
+                        <p class="philosophy-text">
+                            Our co-founders, Olivia and Randy Olson, are a wife-and-husband team who have spent 
+                            their careers at the intersection of technology and human behavior.
+                        </p>
+                        
+                        <div class="founder-philosophy">
+                            <div class="founder-philosophy-item">
+                                <h5 class="founder-philosophy-name">Olivia</h5>
+                                <p class="founder-philosophy-text">
+                                    has dedicated her career to creating ethical, human-centric digital experiences 
+                                    that empower users rather than exploiting them. Her mission is to disrupt the 
+                                    toxic attention economy and the broken economic model of big tech.
+                                </p>
+                            </div>
+                            
+                            <div class="founder-philosophy-item">
+                                <h5 class="founder-philosophy-name">Randy</h5>
+                                <p class="founder-philosophy-text">
+                                    a Ph.D. in computer science with over 15 years of experience in AI, profoundly 
+                                    believes that artificial intelligence can be an "absolute game changing positive 
+                                    technology for the world" that improves human agency and well-being.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- The Solution -->
+                    <div class="philosophy-section">
+                        <h4 class="philosophy-subtitle">Our Solution: Technology That Serves You</h4>
+                        <p class="philosophy-text">
+                            From this shared vision, our first mission became clear. We are creating a tool that 
+                            acts as your personal thought partner—a private interface to the world's knowledge 
+                            designed to serve human intellect, not exploit human attention. It is a space to 
+                            search, learn, and explore your curiosity, free from the ulterior motives of 
+                            advertising and data selling.
+                        </p>
+                        <p class="philosophy-text">
+                            Our commitment is structural. By operating on a subscription model, we ensure that 
+                            you are our customer, not the product we sell to advertisers. This approach is our 
+                            invitation to build a more intentional and rewarding relationship with information. 
+                            It is the first, essential step in our larger mission to build technology that 
+                            truly serves humanity.
+                        </p>
+                    </div>
                 </div>
             </div>
 
-            <!-- News Section -->
-            <div id="news" class="section-content">
+            <!-- Workshops Section -->
+            <div id="workshops" class="section-content">
                 <div class="section">
-                    <h3 class="section-title">News</h3>
-                    <p class="section-text">
-                        Updates from our portfolio coming soon...
-                    </p>
+                    <h3 class="section-title">Workshops</h3>
+                    
+                    <!-- Hero Section -->
+                    <div class="hero-section">
+                        <h2 class="hero-headline">Don't Just Watch the AI Revolution. Lead It.</h2>
+                        <p class="hero-subheadline">
+                            The world is changing faster than ever. Artificial Intelligence is no longer a futuristic concept—it's a daily tool that can unlock unprecedented growth, efficiency, and creativity for your business. The question is no longer if you should adopt AI, but how.
+                        </p>
+                        <h3 class="section-title" style="text-align: left;">Our Approach: AI for Humans</h3>
+                        <p class="section-text" style="text-align: left;">
+                            We make the how simple, safe, and profoundly human. Our hands-on workshops are designed to cut through the hype and empower your team with practical AI strategies you can implement immediately.
+                        </p>
+                        <p class="section-text" style="text-align: left;">
+                            We are cutting-edge AI practitioners who believe technology's greatest purpose is to augment human potential, not replace it. We come directly to you—at your office or remotely—to deliver an immersive, hands-on experience. Forget dry lectures. We focus on real-world tools, sustainable workflows, and the creative collaboration that will give your organization a durable competitive edge.
+                        </p>
+                    </div>
+
+                    <!-- Workshop Tiers -->
+                    <div class="section">
+                        <h3 class="section-title">Choose Your Path to AI Integration</h3>
+                        <p class="section-text">
+                            We've designed three distinct workshops to meet you exactly where you are on your journey.
+                        </p>
+                        
+                        <div class="workshop-categories">
+                            <!-- The Spark Workshop -->
+                            <div class="workshop-category">
+                            <div class="workshop-icon">✨</div>
+                            <h4 class="workshop-title">1. The Spark Workshop</h4>
+                            <p class="workshop-description">
+                                An intensive half-day session to ignite your AI strategy.
+                            </p>
+                            <p class="workshop-description">
+                                <strong>Perfect for:</strong> Solopreneurs and small, agile teams (1-5 people) ready to punch above their weight.
+                            </p>
+                            <p class="workshop-description">
+                                This is more than an introduction; it's a launchpad. In a concentrated half-day, we'll move from AI curiosity to AI capability. Your team will walk away with a clear understanding of the AI landscape, hands-on experience with foundational tools, and a custom-built roadmap to integrate AI into your daily operations for immediate impact.
+                            </p>
+                            <div class="workshop-pricing">
+                                <h5>Your Investment in a Smarter Future: $5,000</h5>
+                                <p>Think of it not as a cost, but as your first and most important step towards scalable growth and reclaiming countless hours of manual work.</p>
+                            </div>
+                            <div class="cta-container">
+                                <a href="#" class="primary-cta">Book Your Spark Session</a>
+                            </div>
+                        </div>
+
+                        <!-- The Accelerator Workshop -->
+                        <div class="workshop-category">
+                            <div class="workshop-icon">🚀</div>
+                            <h4 class="workshop-title">2. The Accelerator Workshop</h4>
+                            <p class="workshop-description">
+                                A full-day deep dive to turn strategy into powerful, everyday execution.
+                            </p>
+                            <p class="workshop-description">
+                                <strong>Perfect for:</strong> Growing businesses (5-10 people) looking to build a unified, AI-powered operational core.
+                            </p>
+                            <p class="workshop-description">
+                                Go beyond the basics and start building. In this immersive full-day session, we'll work with your entire team to develop custom AI workflows, automate repetitive tasks, and unlock new creative possibilities specific to your industry. We don't just teach the tools; we help you weave them into the fabric of your business, ensuring team-wide adoption and a tangible return on investment.
+                            </p>
+                            <div class="workshop-pricing">
+                                <h5>Your Investment in Team-Wide Amplification: $10,000</h5>
+                                <p>Empower your entire core team for a fraction of the cost of a single new specialized hire. You're not just buying a workshop; you're investing in a more efficient, innovative, and collaborative workforce.</p>
+                            </div>
+                            <div class="cta-container">
+                                <a href="#" class="primary-cta">Schedule The Accelerator</a>
+                            </div>
+                        </div>
+
+                        <!-- The Transformation Workshop -->
+                        <div class="workshop-category">
+                            <div class="workshop-icon">🌟</div>
+                            <h4 class="workshop-title">3. The Transformation Workshop</h4>
+                            <p class="workshop-description">
+                                A multi-day partnership to embed AI into your company's DNA.
+                            </p>
+                            <p class="workshop-description">
+                                <strong>Perfect for:</strong> Established organizations (10+ people) committed to leading their industry and building a long-term strategic advantage.
+                            </p>
+                            <p class="workshop-description">
+                                This is our most comprehensive and bespoke engagement. Over multiple days, we become an extension of your team. We'll conduct a deep analysis of your organization's needs and opportunities, co-design enterprise-grade AI systems, and train your team not just to use AI, but to think with it. This is about fostering a culture of innovation that will pay dividends for years to come.
+                            </p>
+                            <div class="workshop-pricing">
+                                <h5>A Custom Partnership for Transformational Results: Starting at $25,000</h5>
+                                <p>Scaled to organization size and scope. This is a strategic investment in the long-term resilience and intelligence of your entire organization. Let's build your future, together.</p>
+                            </div>
+                            <div class="cta-container">
+                                <a href="#" class="primary-cta">Request a Consultation</a>
+                            </div>
+                                                    </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Section -->
+                    <div class="section">
+                        <h3 class="section-title">Frequently Asked Questions</h3>
+                        <div class="faq-grid">
+                            <div class="faq-item">
+                                <h4 class="faq-question">Do we need to be technical experts?</h4>
+                                <p class="faq-answer">Absolutely not. Our workshops are designed for everyone, from CEOs to creative teams. Our focus is on practical application and strategy, not complex coding.</p>
+                            </div>
+                            <div class="faq-item">
+                                <h4 class="faq-question">Do you offer these workshops remotely?</h4>
+                                <p class="faq-answer">Yes! We can deliver the same hands-on, engaging experience for your team anywhere in the world.</p>
+                            </div>
+                            <div class="faq-item">
+                                <h4 class="faq-question">What is the real ROI of a workshop like this?</h4>
+                                <p class="faq-answer">Our clients see returns in multiple ways: dramatic increases in team productivity, reduction in costs for outsourced tasks, faster content and product development cycles, and—most importantly—the strategic clarity to make smarter business decisions. This isn't just about efficiency; it's about building a more intelligent business.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Final CTA -->
+                    <div class="section">
+                        <h3 class="section-title">Ready to unlock your team's full potential?</h3>
+                        <p class="section-text">
+                            Stop letting the future happen to you. Let's build it together.
+                        </p>
+                        <div class="cta-container">
+                            <a href="#" class="primary-cta">Get In Touch</a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -890,6 +2262,97 @@
     </div>
 
     <script>
+        // Theme Management Functions
+        function detectAndApplyTheme() {
+            const userPreference = localStorage.getItem('theme');
+            const systemPreference = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            if (userPreference) {
+                applyTheme(userPreference);
+            } else {
+                applyTheme(systemPreference ? 'dark' : 'light');
+            }
+        }
+
+        function applyTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            updateThemeToggleIcon(theme);
+        }
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            applyTheme(newTheme);
+            localStorage.setItem('theme', newTheme);
+        }
+
+        function updateThemeToggleIcon(theme) {
+            const toggleButton = document.querySelector('.theme-toggle');
+            if (toggleButton) {
+                toggleButton.innerHTML = theme === 'dark' ? '☀️' : '🌙';
+                toggleButton.title = theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode';
+            }
+        }
+
+        // Listen for system theme changes
+        function setupSystemThemeListener() {
+            const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+            
+            darkModeMediaQuery.addEventListener('change', (e) => {
+                // Only apply system preference if user hasn't set a manual preference
+                if (!localStorage.getItem('theme')) {
+                    applyTheme(e.matches ? 'dark' : 'light');
+                }
+            });
+        }
+
+        // Initialize theme on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            detectAndApplyTheme();
+            setupSystemThemeListener();
+            setupMobileMenuClickOutside();
+        });
+
+        // Setup click outside to close mobile menu
+        function setupMobileMenuClickOutside() {
+            document.addEventListener('click', (event) => {
+                const navItems = document.querySelector('.nav-items');
+                const mobileToggle = document.querySelector('.mobile-nav-toggle');
+                const navContainer = document.querySelector('.nav-container');
+                
+                // Check if mobile menu is open and click is outside navigation
+                if (navItems && navItems.classList.contains('active') && 
+                    !navContainer.contains(event.target)) {
+                    closeMobileMenu();
+                }
+            });
+
+            // Close mobile menu on escape key
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape') {
+                    closeMobileMenu();
+                }
+            });
+        }
+
+        // Mobile Navigation Functions
+        function toggleMobileMenu() {
+            const navItems = document.querySelector('.nav-items');
+            const mobileToggle = document.querySelector('.mobile-nav-toggle');
+            
+            navItems.classList.toggle('active');
+            mobileToggle.classList.toggle('active');
+        }
+
+        function closeMobileMenu() {
+            const navItems = document.querySelector('.nav-items');
+            const mobileToggle = document.querySelector('.mobile-nav-toggle');
+            
+            navItems.classList.remove('active');
+            mobileToggle.classList.remove('active');
+        }
+
+        // Existing section navigation function
         function showSection(sectionName) {
             // Hide all sections
             const sections = document.querySelectorAll('.section-content');
@@ -911,6 +2374,9 @@
 
             // Find and activate the clicked nav item
             event.target.classList.add('active');
+
+            // Close mobile menu when navigation item is clicked
+            closeMobileMenu();
         }
     </script>
 </body>
