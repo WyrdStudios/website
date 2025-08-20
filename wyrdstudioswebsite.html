@@ -741,14 +741,15 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 200px;
+            width: 300px;
             height: 200px;
-            border-radius: 50%;
+            border-radius: 16px;
             background: linear-gradient(135deg, var(--card-bg) 0%, var(--bg-secondary) 100%);
-            padding: 1rem;
+            padding: 0;
             box-shadow: 0 4px 15px var(--shadow-color);
             transition: all 0.2s ease;
             align-self: center;
+            overflow: hidden;
         }
 
         .founder-image:hover {
@@ -756,8 +757,53 @@
             box-shadow: 0 6px 20px var(--shadow-hover);
         }
 
-        .founder-image svg {
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+        .founder-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        /* Center the founders photo */
+        .founder-image .founder-photo {
+            object-position: center center;
+        }
+
+        /* Founders photo container */
+        .founders-photo-container {
+            display: flex;
+            justify-content: flex-start;
+            margin-bottom: 3rem;
+        }
+
+        /* Founders bios grid */
+        .founders-bios-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .founder-bio-column {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Mobile responsive for founders section */
+        @media (max-width: 768px) {
+            .founders-bios-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .founders-photo-container {
+                justify-content: center;
+            }
+            
+            .founder-image {
+                width: 250px;
+                height: 167px;
+            }
         }
 
         .founder-content {
@@ -2400,118 +2446,60 @@
                 <div class="section">
                     <h3 class="section-title">Meet the Founders</h3>
 
-                    <div class="founders-grid">
+                    <!-- Founders Photo -->
+                    <div class="founders-photo-container">
+                        <div class="founder-image">
+                            <img src="images/RandyandOlivia.jpeg" alt="Randy and Olivia Olson" class="founder-photo">
+                        </div>
+                    </div>
+
+                    <div class="founders-bios-grid">
                         <!-- Randy Olson -->
-                        <div class="founder-column">
-                            <div class="founder-image">
-                                <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                                    <defs>
-                                        <linearGradient id="beardGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                            <stop offset="0%" style="stop-color:#8B4513;stop-opacity:1" />
-                                            <stop offset="100%" style="stop-color:#654321;stop-opacity:1" />
-                                        </linearGradient>
-                                        <linearGradient id="skinGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                            <stop offset="0%" style="stop-color:#F4D03F;stop-opacity:1" />
-                                            <stop offset="100%" style="stop-color:#E67E22;stop-opacity:1" />
-                                        </linearGradient>
-                                    </defs>
-                                    <!-- Head -->
-                                    <circle cx="100" cy="80" r="50" fill="url(#skinGradient)" stroke="#8B4513" stroke-width="2"/>
-                                    <!-- Eyes -->
-                                    <circle cx="85" cy="70" r="4" fill="#2C3E50"/>
-                                    <circle cx="115" cy="70" r="4" fill="#2C3E50"/>
-                                    <!-- Nose -->
-                                    <ellipse cx="100" cy="80" rx="3" ry="2" fill="#E67E22"/>
-                                    <!-- Mouth -->
-                                    <path d="M 90 90 Q 100 95 110 90" stroke="#8B4513" stroke-width="2" fill="none"/>
-                                    <!-- Beard -->
-                                    <path d="M 60 80 Q 100 120 140 80" fill="url(#beardGradient)"/>
-                                    <path d="M 70 85 Q 100 130 130 85" fill="url(#beardGradient)"/>
-                                    <path d="M 80 90 Q 100 140 120 90" fill="url(#beardGradient)"/>
-                                    <!-- Hair -->
-                                    <path d="M 50 30 Q 100 20 150 30 Q 140 60 100 50 Q 60 60 50 30" fill="#2C3E50"/>
-                                </svg>
-                            </div>
-                            <div class="founder-content">
-                                <h4 class="founder-name">Randy Olson, Ph.D.</h4>
-                                <p class="founder-title">Co-Founder</p>
-                                <p class="founder-bio">
-                                    Randy brings over 15 years of AI experience, rooted in his Ph.D. from Michigan State University, where he focused on the ambitious goal of digitally recreating the evolutionary path to human-level intelligence. As a Principal AI Strategy Architect, he excelled at helping organizations identify high-ROI opportunities and architecting practical, data-driven AI solutions that provide tangible value.
-                                </p>
-                                <p class="founder-bio">
-                                    Driven by a mission to ensure AI becomes a profoundly positive force for the world, Randy's approach is pragmatic and human-centered. He focuses on creating technology that enhances human agency and well-being, often by automating monotonous tasks. He believes in solving real-world problems to build sustainable businesses, using AI to amplify human capabilities and empower people in their daily lives.
-                                </p>
-                                <p class="founder-quote">
-                                    "The most sustainable businesses solve real problems, not chase moonshots. We focus
-                                    on AI that amplifies human capabilities and gives people more control over their
-                                    digital lives."
-                                </p>
-                                <p class="founder-expertise">
-                                    <span class="expertise-title">Key Expertise:</span> AI Strategy & Architecture,
-                                    Data-Driven Decision Making, Human-Centered Technology Design
-                                </p>
-                            </div>
+                        <div class="founder-bio-column">
+                            <h4 class="founder-name">Randy Olson, Ph.D.</h4>
+                            <p class="founder-title">Co-Founder</p>
+                            <p class="founder-bio">
+                                Randy brings over 15 years of AI experience, rooted in his Ph.D. from Michigan State University, where he focused on the ambitious goal of digitally recreating the evolutionary path to human-level intelligence. As a Principal AI Strategy Architect, he excelled at helping organizations identify high-ROI opportunities and architecting practical, data-driven AI solutions that provide tangible value.
+                            </p>
+                            <p class="founder-bio">
+                                Driven by a mission to ensure AI becomes a profoundly positive force for the world, Randy's approach is pragmatic and human-centered. He focuses on creating technology that enhances human agency and well-being, often by automating monotonous tasks. He believes in solving real-world problems to build sustainable businesses, using AI to amplify human capabilities and empower people in their daily lives.
+                            </p>
+                            <p class="founder-quote">
+                                "The most sustainable businesses solve real problems, not chase moonshots. We focus
+                                on AI that amplifies human capabilities and gives people more control over their
+                                digital lives."
+                            </p>
+                            <p class="founder-expertise">
+                                <span class="expertise-title">Key Expertise:</span> AI Strategy & Architecture,
+                                Data-Driven Decision Making, Human-Centered Technology Design
+                            </p>
                         </div>
 
                         <!-- Olivia Olson -->
-                        <div class="founder-column">
-                            <div class="founder-image">
-                                <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                                    <defs>
-                                        <linearGradient id="hairGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                            <stop offset="0%" style="stop-color:#8B4513;stop-opacity:1" />
-                                            <stop offset="100%" style="stop-color:#654321;stop-opacity:1" />
-                                        </linearGradient>
-                                        <linearGradient id="skinGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
-                                            <stop offset="0%" style="stop-color:#F4D03F;stop-opacity:1" />
-                                            <stop offset="100%" style="stop-color:#E67E22;stop-opacity:1" />
-                                        </linearGradient>
-                                    </defs>
-                                    <!-- Head -->
-                                    <circle cx="100" cy="80" r="50" fill="url(#skinGradient2)" stroke="#8B4513" stroke-width="2"/>
-                                    <!-- Eyes -->
-                                    <circle cx="85" cy="70" r="4" fill="#2C3E50"/>
-                                    <circle cx="115" cy="70" r="4" fill="#2C3E50"/>
-                                    <!-- Nose -->
-                                    <ellipse cx="100" cy="80" rx="3" ry="2" fill="#E67E22"/>
-                                    <!-- Mouth -->
-                                    <path d="M 90 90 Q 100 95 110 90" stroke="#8B4513" stroke-width="2" fill="none"/>
-                                    <!-- Curly Hair -->
-                                    <path d="M 50 30 Q 100 15 150 30 Q 140 50 100 40 Q 60 50 50 30" fill="url(#hairGradient)"/>
-                                    <path d="M 45 35 Q 100 25 155 35 Q 145 55 100 45 Q 55 55 45 35" fill="url(#hairGradient)"/>
-                                    <path d="M 40 40 Q 100 30 160 40 Q 150 60 100 50 Q 50 60 40 40" fill="url(#hairGradient)"/>
-                                    <!-- Curls -->
-                                    <circle cx="60" cy="25" r="8" fill="url(#hairGradient)"/>
-                                    <circle cx="140" cy="25" r="8" fill="url(#hairGradient)"/>
-                                    <circle cx="70" cy="20" r="6" fill="url(#hairGradient)"/>
-                                    <circle cx="130" cy="20" r="6" fill="url(#hairGradient)"/>
-                                </svg>
-                            </div>
-                            <div class="founder-content">
-                                <h4 class="founder-name">Olivia Rose Olson</h4>
-                                <p class="founder-title">Co-Founder</p>
-                                <p class="founder-bio">
-                                    Olivia brings extensive customer experience and service design expertise, with an M.S.
-                                    in Human-Computer Interaction Design from the University of Washington. Her career
-                                    spans transformational work across government and private sector, specializing in
-                                    strategic consultation on policies and organizational change.
-                                </p>
-                                <p class="founder-bio">
-                                    Her expertise encompasses the full spectrum of user-centered design—from ethnographic
-                                    research and usability testing to complex information architectures and cross-platform
-                                    design systems. Her background in behavioral science enables her to drive organizational
-                                    change with minimal resistance, while her multilingual abilities (German, Portuguese,
-                                    Spanish, Swiss German) inform her approach to designing inclusive experiences.
-                                </p>
-                                <p class="founder-quote">
-                                    "Technology should serve human intellect, not exploit human attention. Every product
-                                    we build starts with understanding real human needs and respecting people's autonomy."
-                                </p>
-                                <p class="founder-expertise">
-                                    <span class="expertise-title">Key Expertise:</span> Strategic CX Leadership,
-                                    Service Design & Modernization, Cross-Cultural UX Research, Behavioral Science Applications
-                                </p>
-                            </div>
+                        <div class="founder-bio-column">
+                            <h4 class="founder-name">Olivia Rose Olson</h4>
+                            <p class="founder-title">Co-Founder</p>
+                            <p class="founder-bio">
+                                Olivia brings extensive customer experience and service design expertise, with an M.S.
+                                in Human-Computer Interaction Design from the University of Washington. Her career
+                                spans transformational work across government and private sector, specializing in
+                                strategic consultation on policies and organizational change.
+                            </p>
+                            <p class="founder-bio">
+                                Her expertise encompasses the full spectrum of user-centered design—from ethnographic
+                                research and usability testing to complex information architectures and cross-platform
+                                design systems. Her background in behavioral science enables her to drive organizational
+                                change with minimal resistance, while her multilingual abilities (German, Portuguese,
+                                Spanish, Swiss German) inform her approach to designing inclusive experiences.
+                            </p>
+                            <p class="founder-quote">
+                                "Technology should serve human intellect, not exploit human attention. Every product
+                                we build starts with understanding real human needs and respecting people's autonomy."
+                            </p>
+                            <p class="founder-expertise">
+                                <span class="expertise-title">Key Expertise:</span> Strategic CX Leadership,
+                                Service Design & Modernization, Cross-Cultural UX Research, Behavioral Science Applications
+                            </p>
                         </div>
                     </div>
 
