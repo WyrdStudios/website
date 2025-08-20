@@ -917,95 +917,54 @@
             color: var(--text-primary);
         }
 
-        /* Contact Form Styling */
-        .contact-form-container {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 3rem;
+        /* Simple Contact Section Styling */
+        .contact-simple {
+            display: flex;
+            justify-content: center;
             margin-top: 2rem;
         }
 
-        .contact-form {
+        .contact-email-section {
             background: linear-gradient(135deg, var(--card-bg) 0%, var(--bg-secondary) 100%);
             padding: 2rem;
             border-radius: 16px;
             border: 1px solid var(--border-color);
+            text-align: center;
         }
 
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
+        .contact-email-section h4 {
+            font-size: 1.5rem;
             font-weight: 600;
             color: var(--text-primary);
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
+            margin-bottom: 1rem;
         }
 
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            font-size: 1rem;
-            background: var(--bg-secondary);
-            color: var(--text-primary);
-            transition: all 0.2s ease;
-            font-family: inherit;
+        .contact-email-section p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.6;
         }
 
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--accent-primary);
-            box-shadow: 0 0 0 3px rgba(215, 193, 12, 0.1);
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        .contact-submit-btn {
+        .contact-email-btn {
             background: linear-gradient(135deg, #D7C10C 0%, #D09FB6 100%);
             color: var(--bg-primary);
             padding: 1rem 2rem;
-            border: none;
-            border-radius: 12px;
+            text-decoration: none;
             font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
+            font-size: 1.1rem;
+            border-radius: 12px;
+            display: inline-block;
             transition: all 0.2s ease;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
             box-shadow: 0 4px 15px var(--shadow-color);
-            width: 100%;
         }
 
-        .contact-submit-btn:hover {
+        .contact-email-btn:hover {
             background: linear-gradient(135deg, #D09FB6 0%, #D7C10C 100%);
             transform: translateY(-2px);
             box-shadow: 0 6px 20px var(--shadow-hover);
         }
 
-        .contact-submit-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .contact-info-sidebar {
+        .contact-info-section {
             background: linear-gradient(135deg, var(--overlay-light) 0%, var(--bg-secondary) 100%);
             padding: 2rem;
             border-radius: 16px;
@@ -1013,55 +972,28 @@
             height: fit-content;
         }
 
-        .contact-info-sidebar h4 {
+        .contact-info-section h4 {
             font-size: 1.25rem;
             font-weight: 600;
             color: var(--text-primary);
             margin-bottom: 1rem;
         }
 
-        .contact-info-sidebar p {
-            color: var(--text-secondary);
-            margin-bottom: 1rem;
-        }
-
-        .email-link {
-            color: var(--accent-primary);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: color 0.2s ease;
-        }
-
-        .email-link:hover {
-            color: var(--accent-secondary);
-        }
-
-        .contact-details {
-            margin-top: 2rem;
-        }
-
-        .contact-details h5 {
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 0.75rem;
-        }
-
-        .contact-details ul {
+        .contact-info-section ul {
             list-style: none;
             padding: 0;
             margin: 0;
         }
 
-        .contact-details li {
+        .contact-info-section li {
             color: var(--text-secondary);
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.75rem;
             padding-left: 1.5rem;
             position: relative;
+            line-height: 1.5;
         }
 
-        .contact-details li::before {
+        .contact-info-section li::before {
             content: '✓';
             position: absolute;
             left: 0;
@@ -2272,17 +2204,7 @@
 
         /* Mobile Responsive Footer */
         @media (max-width: 768px) {
-            .contact-form-container {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-
-            .contact-form,
-            .contact-info-sidebar {
+            .contact-email-section {
                 padding: 1.5rem;
             }
 
@@ -2853,66 +2775,11 @@
                         Ready to build technology that serves humanity? Let's connect.
                     </p>
                     
-                    <div class="contact-form-container">
-                        <form class="contact-form" id="contactForm" onsubmit="submitContactForm(event)">
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="firstName">First Name *</label>
-                                    <input type="text" id="firstName" name="firstName" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="lastName">Last Name *</label>
-                                    <input type="text" id="lastName" name="lastName" required>
-                                </div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="email">Email *</label>
-                                <input type="email" id="email" name="email" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="company">Company</label>
-                                <input type="text" id="company" name="company">
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="inquiryType">What can we help you with? *</label>
-                                <select id="inquiryType" name="inquiryType" required>
-                                    <option value="">Select an option</option>
-                                    <option value="workshop">AI Workshop Inquiry</option>
-                                    <option value="partnership">Partnership Opportunity</option>
-                                    <option value="product">Product Development</option>
-                                    <option value="consultation">General Consultation</option>
-                                    <option value="other">Other</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="message">Message *</label>
-                                <textarea id="message" name="message" rows="5" required placeholder="Tell us about your project, goals, or how we can help..."></textarea>
-                            </div>
-                            
-                            <div class="form-group">
-                                <button type="submit" class="contact-submit-btn">Send Message</button>
-                            </div>
-                        </form>
-                        
-                        <div class="contact-info-sidebar">
-                            <h4>Other Ways to Connect</h4>
-                            <p>Prefer to email directly?</p>
-                            <a href="mailto:info@thewyrdstudios.com" class="email-link">info@thewyrdstudios.com</a>
-                            
-                            <div class="contact-details">
-                                <h5>What to Expect</h5>
-                                <ul>
-                                    <li>Timely response</li>
-                                    <li>Free initial consultation</li>
-                                    <li>Direct access to AI experts</li>
-                                    <li>Custom AI strategy roadmap</li>
-                                    <li>Excitement about the future</li>
-                                </ul>
-                            </div>
+                    <div class="contact-simple">
+                        <div class="contact-email-section">
+                            <h4>Email Us Directly</h4>
+                            <p>We'd love to hear from you. Send us an email and we'll get back to you within 48 hours.</p>
+                            <a href="mailto:info@thewyrdstudios.com" class="contact-email-btn">info@thewyrdstudios.com</a>
                         </div>
                     </div>
                 </div>
@@ -3189,88 +3056,9 @@
             }
         }
 
-        function submitContactForm(event) {
-            event.preventDefault();
-            
-            const form = document.getElementById('contactForm');
-            const submitBtn = document.querySelector('.contact-submit-btn');
-            const originalText = submitBtn.textContent;
-            
-            // Disable submit button and show loading state
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Sending...';
-            
-            // Get form data
-            const formData = new FormData(form);
-            const data = Object.fromEntries(formData);
-            
-            // Submit to Netlify function
-            fetch('/.netlify/functions/contact', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => response.json())
-            .then(result => {
-                if (result.success) {
-                    // Show success message
-                    submitBtn.textContent = 'Message Sent!';
-                    submitBtn.style.background = '#4CAF50';
-                    
-                    // Clear form
-                    form.reset();
-                    
-                    // Show success notification
-                    showNotification('Thank you! Your message has been sent. We\'ll get back to you within 48 hours.', 'success');
-                } else {
-                    throw new Error(result.error || 'Failed to send message');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                showNotification('Sorry, there was an error sending your message. Please try again or email us directly.', 'error');
-            })
-            .finally(() => {
-                // Reset button after delay
-                setTimeout(() => {
-                    submitBtn.textContent = originalText;
-                    submitBtn.style.background = '';
-                    submitBtn.disabled = false;
-                }, 3000);
-            });
-        }
 
-        function showNotification(message, type = 'info') {
-            // Create notification element
-            const notification = document.createElement('div');
-            notification.className = `notification notification-${type}`;
-            notification.textContent = message;
-            
-            // Style the notification
-            notification.style.cssText = `
-                position: fixed;
-                top: 2rem;
-                right: 2rem;
-                background: ${type === 'success' ? '#4CAF50' : '#2196F3'};
-                color: white;
-                padding: 1rem 1.5rem;
-                border-radius: 8px;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-                z-index: 10000;
-                max-width: 400px;
-                font-weight: 500;
-            `;
-            
-            // Add to page
-            document.body.appendChild(notification);
-            
-            // Remove after 5 seconds
-            setTimeout(() => {
-                notification.remove();
-            }, 5000);
-        }
+
+
 
         function scrollToTop() {
             window.scrollTo({
