@@ -2303,7 +2303,7 @@
         <nav class="navigation">
             <div class="nav-container">
                 <div class="brand">
-                    <a href="#" class="logo">Wyrd Studios</a>
+                    <a href="#" class="logo" onclick="showSection('home')">Wyrd Studios</a>
                 </div>
                 <button class="mobile-nav-toggle" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu">
                     <span class="hamburger-line"></span>
@@ -2312,11 +2312,11 @@
                 </button>
                 <div class="nav-items">
                     <a href="#" class="nav-item active" onclick="showSection('home')">Home</a>
-                    <a href="#" class="nav-item" onclick="showSection('work')">Work</a>
-                    <a href="#" class="nav-item" onclick="showSection('founders')">Founders</a>
-                    <a href="#" class="nav-item" onclick="showSection('philosophy')">Philosophy</a>
-                    <a href="#" class="nav-item" onclick="showSection('workshops')">Workshops</a>
-                    <a href="#" class="nav-item" onclick="showSection('contact')">Contact</a>
+                    <a href="#work" class="nav-item" onclick="showSection('work')">Work</a>
+                    <a href="#founders" class="nav-item" onclick="showSection('founders')">Founders</a>
+                    <a href="#philosophy" class="nav-item" onclick="showSection('philosophy')">Philosophy</a>
+                    <a href="#workshops" class="nav-item" onclick="showSection('workshops')">Workshops</a>
+                    <a href="#contact" class="nav-item" onclick="showSection('contact')">Contact</a>
                     <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" title="Toggle theme">
                         🌙
                     </button>
@@ -2338,8 +2338,8 @@
                         We specialize in privacy-first, human-centered technology that amplifies human potential.
                     </p>
                     <div class="cta-container">
-                        <a href="#" class="primary-cta" onclick="showSection('work')">Explore Our Work</a>
-                        <a href="#" class="secondary-cta" onclick="showSection('founders')">Meet the Founders</a>
+                        <a href="#work" class="primary-cta" onclick="showSection('work')">Explore Our Work</a>
+                        <a href="#founders" class="secondary-cta" onclick="showSection('founders')">Meet the Founders</a>
                     </div>
                 </div>
 
@@ -2564,7 +2564,7 @@
 
                     <div class="cta-container">
                         <!-- <a href="#" class="primary-cta">Learn More About Iris</a> -->
-                        <a href="#" class="secondary-cta" onclick="showSection('contact')">Partner With Us</a>
+                        <a href="#contact" class="secondary-cta" onclick="showSection('contact')">Partner With Us</a>
                     </div>
                 </div>
             </div>
@@ -2689,7 +2689,7 @@
                                     <p>Think of it not as a cost, but as your first and most important step towards scalable growth and reclaiming countless hours of manual work.</p>
                                 </div>
                                 <div class="cta-container">
-                                    <a href="#" class="primary-cta">Book Spark</a>
+                                    <a href="#contact" class="primary-cta" onclick="showSection('contact')">Book Spark</a>
                                 </div>
                             </div>
 
@@ -2711,7 +2711,7 @@
                                     <p>Empower your entire core team for a fraction of the cost of a single new specialized hire. You're not just buying a workshop; you're investing in a more efficient, innovative, and collaborative workforce.</p>
                                 </div>
                                 <div class="cta-container">
-                                    <a href="#" class="primary-cta">Book Accelerator</a>
+                                    <a href="#contact" class="primary-cta" onclick="showSection('contact')">Book Accelerator</a>
                                 </div>
                             </div>
 
@@ -2733,7 +2733,7 @@
                                     <p>Scaled to organization size and scope. This is a strategic investment in the long-term resilience and intelligence of your entire organization. Let's build your future, together.</p>
                                 </div>
                                 <div class="cta-container">
-                                    <a href="#" class="primary-cta">Book Transformation</a>
+                                    <a href="#contact" class="primary-cta" onclick="showSection('contact')">Book Transformation</a>
                                 </div>
                             </div>
                         </div>
@@ -2870,11 +2870,11 @@
                 <h4>Navigation</h4>
                 <ul class="footer-nav">
                     <li><a href="#" onclick="showSection('home')">Home</a></li>
-                    <li><a href="#" onclick="showSection('work')">Work</a></li>
-                    <li><a href="#" onclick="showSection('founders')">Founders</a></li>
-                    <li><a href="#" onclick="showSection('philosophy')">Philosophy</a></li>
-                    <li><a href="#" onclick="showSection('workshops')">Workshops</a></li>
-                    <li><a href="#" onclick="showSection('contact')">Contact</a></li>
+                    <li><a href="#work" onclick="showSection('work')">Work</a></li>
+                    <li><a href="#founders" onclick="showSection('founders')">Founders</a></li>
+                    <li><a href="#philosophy" onclick="showSection('philosophy')">Philosophy</a></li>
+                    <li><a href="#workshops" onclick="showSection('workshops')">Workshops</a></li>
+                    <li><a href="#contact" onclick="showSection('contact')">Contact</a></li>
                 </ul>
             </div>
 
@@ -2886,8 +2886,8 @@
                     <button class="email-copy-btn" onclick="copyEmail()">info@thewyrdstudios.com</button>
                 </div>
                 <ul class="legal-links">
-                    <li><a href="#" onclick="showSection('privacy')">Privacy Policy</a></li>
-                    <li><a href="#" onclick="showSection('terms')">Terms of Service</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
                 </ul>
             </div>
         </div>
@@ -2953,6 +2953,25 @@
             if (window.self !== window.top) {
                 document.body.setAttribute('data-iframe', 'true');
             }
+            
+            // Handle initial hash on page load
+            const hash = window.location.hash.substring(1);
+            if (hash) {
+                showSection(hash);
+            } else {
+                // If no hash, ensure home section is active and home nav is highlighted
+                showSection('home');
+            }
+        });
+
+        // Listen for hash changes (for direct links and browser back/forward)
+        window.addEventListener('hashchange', () => {
+            const hash = window.location.hash.substring(1);
+            if (hash) {
+                showSection(hash);
+            } else {
+                showSection('home');
+            }
         });
 
         // Setup click outside to close mobile menu
@@ -3008,14 +3027,34 @@
                 selectedSection.classList.add('active');
             }
 
-            // Update navigation
+            // Update navigation - find and activate the correct nav item
             const navItems = document.querySelectorAll('.nav-item');
             navItems.forEach(item => {
                 item.classList.remove('active');
             });
 
-            // Find and activate the clicked nav item
-            event.target.classList.add('active');
+            // Find the nav item that corresponds to this section and activate it
+            let targetNavItem;
+            if (sectionName === 'home') {
+                // For home section, find the nav item with onclick="showSection('home')"
+                targetNavItem = document.querySelector('.nav-item[onclick*="showSection(\'home\')"]');
+            } else {
+                // For other sections, find by href attribute
+                targetNavItem = document.querySelector(`.nav-item[href="#${sectionName}"]`);
+            }
+            
+            if (targetNavItem) {
+                targetNavItem.classList.add('active');
+            } else {
+                console.warn(`Could not find nav item for section: ${sectionName}`);
+            }
+
+            // Update URL hash (except for home)
+            if (sectionName === 'home') {
+                history.pushState(null, null, window.location.pathname);
+            } else {
+                history.pushState(null, null, `#${sectionName}`);
+            }
 
             // Close mobile menu when navigation item is clicked
             closeMobileMenu();
