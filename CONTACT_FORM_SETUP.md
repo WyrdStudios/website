@@ -119,3 +119,4 @@ You can modify `netlify/functions/contact.js` to use:
 4. Monitor function logs for any issues
 
 Your contact form will be fully functional and professional!
+
