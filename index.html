@@ -34,6 +34,10 @@
             --icon-color: #666;
             --nav-bg: rgba(251, 251, 251, 0.95);
             --nav-bg-secondary: rgba(255, 255, 255, 0.95);
+            /* Footer colors */
+            --footer-bg: #D7C10C;
+            --footer-text: #2E2E2E;
+            --footer-border: rgba(46, 46, 46, 0.2);
         }
 
         [data-theme="dark"] {
@@ -59,6 +63,10 @@
             --icon-color: #B0B0B0;
             --nav-bg: rgba(26, 26, 26, 0.95);
             --nav-bg-secondary: rgba(46, 46, 46, 0.95);
+            /* Footer colors - keep consistent with light theme */
+            --footer-bg: #D7C10C;
+            --footer-text: #2E2E2E;
+            --footer-border: rgba(46, 46, 46, 0.2);
         }
 
         /* System preference fallback */
@@ -85,6 +93,10 @@
                 --icon-color: #B0B0B0;
                 --nav-bg: rgba(26, 26, 26, 0.95);
                 --nav-bg-secondary: rgba(46, 46, 46, 0.95);
+                /* Footer colors - keep consistent with light theme */
+                --footer-bg: #D7C10C;
+                --footer-text: #2E2E2E;
+                --footer-border: rgba(46, 46, 46, 0.2);
             }
         }
 
@@ -746,7 +758,6 @@
             border-radius: 16px;
             background: linear-gradient(135deg, var(--card-bg) 0%, var(--bg-secondary) 100%);
             padding: 0;
-            box-shadow: 0 4px 15px var(--shadow-color);
             transition: all 0.2s ease;
             align-self: center;
             overflow: hidden;
@@ -754,7 +765,6 @@
 
         .founder-image:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px var(--shadow-hover);
         }
 
         .founder-photo {
@@ -880,157 +890,80 @@
             color: var(--text-primary);
         }
 
-        /* Contact Form Styling */
-        .contact-form-container {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 3rem;
-            margin-top: 2rem;
+
+
+        /* Simple Contact Message Styling */
+        .contact-message-container {
+            max-width: 800px;
+            margin: 3rem auto 0;
+            text-align: center;
         }
 
-        .contact-form {
+        .contact-message {
             background: linear-gradient(135deg, var(--card-bg) 0%, var(--bg-secondary) 100%);
-            padding: 2rem;
-            border-radius: 16px;
+            padding: 3rem;
+            border-radius: 20px;
             border: 1px solid var(--border-color);
+            box-shadow: 0 8px 32px var(--shadow-color);
         }
 
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-
-        .form-group {
+        .contact-message h4 {
+            font-family: 'Syne Mono', monospace;
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--text-primary);
             margin-bottom: 1.5rem;
+            letter-spacing: -0.01em;
         }
 
-        .form-group label {
-            display: block;
+        .contact-message p {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-email-section {
+            margin-top: 2.5rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .contact-email-section p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            color: var(--text-primary);
+        }
+
+        .contact-email-link {
+            display: inline-block;
+            font-size: 1.5rem;
             font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            font-size: 1rem;
-            background: var(--bg-secondary);
-            color: var(--text-primary);
-            transition: all 0.2s ease;
-            font-family: inherit;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--accent-primary);
-            box-shadow: 0 0 0 3px rgba(215, 193, 12, 0.1);
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        .contact-submit-btn {
-            background: linear-gradient(135deg, #D7C10C 0%, #D09FB6 100%);
-            color: var(--bg-primary);
+            color: var(--accent-primary);
+            text-decoration: none;
             padding: 1rem 2rem;
-            border: none;
+            background: linear-gradient(135deg, var(--overlay-light) 0%, var(--bg-secondary) 100%);
             border-radius: 12px;
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            box-shadow: 0 4px 15px var(--shadow-color);
-            width: 100%;
+            border: 2px solid var(--accent-primary);
+            transition: all 0.3s ease;
+            margin-top: 0.5rem;
         }
 
-        .contact-submit-btn:hover {
-            background: linear-gradient(135deg, #D09FB6 0%, #D7C10C 100%);
+        .contact-email-link:hover {
+            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+            color: var(--bg-primary);
             transform: translateY(-2px);
             box-shadow: 0 6px 20px var(--shadow-hover);
         }
 
-        .contact-submit-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
 
-        .contact-info-sidebar {
-            background: linear-gradient(135deg, var(--overlay-light) 0%, var(--bg-secondary) 100%);
-            padding: 2rem;
-            border-radius: 16px;
-            border: 1px solid var(--border-color);
-            height: fit-content;
-        }
 
-        .contact-info-sidebar h4 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-        }
 
-        .contact-info-sidebar p {
-            color: var(--text-secondary);
-            margin-bottom: 1rem;
-        }
 
-        .email-link {
-            color: var(--accent-primary);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: color 0.2s ease;
-        }
 
-        .email-link:hover {
-            color: var(--accent-secondary);
-        }
-
-        .contact-details {
-            margin-top: 2rem;
-        }
-
-        .contact-details h5 {
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 0.75rem;
-        }
-
-        .contact-details ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .contact-details li {
-            color: var(--text-secondary);
-            margin-bottom: 0.5rem;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        .contact-details li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: var(--accent-primary);
-            font-weight: bold;
-        }
 
         /* Contact Button (keeping for other uses) */
         .contact-button {
@@ -1980,8 +1913,8 @@
 
         /* Footer Styles - Condensed Version */
         .footer {
-            background: var(--accent-primary);
-            color: var(--text-primary);
+            background: var(--footer-bg);
+            color: var(--footer-text);
             padding: 1.5rem 0 0.5rem 0;
             position: relative;
         }
@@ -1993,7 +1926,7 @@
             left: 0;
             right: 0;
             height: 1px;
-            background: linear-gradient(90deg, transparent, var(--text-primary), transparent);
+            background: linear-gradient(90deg, transparent, var(--footer-text), transparent);
             opacity: 0.3;
         }
 
@@ -2010,7 +1943,7 @@
             font-size: 1rem;
             font-weight: 600;
             margin-bottom: 1rem;
-            color: var(--text-primary);
+            color: var(--footer-text);
             letter-spacing: -0.01em;
         }
 
@@ -2025,7 +1958,7 @@
             font-size: 1.25rem;
             font-weight: 700;
             margin-bottom: 0.25rem;
-            color: var(--text-primary);
+            color: var(--footer-text);
         }
 
 
@@ -2039,7 +1972,7 @@
 
         .newsletter-signup p {
             font-size: 0.9rem;
-            color: var(--text-primary);
+            color: var(--footer-text);
             margin-bottom: 1rem;
             line-height: 1.4;
         }
@@ -2054,11 +1987,11 @@
             min-width: auto;
             flex: 0.67;
             padding: 0.5rem 0.75rem;
-            border: 1px solid var(--text-primary);
+            border: 1px solid var(--footer-text);
             border-radius: 6px;
             font-size: 0.9rem;
             background: var(--bg-secondary);
-            color: var(--text-primary);
+            color: var(--footer-text);
             transition: all 0.2s ease;
         }
 
@@ -2070,8 +2003,8 @@
 
         .newsletter-subscribe-btn {
             padding: 0.5rem 1rem;
-            background: var(--text-primary);
-            color: var(--accent-primary);
+            background: var(--footer-text);
+            color: var(--footer-bg);
             border: none;
             border-radius: 6px;
             font-weight: 600;
@@ -2097,7 +2030,7 @@
         }
 
         .footer-nav a {
-            color: var(--text-primary);
+            color: var(--footer-text);
             text-decoration: none;
             font-size: 0.85rem;
             transition: color 0.2s ease;
@@ -2117,13 +2050,13 @@
 
         .contact-info p {
             font-size: 0.9rem;
-            color: var(--text-primary);
+            color: var(--footer-text);
             margin-bottom: 0.5rem;
         }
 
         .email-copy-btn {
-            background: var(--text-primary);
-            color: var(--accent-primary);
+            background: var(--footer-text);
+            color: var(--footer-bg);
             border: none;
             border-radius: 6px;
             padding: 0.4rem 0.75rem;
@@ -2149,7 +2082,7 @@
         }
 
         .legal-links a {
-            color: var(--text-primary);
+            color: var(--footer-text);
             text-decoration: none;
             font-size: 0.85rem;
             transition: color 0.2s ease;
@@ -2171,7 +2104,7 @@
 
         .footer-bottom p {
             font-size: 0.8rem;
-            color: var(--text-primary);
+            color: var(--footer-text);
             margin: 0;
         }
 
@@ -2225,6 +2158,29 @@
             .contact-form,
             .contact-info-sidebar {
                 padding: 1.5rem;
+            }
+
+            /* Mobile Contact Message */
+            .contact-message-container {
+                margin: 2rem 1rem 0;
+            }
+
+            .contact-message {
+                padding: 2rem 1.5rem;
+            }
+
+            .contact-message h4 {
+                font-size: 1.75rem;
+            }
+
+            .contact-message p {
+                font-size: 1rem;
+                line-height: 1.6;
+            }
+
+            .contact-email-link {
+                font-size: 1.25rem;
+                padding: 0.875rem 1.5rem;
             }
 
             .footer-container {
@@ -2787,69 +2743,16 @@
             <div id="contact" class="section-content">
                 <div class="section">
                     <h3 class="section-title">Get in Touch</h3>
-                    <p class="section-text">
-                        Ready to build technology that serves humanity? Let's connect.
-                    </p>
                     
-                    <div class="contact-form-container">
-                        <form class="contact-form" id="contactForm" onsubmit="submitContactForm(event)">
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="firstName">First Name *</label>
-                                    <input type="text" id="firstName" name="firstName" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="lastName">Last Name *</label>
-                                    <input type="text" id="lastName" name="lastName" required>
-                                </div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="email">Email *</label>
-                                <input type="email" id="email" name="email" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="company">Company</label>
-                                <input type="text" id="company" name="company">
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="inquiryType">What can we help you with? *</label>
-                                <select id="inquiryType" name="inquiryType" required>
-                                    <option value="">Select an option</option>
-                                    <option value="workshop">AI Workshop Inquiry</option>
-                                    <option value="partnership">Partnership Opportunity</option>
-                                    <option value="product">Product Development</option>
-                                    <option value="consultation">General Consultation</option>
-                                    <option value="other">Other</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="message">Message *</label>
-                                <textarea id="message" name="message" rows="5" required placeholder="Tell us about your project, goals, or how we can help..."></textarea>
-                            </div>
-                            
-                            <div class="form-group">
-                                <button type="submit" class="contact-submit-btn">Send Message</button>
-                            </div>
-                        </form>
-                        
-                        <div class="contact-info-sidebar">
-                            <h4>Other Ways to Connect</h4>
-                            <p>Prefer to email directly?</p>
-                            <a href="mailto:info@thewyrdstudios.com" class="email-link">info@thewyrdstudios.com</a>
-                            
-                            <div class="contact-details">
-                                <h5>What to Expect</h5>
-                                <ul>
-                                    <li>Timely response</li>
-                                    <li>Free initial consultation</li>
-                                    <li>Direct access to AI experts</li>
-                                    <li>Custom AI strategy roadmap</li>
-                                    <li>Excitement about the future</li>
-                                </ul>
+                    <!-- Simple Contact Message -->
+                    <div class="contact-message-container">
+                        <div class="contact-message">
+                            <h4>We'd Love to Hear From You</h4>
+                            <p>Ready to build technology that serves humanity? We're always excited to connect with like-minded individuals and organizations who share our vision for a more humane digital future.</p>
+                            <p>Whether you're interested in collaborating on projects, want to learn more about our AI workshops, or simply want to explore how we can work together, we'd love to hear from you.</p>
+                            <div class="contact-email-section">
+                                <p><strong>Get in touch:</strong></p>
+                                <a href="mailto:info@thewyrdstudios.com" class="contact-email-link">info@thewyrdstudios.com</a>
                             </div>
                         </div>
                     </div>
