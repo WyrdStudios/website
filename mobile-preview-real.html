@@ -3,30 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mobile Preview - Real Wyrd Studios Website</title>
+    <title>Mobile Preview - Wyrd Studios Website</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             margin: 0;
-            padding: 20px;
-            background: #f5f5f5;
+            padding: 0;
+            background: #19191a;
+            overflow-x: hidden;
         }
         
         .preview-header {
             text-align: center;
             margin-bottom: 30px;
+            padding: 20px;
         }
         
         .preview-title {
             font-size: 2rem;
             font-weight: 600;
-            color: #2E2E2E;
+            color: #ffffff;
             margin: 0 0 10px 0;
         }
         
         .preview-subtitle {
             font-size: 1.1rem;
-            color: #666;
+            color: #cccccc;
             margin: 0;
         }
         
@@ -69,57 +71,6 @@
             transform-origin: 0 0;
         }
         
-        .responsive-info {
-            background: #e3f2fd;
-            border: 1px solid #2196f3;
-            border-radius: 12px;
-            padding: 20px;
-            margin: 30px auto;
-            max-width: 600px;
-            text-align: center;
-        }
-        
-        .responsive-info h3 {
-            color: #1976d2;
-            margin: 0 0 15px 0;
-            font-size: 1.3rem;
-        }
-        
-        .responsive-info p {
-            margin: 10px 0;
-            font-size: 1rem;
-            color: #333;
-            line-height: 1.6;
-        }
-        
-        .responsive-features {
-            background: #f3e5f5;
-            border: 1px solid #9c27b0;
-            border-radius: 12px;
-            padding: 20px;
-            margin: 30px auto;
-            max-width: 600px;
-        }
-        
-        .responsive-features h3 {
-            color: #7b1fa2;
-            margin: 0 0 15px 0;
-            font-size: 1.3rem;
-            text-align: center;
-        }
-        
-        .responsive-features ul {
-            margin: 15px 0;
-            padding-left: 25px;
-        }
-        
-        .responsive-features li {
-            margin: 8px 0;
-            font-size: 1rem;
-            color: #333;
-            line-height: 1.5;
-        }
-        
         .device-buttons {
             display: flex;
             justify-content: center;
@@ -151,17 +102,27 @@
         .iframe-container {
             display: flex;
             justify-content: center;
-            margin: 20px 0;
+            margin: 0;
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
         }
         
         .desktop-preview {
-            width: 100%;
-            max-width: 1200px;
+            width: 100vw;
             height: 600px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
+            border: none;
+            border-radius: 0;
             overflow: hidden;
             display: none;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
         }
         
         .desktop-preview.active {
@@ -175,25 +136,33 @@
         .phone-frame.hidden {
             display: none;
         }
+        
+        .main-content {
+            padding: 0;
+            overflow-x: hidden;
+        }
+        
+        .preview-header {
+            padding: 20px;
+        }
+        
+        .device-buttons {
+            margin: 20px;
+        }
+        
+        /* Ensure iframe content fills entire width */
+        .desktop-preview {
+            min-width: 100vw;
+            width: 100vw;
+        }
     </style>
 </head>
 <body>
-    <div class="preview-header">
-        <h1 class="preview-title">📱 Mobile Preview - Wyrd Studios Website</h1>
-        <p class="pretitle">See how your actual website looks on different devices</p>
-    </div>
-    
-    <div class="responsive-info">
-        <h3>✅ Your Website IS Mobile Responsive!</h3>
-        <p><strong>I found these responsive features in your HTML:</strong></p>
-        <ul style="text-align: left; max-width: 500px; margin: 15px auto;">
-            <li>Proper viewport meta tag for mobile scaling</li>
-            <li>CSS media queries for tablets (1024px) and mobile (768px)</li>
-            <li>Responsive grid layouts that stack on mobile</li>
-            <li>Mobile-optimized typography and spacing</li>
-            <li>Touch-friendly navigation and buttons</li>
-        </ul>
-    </div>
+    <div class="main-content">
+        <div class="preview-header">
+            <h1 class="preview-title">📱 Mobile Preview - Wyrd Studios Website</h1>
+            <p class="preview-subtitle">Switch between mobile and desktop views to see responsive design</p>
+        </div>
     
     <div class="device-buttons">
         <button class="device-btn active" onclick="showDevice('mobile')">📱 Mobile (iPhone)</button>
@@ -209,19 +178,6 @@
         
         <iframe src="wyrdstudioswebsite.html" class="desktop-preview" id="desktop-frame"></iframe>
     </div>
-    
-    <div class="responsive-features">
-        <h3>🔧 How Your Responsive Design Works</h3>
-        <ul>
-            <li><strong>Mobile First:</strong> Your CSS includes media queries that adapt the layout for different screen sizes</li>
-            <li><strong>Grid Flexibility:</strong> Multi-column grids automatically stack into single columns on mobile</li>
-            <li><strong>Typography Scaling:</strong> Font sizes adjust from desktop (2.75rem) to mobile (1.75rem)</li>
-            <li><strong>Touch Optimization:</strong> Buttons and interactive elements are sized for mobile interaction</li>
-            <li><strong>Content Adaptation:</strong> Text alignment and spacing optimize for mobile reading</li>
-        </ul>
-        <p style="text-align: center; margin-top: 20px; font-weight: 600; color: #7b1fa2;">
-            Your website automatically adapts to provide the best experience on any device! 🎉
-        </p>
     </div>
     
     <script>

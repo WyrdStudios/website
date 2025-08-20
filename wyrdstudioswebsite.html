@@ -88,6 +88,33 @@
             }
         }
 
+        /* Custom Scrollbar Styling */
+        /* Webkit browsers (Chrome, Safari, Edge) */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+            border-radius: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 6px;
+            border: 2px solid var(--bg-secondary);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-primary);
+        }
+
+        /* Firefox */
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: var(--border-color) var(--bg-secondary);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -98,7 +125,7 @@
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.5;
             color: var(--text-primary);
-            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            background: var(--bg-container);
             font-weight: 400;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
@@ -121,13 +148,46 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background:
-                radial-gradient(circle at 20% 80%, var(--overlay-light) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, var(--overlay-medium) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, var(--overlay-light) 0%, transparent 50%);
+            background: transparent;
             pointer-events: none;
             z-index: -1;
         }
+        
+        /* Iframe-specific overrides to eliminate gradient bands */
+        body[data-iframe="true"],
+        body[data-iframe="true"] .container,
+        body[data-iframe="true"] .container::before {
+            background: var(--bg-primary) !important;
+        }
+        
+        body[data-iframe="true"] .container {
+            max-width: none !important;
+            margin: 0 !important;
+            width: 100% !important;
+        }
+        
+        /* Override all gradient backgrounds when in iframe */
+        body[data-iframe="true"] *[style*="gradient"] {
+            background: var(--bg-primary) !important;
+        }
+        
+        /* Additional iframe overrides for specific elements */
+        body[data-iframe="true"] .navigation {
+            background: var(--nav-bg) !important;
+        }
+        
+        body[data-iframe="true"] .hero-section,
+        body[data-iframe="true"] .section {
+            background: var(--bg-primary) !important;
+        }
+        
+        body[data-iframe="true"] .value-prop,
+        body[data-iframe="true"] .focus-area,
+        body[data-iframe="true"] .workshop-category {
+            background: var(--bg-primary) !important;
+        }
+        
+
 
         /* Navigation */
         .navigation {
@@ -153,6 +213,13 @@
             padding: 0 2rem;
         }
 
+        .brand {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            line-height: 1.1;
+        }
+
         .logo {
             font-family: 'Syne Mono', monospace;
             font-size: 1.75rem;
@@ -165,20 +232,7 @@
             letter-spacing: 0.02em;
         }
 
-        .brand {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            line-height: 1.1;
-        }
 
-        .brand-subtitle {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            font-weight: 400;
-            letter-spacing: 0.02em;
-            margin-top: 0.25rem;
-        }
 
         .nav-items {
             display: flex;
@@ -187,17 +241,18 @@
         }
 
         .nav-item {
-            padding: 0.75rem 1.5rem;
+            padding: 0.5rem 1.25rem;
             cursor: pointer;
             transition: all 0.2s ease;
             text-decoration: none;
             color: var(--text-secondary);
             font-weight: 500;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 0.05em;
             position: relative;
             border-radius: 12px;
+            line-height: 1.2;
         }
 
         .nav-item:hover {
@@ -328,11 +383,17 @@
 
         /* Content */
         .content {
-            padding: 7rem 2rem 4rem;
+            padding: 7rem 2rem 3rem;
         }
 
         .section {
             margin-bottom: 6rem;
+        }
+
+        /* Remove bottom margin from the last section to eliminate gap before footer */
+        .section:last-child,
+        #contact .section {
+            margin-bottom: 0;
         }
 
         .section-title {
@@ -368,8 +429,8 @@
         /* Hero Section */
         .hero-section {
             text-align: center;
-            margin-bottom: 6rem;
-            padding: 4rem 0;
+            margin-bottom: 3rem;
+            padding: 3rem 0;
         }
 
         .hero-headline {
@@ -414,7 +475,8 @@
             justify-content: center;
             gap: 1rem;
             flex-wrap: wrap;
-            margin-top: 1rem;
+            margin-top: auto;
+            padding-top: 1.5rem;
         }
 
         .primary-cta,
@@ -473,27 +535,27 @@
         .grid-2 {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 4rem;
+            gap: 2.5rem;
             align-items: start;
         }
 
         .grid-3 {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 3rem;
+            gap: 2.5rem;
         }
 
         .grid-4 {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
+            gap: 1.5rem;
         }
 
         /* Value Props */
         .value-props {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 3rem;
+            gap: 2.5rem;
         }
 
         .value-prop {
@@ -523,13 +585,21 @@
             font-size: 1rem;
             color: var(--text-secondary);
             line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .value-prop-description {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-top: 0.5rem;
         }
 
         /* Focus Areas */
         .focus-areas {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 4rem;
+            gap: 2.5rem;
         }
 
         .focus-area {
@@ -572,7 +642,7 @@
         .dont-build-list {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
+            gap: 1.5rem;
         }
 
         .dont-build-item {
@@ -626,16 +696,7 @@
             text-align: left;
         }
 
-        .dont-build-item::after {
-            content: '✕';
-            position: absolute;
-            top: 1.5rem;
-            right: calc(1.5rem + 50px);
-            font-size: 1.25rem;
-            color: var(--text-secondary);
-            font-weight: bold;
-            opacity: 0.6;
-        }
+
 
         /* Founder Cards */
         .founder-card {
@@ -664,7 +725,7 @@
         .founders-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 4rem;
+            gap: 2.5rem;
             margin-bottom: 4rem;
         }
 
@@ -680,14 +741,15 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 200px;
+            width: 300px;
             height: 200px;
-            border-radius: 50%;
+            border-radius: 16px;
             background: linear-gradient(135deg, var(--card-bg) 0%, var(--bg-secondary) 100%);
-            padding: 1rem;
+            padding: 0;
             box-shadow: 0 4px 15px var(--shadow-color);
             transition: all 0.2s ease;
             align-self: center;
+            overflow: hidden;
         }
 
         .founder-image:hover {
@@ -695,8 +757,53 @@
             box-shadow: 0 6px 20px var(--shadow-hover);
         }
 
-        .founder-image svg {
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+        .founder-photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        /* Center the founders photo */
+        .founder-image .founder-photo {
+            object-position: center center;
+        }
+
+        /* Founders photo container */
+        .founders-photo-container {
+            display: flex;
+            justify-content: flex-start;
+            margin-bottom: 3rem;
+        }
+
+        /* Founders bios grid */
+        .founders-bios-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .founder-bio-column {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Mobile responsive for founders section */
+        @media (max-width: 768px) {
+            .founders-bios-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .founders-photo-container {
+                justify-content: center;
+            }
+            
+            .founder-image {
+                width: 250px;
+                height: 167px;
+            }
         }
 
         .founder-content {
@@ -773,7 +880,159 @@
             color: var(--text-primary);
         }
 
-        /* Contact Button */
+        /* Contact Form Styling */
+        .contact-form-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .contact-form {
+            background: linear-gradient(135deg, var(--card-bg) 0%, var(--bg-secondary) 100%);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 3px rgba(215, 193, 12, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .contact-submit-btn {
+            background: linear-gradient(135deg, #D7C10C 0%, #D09FB6 100%);
+            color: var(--bg-primary);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            box-shadow: 0 4px 15px var(--shadow-color);
+            width: 100%;
+        }
+
+        .contact-submit-btn:hover {
+            background: linear-gradient(135deg, #D09FB6 0%, #D7C10C 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px var(--shadow-hover);
+        }
+
+        .contact-submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .contact-info-sidebar {
+            background: linear-gradient(135deg, var(--overlay-light) 0%, var(--bg-secondary) 100%);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            height: fit-content;
+        }
+
+        .contact-info-sidebar h4 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .contact-info-sidebar p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .email-link {
+            color: var(--accent-primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: color 0.2s ease;
+        }
+
+        .email-link:hover {
+            color: var(--accent-secondary);
+        }
+
+        .contact-details {
+            margin-top: 2rem;
+        }
+
+        .contact-details h5 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+        }
+
+        .contact-details ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .contact-details li {
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .contact-details li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent-primary);
+            font-weight: bold;
+        }
+
+        /* Contact Button (keeping for other uses) */
         .contact-button {
             background: linear-gradient(135deg, #D7C10C 0%, #D09FB6 100%);
             color: var(--bg-primary);
@@ -806,24 +1065,24 @@
             .focus-areas,
             .dont-build-list {
                 grid-template-columns: 1fr;
-                gap: 2rem;
+                gap: 1.5rem;
                 text-align: left;
             }
 
             .founders-grid {
                 grid-template-columns: 1fr;
-                gap: 3rem;
+                gap: 2.5rem;
             }
 
             .workshop-categories {
                 grid-template-columns: 1fr; /* Single column for tablets and below */
-                gap: 2rem;
+                gap: 1.5rem;
                 margin: 2rem 0;
             }
 
             .benefits-grid {
                 grid-template-columns: 1fr;
-                gap: 1.5rem;
+                gap: 1.25rem;
             }
         }
 
@@ -855,15 +1114,16 @@
             }
 
             .nav-item {
-                padding: 1rem 2rem;
+                padding: 0.75rem 1.5rem;
                 border-bottom: 1px solid var(--border-color);
                 margin: 0;
                 border-radius: 0;
-                min-height: 48px;
+                min-height: 44px;
                 display: flex;
                 align-items: center;
                 width: 100%;
                 text-align: left;
+                line-height: 1.2;
             }
 
             .nav-item:last-child {
@@ -902,27 +1162,48 @@
             }
 
             .content {
-                padding: 8rem 1rem 2rem; /* Increased top padding for mobile */
+                padding: 5rem 0.75rem 1rem; /* Reduced from 6rem 0.75rem 1.5rem for tighter spacing */
             }
 
             .hero-section {
-                padding: 3rem 0; /* Increased hero section padding */
+                padding: 3rem 0; /* Maintain hero spacing on ultra-small */
+                margin-bottom: 0.75rem; /* Ultra-tight spacing below hero on extra small mobile */
             }
 
             /* Add extra spacing below header for mobile */
             .header {
                 padding-left: 2.5rem; /* Increased left padding to avoid yellow bar */
                 padding-right: 1.5rem;
-                margin-bottom: 1rem;
+                margin-bottom: 0.5rem; /* Reduced from 1rem for tighter spacing */
             }
 
             .founders-grid {
                 gap: 2rem;
             }
 
+            /* Value Props Mobile */
+            .value-props {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .value-prop {
+                text-align: center;
+            }
+
             .founder-image {
                 width: 150px;
                 height: 150px;
+            }
+
+            /* Focus Areas Mobile */
+            .focus-areas {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .focus-area {
+                padding: 1.5rem 0 1.5rem 1.5rem;
             }
 
             .founder-name {
@@ -932,7 +1213,7 @@
             /* Workshop tiles mobile optimization */
             .workshop-categories {
                 grid-template-columns: 1fr !important; /* Force single column on mobile */
-                gap: 1.5rem;
+                gap: 1.25rem;
                 margin: 1.5rem 0;
             }
 
@@ -1021,7 +1302,7 @@
         .founder-philosophy {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 3rem;
+            gap: 2.5rem;
             margin-top: 2rem;
         }
 
@@ -1060,7 +1341,7 @@
         @media (max-width: 768px) {
             .founder-philosophy {
                 grid-template-columns: 1fr;
-                gap: 2rem;
+                gap: 1.5rem;
             }
 
             .philosophy-subtitle {
@@ -1113,7 +1394,7 @@
             }
 
             .content {
-                padding: 7rem 0.75rem 2rem; /* Increased top padding for small mobile */
+                padding: 5rem 0.75rem 1rem; /* Increased top padding for small mobile */
             }
 
             .header {
@@ -1130,7 +1411,7 @@
             .value-props,
             .focus-areas,
             .founder-philosophy {
-                gap: 1rem;
+                gap: 0.5rem; /* Reduced from 0.75rem */
             }
 
             .workshop-categories {
@@ -1158,7 +1439,7 @@
             }
 
             .cta-container {
-                gap: 0.75rem;
+                gap: 0.5rem;
             }
         }
 
@@ -1181,9 +1462,7 @@
                 font-size: 1.5rem;
             }
 
-            .brand-subtitle {
-                font-size: 0.75rem;
-            }
+
 
             /* Ultra-compact layout */
             .nav-container,
@@ -1208,6 +1487,7 @@
             .nav-item {
                 padding: 0.875rem 1.5rem;
                 font-size: 0.85rem;
+                line-height: 1.2;
             }
 
             .primary-cta, .secondary-cta {
@@ -1348,7 +1628,7 @@
             /* Optimize founder section for mobile */
             .founders-grid {
                 text-align: center;
-                gap: 3rem;
+                gap: 2.5rem;
             }
 
             .founder-image {
@@ -1365,13 +1645,13 @@
 
             /* Mobile grid spacing optimization */
             .section {
-                margin-bottom: 4rem;
+                margin-bottom: 2rem; /* Reduced from 2.5rem */
             }
 
             .value-props,
             .focus-areas,
             .workshop-categories {
-                margin: 2rem 0;
+                margin: 1.5rem 0; /* Reduced from 2rem */
             }
 
             /* Ensure proper vertical rhythm on mobile */
@@ -1430,29 +1710,6 @@
                 opacity: 0.4; /* Simplify header gradients */
             }
 
-            /* Optimize animations for mobile performance */
-            * {
-                transition: none; /* Disable most transitions on mobile */
-            }
-
-            /* Keep essential transitions only */
-            .nav-items,
-            .mobile-nav-toggle,
-            .hamburger-line,
-            .nav-item:active,
-            .primary-cta:active,
-            .secondary-cta:active {
-                transition: all 0.3s ease;
-            }
-
-            /* Theme transitions for essential elements */
-            .theme-toggle,
-            .nav-item,
-            .primary-cta,
-            .secondary-cta {
-                transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-            }
-
             /* Reduce shadow complexity on mobile */
             .workshop-category:hover,
             .workshop-category:focus,
@@ -1495,19 +1752,22 @@
         .workshop-categories {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 2.5rem;
+            gap: 2rem;
             margin: 2rem 0;
             text-align: left;
         }
 
         .workshop-category {
-            padding: 1rem;
+            padding: 1.5rem;
             background: linear-gradient(135deg, var(--card-bg) 0%, var(--bg-secondary) 100%);
             border-radius: 16px;
             border-left: 4px solid #D7C10C;
             transition: all 0.2s ease;
             position: relative;
             text-align: left;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
 
         .workshop-category:hover {
@@ -1538,7 +1798,7 @@
             font-size: 0.9rem;
             color: var(--text-secondary);
             line-height: 1.6;
-            margin-bottom: 0.75rem;
+            margin-bottom: 1rem;
             text-align: left;
         }
 
@@ -1575,7 +1835,7 @@
         .benefits-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
+            gap: 1.5rem;
             margin-top: 2rem;
             text-align: left;
         }
@@ -1661,7 +1921,7 @@
             border: 1px solid var(--border-color);
             border-radius: 12px;
             padding: 1.25rem;
-            margin: 1rem 0;
+            margin: 1.5rem 0;
             text-align: left;
         }
 
@@ -1684,7 +1944,7 @@
         .faq-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 2rem;
+            gap: 1.5rem;
             margin-top: 2rem;
         }
 
@@ -1717,6 +1977,323 @@
             line-height: 1.6;
             margin: 0;
         }
+
+        /* Footer Styles - Condensed Version */
+        .footer {
+            background: var(--accent-primary);
+            color: var(--text-primary);
+            padding: 1.5rem 0 0.5rem 0;
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--text-primary), transparent);
+            opacity: 0.3;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .footer-section h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            letter-spacing: -0.01em;
+        }
+
+        /* Company Section */
+        .company-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .company-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+            color: var(--text-primary);
+        }
+
+
+
+
+
+        /* Newsletter Signup */
+        .newsletter-signup h4 {
+            margin-bottom: 0.5rem;
+        }
+
+        .newsletter-signup p {
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .newsletter-form input {
+            min-width: auto;
+            flex: 0.67;
+            padding: 0.5rem 0.75rem;
+            border: 1px solid var(--text-primary);
+            border-radius: 6px;
+            font-size: 0.9rem;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            transition: all 0.2s ease;
+        }
+
+        .newsletter-form input:focus {
+            outline: none;
+            border-color: var(--accent-secondary);
+            box-shadow: 0 0 0 3px rgba(208, 159, 182, 0.1);
+        }
+
+        .newsletter-subscribe-btn {
+            padding: 0.5rem 1rem;
+            background: var(--text-primary);
+            color: var(--accent-primary);
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .newsletter-subscribe-btn:hover {
+            background: #000;
+            transform: translateY(-1px);
+        }
+
+        /* Navigation Section */
+        .footer-nav {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-nav li {
+            margin-bottom: 0.3rem;
+        }
+
+        .footer-nav a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.2s ease;
+            display: inline-block;
+            padding: 0.15rem 0;
+            line-height: 1.1;
+        }
+
+        .footer-nav a:hover {
+            color: #000;
+        }
+
+        /* Contact Section */
+        .contact-info {
+            margin-bottom: 1rem;
+        }
+
+        .contact-info p {
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .email-copy-btn {
+            background: var(--text-primary);
+            color: var(--accent-primary);
+            border: none;
+            border-radius: 6px;
+            padding: 0.4rem 0.75rem;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+
+        .email-copy-btn:hover {
+            background: #000;
+            transform: translateY(-1px);
+        }
+
+        .legal-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .legal-links li {
+            margin-bottom: 0.3rem;
+        }
+
+        .legal-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.2s ease;
+            display: inline-block;
+            padding: 0.15rem 0;
+        }
+
+        .legal-links a:hover {
+            color: #000;
+        }
+
+        /* Footer Bottom */
+        .footer-bottom {
+            border-top: 1px solid rgba(0, 0, 0, 0.2);
+            margin-top: 1rem;
+            padding-top: 0.75rem;
+            text-align: center;
+        }
+
+        .footer-bottom p {
+            font-size: 0.8rem;
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background: var(--accent-primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            background: var(--accent-secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Mobile Responsive Footer */
+        @media (max-width: 768px) {
+            .contact-form-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-form,
+            .contact-info-sidebar {
+                padding: 1.5rem;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                padding: 0 1.5rem;
+            }
+
+            .company-section {
+                text-align: center;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .newsletter-form input {
+                min-width: auto;
+                flex: 0.67;
+            }
+
+            .footer-section {
+                text-align: center;
+            }
+
+            .footer-nav,
+            .legal-links {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            .footer-nav li,
+            .legal-links li {
+                margin-bottom: 0;
+            }
+
+            .back-to-top {
+                bottom: 1.5rem;
+                right: 1.5rem;
+                width: 45px;
+                height: 45px;
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer {
+                padding: 1rem 0 0.5rem 0;
+            }
+
+            .footer-container {
+                padding: 0 1rem;
+            }
+
+            .newsletter-form {
+                gap: 0.5rem;
+            }
+
+            .back-to-top {
+                bottom: 1rem;
+                right: 1rem;
+                width: 40px;
+                height: 40px;
+                font-size: 1.1rem;
+            }
+        }
     </style>
 </head>
 
@@ -1727,7 +2304,6 @@
             <div class="nav-container">
                 <div class="brand">
                     <a href="#" class="logo">Wyrd Studios</a>
-                    <div class="brand-subtitle">Human-Centered Technology Products</div>
                 </div>
                 <button class="mobile-nav-toggle" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu">
                     <span class="hamburger-line"></span>
@@ -1774,52 +2350,56 @@
                         <div class="value-prop">
                             <div class="value-prop-number">01</div>
                             <h4 class="value-prop-title">Independence First</h4>
-                            <p class="value-prop-text">Building with complete autonomy to focus on user needs</p>
+                            <p class="value-prop-text">Building with complete autonomy to focus on user needs.</p>
+                            <p class="value-prop-description">
+                                We operate without external investment, freeing us from the growth-at-all-costs mindset that can compromise quality. This independence allows us to maintain a singular focus: solving real problems for our users. Our decisions are guided by product excellence and customer satisfaction, not by shareholder demands or market pressures.
+                            </p>
                         </div>
                         <div class="value-prop">
                             <div class="value-prop-number">02</div>
                             <h4 class="value-prop-title">Human-Centered Design</h4>
-                            <p class="value-prop-text">Technology that amplifies human potential</p>
+                            <p class="value-prop-text">Technology that amplifies human potential.</p>
+                            <p class="value-prop-description">
+                                We believe technology should be an intuitive partner in creativity and productivity. Our design process is rooted in empathy, creating tools that enhance, not replace, human capability. We build applications that feel like a natural extension of your own abilities, empowering you to achieve more with clarity and purpose.
+                            </p>
                         </div>
                         <div class="value-prop">
                             <div class="value-prop-number">03</div>
                             <h4 class="value-prop-title">Sustainable Innovation</h4>
-                            <p class="value-prop-text">Building for long-term impact with AI-enhanced product
-                                development</p>
+                            <p class="value-prop-text">Building for long-term impact with AI-enhanced product development.</p>
+                            <p class="value-prop-description">
+                                We build for the future, not for the trend cycle. Our approach to innovation is grounded in creating durable, scalable, and meaningful products. By integrating AI thoughtfully into our development process, we create solutions that are not only cutting-edge today but are engineered to adapt and deliver value for years to come.
+                            </p>
                         </div>
                     </div>
                 </div>
 
                 <!-- Company Focus Areas -->
                 <div class="section">
-                    <h3 class="section-title">Our Investment Philosophy</h3>
+                    <h3 class="section-title">Our Core Practices</h3>
                     <div class="focus-areas">
                         <div class="focus-area">
                             <h4 class="focus-area-title">Privacy-First Consumer Technology</h4>
                             <p class="focus-area-text">
-                                Building subscription-based tools that give users control over their digital lives,
-                                with business models that align success with user satisfaction.
+                                Building subscription-based tools that give users control over their digital lives, with business models that align success with user satisfaction.
                             </p>
                         </div>
                         <div class="focus-area">
                             <h4 class="focus-area-title">Human-Centered AI Applications</h4>
                             <p class="focus-area-text">
-                                Creating AI that enhances human capabilities through systematic problem-solving
-                                combined with customer-centric design principles.
+                                Creating AI that enhances human capabilities through systematic problem-solving combined with customer-centric design principles.
                             </p>
                         </div>
                         <div class="focus-area">
-                            <h4 class="focus-area-title">Government & Enterprise Experience Innovation</h4>
+                            <h4 class="focus-area-title">Enterprise Experience Innovation</h4>
                             <p class="focus-area-text">
-                                Leveraging proven methodologies to transform user experiences across complex
-                                organizational systems.
+                                Leveraging proven methodologies to transform user experiences across complex organizational systems.
                             </p>
                         </div>
                         <div class="focus-area">
                             <h4 class="focus-area-title">AI-Enhanced Product Development</h4>
                             <p class="focus-area-text">
-                                Pioneering efficient product building through our digital C-Suite approach,
-                                allowing focus on product development over corporate overhead.
+                                Pioneering efficient product building through our digital C-Suite approach, allowing focus on product development over corporate overhead.
                             </p>
                         </div>
                     </div>
@@ -1866,119 +2446,60 @@
                 <div class="section">
                     <h3 class="section-title">Meet the Founders</h3>
 
-                    <div class="founders-grid">
+                    <!-- Founders Photo -->
+                    <div class="founders-photo-container">
+                        <div class="founder-image">
+                            <img src="images/RandyandOlivia.jpeg" alt="Randy and Olivia Olson" class="founder-photo">
+                        </div>
+                    </div>
+
+                    <div class="founders-bios-grid">
                         <!-- Randy Olson -->
-                        <div class="founder-column">
-                            <div class="founder-image">
-                                <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                                    <defs>
-                                        <linearGradient id="beardGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                            <stop offset="0%" style="stop-color:#8B4513;stop-opacity:1" />
-                                            <stop offset="100%" style="stop-color:#654321;stop-opacity:1" />
-                                        </linearGradient>
-                                        <linearGradient id="skinGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                            <stop offset="0%" style="stop-color:#F4D03F;stop-opacity:1" />
-                                            <stop offset="100%" style="stop-color:#E67E22;stop-opacity:1" />
-                                        </linearGradient>
-                                    </defs>
-                                    <!-- Head -->
-                                    <circle cx="100" cy="80" r="50" fill="url(#skinGradient)" stroke="#8B4513" stroke-width="2"/>
-                                    <!-- Eyes -->
-                                    <circle cx="85" cy="70" r="4" fill="#2C3E50"/>
-                                    <circle cx="115" cy="70" r="4" fill="#2C3E50"/>
-                                    <!-- Nose -->
-                                    <ellipse cx="100" cy="80" rx="3" ry="2" fill="#E67E22"/>
-                                    <!-- Mouth -->
-                                    <path d="M 90 90 Q 100 95 110 90" stroke="#8B4513" stroke-width="2" fill="none"/>
-                                    <!-- Beard -->
-                                    <path d="M 60 80 Q 100 120 140 80" fill="url(#beardGradient)"/>
-                                    <path d="M 70 85 Q 100 130 130 85" fill="url(#beardGradient)"/>
-                                    <path d="M 80 90 Q 100 140 120 90" fill="url(#beardGradient)"/>
-                                    <!-- Hair -->
-                                    <path d="M 50 30 Q 100 20 150 30 Q 140 60 100 50 Q 60 60 50 30" fill="#2C3E50"/>
-                                </svg>
-                            </div>
-                            <div class="founder-content">
-                                <h4 class="founder-name">Randy Olson, Ph.D.</h4>
-                                <p class="founder-title">Co-Founder</p>
-                                <p class="founder-bio">
-                                    Randy brings 15+ years of AI research and application experience, with a Ph.D. from
-                                    Michigan State University focused on digitally recreating the evolutionary path to
-                                    human-level intelligence. As Principal AI Strategy Architect at AE Studio, he helped
-                                    organizations identify high-ROI AI opportunities through systematic problem-solving
-                                    and data-driven approaches.
-                                </p>
-                                <p class="founder-quote">
-                                    "The most sustainable businesses solve real problems, not chase moonshots. We focus
-                                    on AI that amplifies human capabilities and gives people more control over their
-                                    digital lives."
-                                </p>
-                                <p class="founder-expertise">
-                                    <span class="expertise-title">Key Expertise:</span> AI Strategy & Architecture,
-                                    Data-Driven Decision Making, Human-Centered Technology Design
-                                </p>
-                            </div>
+                        <div class="founder-bio-column">
+                            <h4 class="founder-name">Randy Olson, Ph.D.</h4>
+                            <p class="founder-title">Co-Founder</p>
+                            <p class="founder-bio">
+                                Randy brings over 15 years of AI experience, rooted in his Ph.D. from Michigan State University, where he focused on the ambitious goal of digitally recreating the evolutionary path to human-level intelligence. As a Principal AI Strategy Architect, he excelled at helping organizations identify high-ROI opportunities and architecting practical, data-driven AI solutions that provide tangible value.
+                            </p>
+                            <p class="founder-bio">
+                                Driven by a mission to ensure AI becomes a profoundly positive force for the world, Randy's approach is pragmatic and human-centered. He focuses on creating technology that enhances human agency and well-being, often by automating monotonous tasks. He believes in solving real-world problems to build sustainable businesses, using AI to amplify human capabilities and empower people in their daily lives.
+                            </p>
+                            <p class="founder-quote">
+                                "The most sustainable businesses solve real problems, not chase moonshots. We focus
+                                on AI that amplifies human capabilities and gives people more control over their
+                                digital lives."
+                            </p>
+                            <p class="founder-expertise">
+                                <span class="expertise-title">Key Expertise:</span> AI Strategy & Architecture,
+                                Data-Driven Decision Making, Human-Centered Technology Design
+                            </p>
                         </div>
 
                         <!-- Olivia Olson -->
-                        <div class="founder-column">
-                            <div class="founder-image">
-                                <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                                    <defs>
-                                        <linearGradient id="hairGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                            <stop offset="0%" style="stop-color:#8B4513;stop-opacity:1" />
-                                            <stop offset="100%" style="stop-color:#654321;stop-opacity:1" />
-                                        </linearGradient>
-                                        <linearGradient id="skinGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
-                                            <stop offset="0%" style="stop-color:#F4D03F;stop-opacity:1" />
-                                            <stop offset="100%" style="stop-color:#E67E22;stop-opacity:1" />
-                                        </linearGradient>
-                                    </defs>
-                                    <!-- Head -->
-                                    <circle cx="100" cy="80" r="50" fill="url(#skinGradient2)" stroke="#8B4513" stroke-width="2"/>
-                                    <!-- Eyes -->
-                                    <circle cx="85" cy="70" r="4" fill="#2C3E50"/>
-                                    <circle cx="115" cy="70" r="4" fill="#2C3E50"/>
-                                    <!-- Nose -->
-                                    <ellipse cx="100" cy="80" rx="3" ry="2" fill="#E67E22"/>
-                                    <!-- Mouth -->
-                                    <path d="M 90 90 Q 100 95 110 90" stroke="#8B4513" stroke-width="2" fill="none"/>
-                                    <!-- Curly Hair -->
-                                    <path d="M 50 30 Q 100 15 150 30 Q 140 50 100 40 Q 60 50 50 30" fill="url(#hairGradient)"/>
-                                    <path d="M 45 35 Q 100 25 155 35 Q 145 55 100 45 Q 55 55 45 35" fill="url(#hairGradient)"/>
-                                    <path d="M 40 40 Q 100 30 160 40 Q 150 60 100 50 Q 50 60 40 40" fill="url(#hairGradient)"/>
-                                    <!-- Curls -->
-                                    <circle cx="60" cy="25" r="8" fill="url(#hairGradient)"/>
-                                    <circle cx="140" cy="25" r="8" fill="url(#hairGradient)"/>
-                                    <circle cx="70" cy="20" r="6" fill="url(#hairGradient)"/>
-                                    <circle cx="130" cy="20" r="6" fill="url(#hairGradient)"/>
-                                </svg>
-                            </div>
-                            <div class="founder-content">
-                                <h4 class="founder-name">Olivia Rose Olson</h4>
-                                <p class="founder-title">Co-Founder</p>
-                                <p class="founder-bio">
-                                    Olivia brings extensive customer experience and service design expertise, with an M.S.
-                                    in Human-Computer Interaction Design from the University of Washington. Her career
-                                    spans transformational work across government and private sector, specializing in
-                                    strategic consultation on policies and organizational change.
-                                </p>
-                                <p class="founder-bio">
-                                    Her expertise encompasses the full spectrum of user-centered design—from ethnographic
-                                    research and usability testing to complex information architectures and cross-platform
-                                    design systems. Her background in behavioral science enables her to drive organizational
-                                    change with minimal resistance, while her multilingual abilities (German, Portuguese,
-                                    Spanish, Swiss German) inform her approach to designing inclusive experiences.
-                                </p>
-                                <p class="founder-quote">
-                                    "Technology should serve human intellect, not exploit human attention. Every product
-                                    we build starts with understanding real human needs and respecting people's autonomy."
-                                </p>
-                                <p class="founder-expertise">
-                                    <span class="expertise-title">Key Expertise:</span> Strategic CX Leadership,
-                                    Service Design & Modernization, Cross-Cultural UX Research, Behavioral Science Applications
-                                </p>
-                            </div>
+                        <div class="founder-bio-column">
+                            <h4 class="founder-name">Olivia Rose Olson</h4>
+                            <p class="founder-title">Co-Founder</p>
+                            <p class="founder-bio">
+                                Olivia brings extensive customer experience and service design expertise, with an M.S.
+                                in Human-Computer Interaction Design from the University of Washington. Her career
+                                spans transformational work across government and private sector, specializing in
+                                strategic consultation on policies and organizational change.
+                            </p>
+                            <p class="founder-bio">
+                                Her expertise encompasses the full spectrum of user-centered design—from ethnographic
+                                research and usability testing to complex information architectures and cross-platform
+                                design systems. Her background in behavioral science enables her to drive organizational
+                                change with minimal resistance, while her multilingual abilities (German, Portuguese,
+                                Spanish, Swiss German) inform her approach to designing inclusive experiences.
+                            </p>
+                            <p class="founder-quote">
+                                "Technology should serve human intellect, not exploit human attention. Every product
+                                we build starts with understanding real human needs and respecting people's autonomy."
+                            </p>
+                            <p class="founder-expertise">
+                                <span class="expertise-title">Key Expertise:</span> Strategic CX Leadership,
+                                Service Design & Modernization, Cross-Cultural UX Research, Behavioral Science Applications
+                            </p>
                         </div>
                     </div>
 
@@ -2018,6 +2539,7 @@
                     </div>
 
                     <!-- Our First Answer: Iris -->
+                    <!-- 
                     <div class="work-section">
                         <h4 class="work-subtitle">Our First Answer: Iris</h4>
                         <p class="work-text">
@@ -2027,6 +2549,7 @@
                             Iris is built on a subscription model, which guarantees that you are our customer, not the product we sell to advertisers. It is our definitive statement that technology can and should serve the human mind, not exploit it.
                         </p>
                     </div>
+                    -->
 
                     <!-- An Invitation to Co-Create -->
                     <div class="work-section">
@@ -2040,7 +2563,7 @@
                     </div>
 
                     <div class="cta-container">
-                        <a href="#" class="primary-cta">Learn More About Iris</a>
+                        <!-- <a href="#" class="primary-cta">Learn More About Iris</a> -->
                         <a href="#" class="secondary-cta" onclick="showSection('contact')">Partner With Us</a>
                     </div>
                 </div>
@@ -2150,69 +2673,69 @@
                         <div class="workshop-categories">
                             <!-- The Spark Workshop -->
                             <div class="workshop-category">
-                            <div class="workshop-icon">✨</div>
-                            <h4 class="workshop-title">1. The Spark Workshop</h4>
-                            <p class="workshop-description">
-                                An intensive half-day session to ignite your AI strategy.
-                            </p>
-                            <p class="workshop-description">
-                                <strong>Perfect for:</strong> Solopreneurs and small, agile teams (1-5 people) ready to punch above their weight.
-                            </p>
-                            <p class="workshop-description">
-                                This is more than an introduction; it's a launchpad. In a concentrated half-day, we'll move from AI curiosity to AI capability. Your team will walk away with a clear understanding of the AI landscape, hands-on experience with foundational tools, and a custom-built roadmap to integrate AI into your daily operations for immediate impact.
-                            </p>
-                            <div class="workshop-pricing">
-                                <h5>Your Investment in a Smarter Future: $5,000</h5>
-                                <p>Think of it not as a cost, but as your first and most important step towards scalable growth and reclaiming countless hours of manual work.</p>
+                                <div class="workshop-icon">✨</div>
+                                <h4 class="workshop-title">1. The Spark Workshop</h4>
+                                <p class="workshop-description">
+                                    <strong>Title:</strong> AI Foundations for Your Business
+                                </p>
+                                <p class="workshop-description">
+                                    <strong>Perfect for:</strong> Ambitious founders and agile teams ready to leverage AI for immediate efficiency and a powerful competitive edge.
+                                </p>
+                                <p class="workshop-description">
+                                    This is more than an introduction; it's a fundamental training in applied AI. In this concentrated, hands-on session, we translate theory into practice, moving you from AI curiosity to AI capability. We focus on mastering core AI tools for powerful business applications. Your team will leave with a clear understanding and a custom-built roadmap to integrate AI into your daily operations for immediate impact and efficiency.
+                                </p>
+                                <div class="workshop-pricing">
+                                    <h5>Your Investment in a Smarter Future: $5,000</h5>
+                                    <p>Think of it not as a cost, but as your first and most important step towards scalable growth and reclaiming countless hours of manual work.</p>
+                                </div>
+                                <div class="cta-container">
+                                    <a href="#" class="primary-cta">Book Spark</a>
+                                </div>
                             </div>
-                            <div class="cta-container">
-                                <a href="#" class="primary-cta">Book Your Spark Session</a>
-                            </div>
-                        </div>
 
-                        <!-- The Accelerator Workshop -->
-                        <div class="workshop-category">
-                            <div class="workshop-icon">🚀</div>
-                            <h4 class="workshop-title">2. The Accelerator Workshop</h4>
-                            <p class="workshop-description">
-                                A full-day deep dive to turn strategy into powerful, everyday execution.
-                            </p>
-                            <p class="workshop-description">
-                                <strong>Perfect for:</strong> Growing businesses (5-10 people) looking to build a unified, AI-powered operational core.
-                            </p>
-                            <p class="workshop-description">
-                                Go beyond the basics and start building. In this immersive full-day session, we'll work with your entire team to develop custom AI workflows, automate repetitive tasks, and unlock new creative possibilities specific to your industry. We don't just teach the tools; we help you weave them into the fabric of your business, ensuring team-wide adoption and a tangible return on investment.
-                            </p>
-                            <div class="workshop-pricing">
-                                <h5>Your Investment in Team-Wide Amplification: $10,000</h5>
-                                <p>Empower your entire core team for a fraction of the cost of a single new specialized hire. You're not just buying a workshop; you're investing in a more efficient, innovative, and collaborative workforce.</p>
+                            <!-- The Accelerator Workshop -->
+                            <div class="workshop-category">
+                                <div class="workshop-icon">🚀</div>
+                                <h4 class="workshop-title">2. The Accelerator Workshop</h4>
+                                <p class="workshop-description">
+                                    <strong>Title:</strong> Advanced AI for Automation & Scale
+                                </p>
+                                <p class="workshop-description">
+                                    <strong>Perfect for:</strong> Organizations ready to systematize their operations and scale effectively with advanced AI and automation.
+                                </p>
+                                <p class="workshop-description">
+                                    Go beyond the basics and start building intelligent, automated systems. In this immersive session, your team will master advanced AI applications and no-code platforms to design and implement custom workflows. We focus on automating complex internal processes to unlock new operational efficiencies. Our goal is to weave these capabilities into the fabric of your business, ensuring team-wide adoption and a tangible return on investment.
+                                </p>
+                                <div class="workshop-pricing">
+                                    <h5>Your Investment in Team-Wide Amplification: $10,000</h5>
+                                    <p>Empower your entire core team for a fraction of the cost of a single new specialized hire. You're not just buying a workshop; you're investing in a more efficient, innovative, and collaborative workforce.</p>
+                                </div>
+                                <div class="cta-container">
+                                    <a href="#" class="primary-cta">Book Accelerator</a>
+                                </div>
                             </div>
-                            <div class="cta-container">
-                                <a href="#" class="primary-cta">Schedule The Accelerator</a>
-                            </div>
-                        </div>
 
-                        <!-- The Transformation Workshop -->
-                        <div class="workshop-category">
-                            <div class="workshop-icon">🌟</div>
-                            <h4 class="workshop-title">3. The Transformation Workshop</h4>
-                            <p class="workshop-description">
-                                A multi-day partnership to embed AI into your company's DNA.
-                            </p>
-                            <p class="workshop-description">
-                                <strong>Perfect for:</strong> Established organizations (10+ people) committed to leading their industry and building a long-term strategic advantage.
-                            </p>
-                            <p class="workshop-description">
-                                This is our most comprehensive and bespoke engagement. Over multiple days, we become an extension of your team. We'll conduct a deep analysis of your organization's needs and opportunities, co-design enterprise-grade AI systems, and train your team not just to use AI, but to think with it. This is about fostering a culture of innovation that will pay dividends for years to come.
-                            </p>
-                            <div class="workshop-pricing">
-                                <h5>A Custom Partnership for Transformational Results: Starting at $25,000</h5>
-                                <p>Scaled to organization size and scope. This is a strategic investment in the long-term resilience and intelligence of your entire organization. Let's build your future, together.</p>
+                            <!-- The Transformation Workshop -->
+                            <div class="workshop-category">
+                                <div class="workshop-icon">🌟</div>
+                                <h4 class="workshop-title">3. The Transformation Workshop</h4>
+                                <p class="workshop-description">
+                                    <strong>Title:</strong> Custom AI Integration & Strategy
+                                </p>
+                                <p class="workshop-description">
+                                    <strong>Perfect for:</strong> Established organizations committed to leading their industry and embedding AI as a long-term, strategic advantage.
+                                </p>
+                                <p class="workshop-description">
+                                    This bespoke partnership deeply embeds AI into your company's DNA. We become an extension of your team to co-design and implement enterprise-grade AI systems tailored to your unique needs. More than just installing tools, we train your team to operate with an AI-first mindset, turning this technology into a core business function. The outcome is a sustainable culture of innovation and a powerful, long-term competitive advantage.
+                                </p>
+                                <div class="workshop-pricing">
+                                    <h5>A Custom Partnership for Transformational Results: Starting at $25,000</h5>
+                                    <p>Scaled to organization size and scope. This is a strategic investment in the long-term resilience and intelligence of your entire organization. Let's build your future, together.</p>
+                                </div>
+                                <div class="cta-container">
+                                    <a href="#" class="primary-cta">Book Transformation</a>
+                                </div>
                             </div>
-                            <div class="cta-container">
-                                <a href="#" class="primary-cta">Request a Consultation</a>
-                            </div>
-                                                    </div>
                         </div>
                     </div>
 
@@ -2242,7 +2765,7 @@
                             Stop letting the future happen to you. Let's build it together.
                         </p>
                         <div class="cta-container">
-                            <a href="#" class="primary-cta">Get In Touch</a>
+                            <a href="#contact" class="primary-cta" onclick="showSection('contact')">Get In Touch</a>
                         </div>
                     </div>
                 </div>
@@ -2255,11 +2778,125 @@
                     <p class="section-text">
                         Ready to build technology that serves humanity? Let's connect.
                     </p>
-                    <a href="mailto:contact@wyrdstudios.com" class="contact-button">Contact Us</a>
+                    
+                    <div class="contact-form-container">
+                        <form class="contact-form" id="contactForm" onsubmit="submitContactForm(event)">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="firstName">First Name *</label>
+                                    <input type="text" id="firstName" name="firstName" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastName">Last Name *</label>
+                                    <input type="text" id="lastName" name="lastName" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="company">Company</label>
+                                <input type="text" id="company" name="company">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="inquiryType">What can we help you with? *</label>
+                                <select id="inquiryType" name="inquiryType" required>
+                                    <option value="">Select an option</option>
+                                    <option value="workshop">AI Workshop Inquiry</option>
+                                    <option value="partnership">Partnership Opportunity</option>
+                                    <option value="product">Product Development</option>
+                                    <option value="consultation">General Consultation</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="message">Message *</label>
+                                <textarea id="message" name="message" rows="5" required placeholder="Tell us about your project, goals, or how we can help..."></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <button type="submit" class="contact-submit-btn">Send Message</button>
+                            </div>
+                        </form>
+                        
+                        <div class="contact-info-sidebar">
+                            <h4>Other Ways to Connect</h4>
+                            <p>Prefer to email directly?</p>
+                            <a href="mailto:info@thewyrdstudios.com" class="email-link">info@thewyrdstudios.com</a>
+                            
+                            <div class="contact-details">
+                                <h5>What to Expect</h5>
+                                <ul>
+                                    <li>Timely response</li>
+                                    <li>Free initial consultation</li>
+                                    <li>Direct access to AI experts</li>
+                                    <li>Custom AI strategy roadmap</li>
+                                    <li>Excitement about the future</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </main>
     </div>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <!-- Company Info & Newsletter -->
+            <div class="footer-section company-section">
+                <div class="company-info">
+                    <h3 class="company-name">Wyrd Studios</h3>
+                </div>
+                
+                <div class="newsletter-signup">
+                    <h4>Stay Updated</h4>
+                    <p>Get the latest updates on our projects and workshops</p>
+                    <div class="newsletter-form">
+                        <input type="email" id="newsletter-email" placeholder="Enter your email" required>
+                        <button class="newsletter-subscribe-btn" onclick="subscribeNewsletter()">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation Links -->
+            <div class="footer-section nav-section">
+                <h4>Navigation</h4>
+                <ul class="footer-nav">
+                    <li><a href="#" onclick="showSection('home')">Home</a></li>
+                    <li><a href="#" onclick="showSection('work')">Work</a></li>
+                    <li><a href="#" onclick="showSection('founders')">Founders</a></li>
+                    <li><a href="#" onclick="showSection('philosophy')">Philosophy</a></li>
+                    <li><a href="#" onclick="showSection('workshops')">Workshops</a></li>
+                    <li><a href="#" onclick="showSection('contact')">Contact</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact & Legal -->
+            <div class="footer-section contact-section">
+                <h4>Contact & Legal</h4>
+                <div class="contact-info">
+                    <p>Email us at:</p>
+                    <button class="email-copy-btn" onclick="copyEmail()">info@thewyrdstudios.com</button>
+                </div>
+                <ul class="legal-links">
+                    <li><a href="#" onclick="showSection('privacy')">Privacy Policy</a></li>
+                    <li><a href="#" onclick="showSection('terms')">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+            <p>&copy; 2025 Wyrd Studios. Building technology for good.</p>
+        </div>
+    </footer>
 
     <script>
         // Theme Management Functions
@@ -2311,6 +2948,11 @@
             detectAndApplyTheme();
             setupSystemThemeListener();
             setupMobileMenuClickOutside();
+            
+            // Check if page is loaded in iframe and apply iframe-specific styles
+            if (window.self !== window.top) {
+                document.body.setAttribute('data-iframe', 'true');
+            }
         });
 
         // Setup click outside to close mobile menu
@@ -2378,7 +3020,167 @@
             // Close mobile menu when navigation item is clicked
             closeMobileMenu();
         }
-    </script>
-</body>
 
-</html>
+        // Footer functionality
+        function copyEmail() {
+            const email = 'info@thewyrdstudios.com';
+            navigator.clipboard.writeText(email).then(() => {
+                // Show success message
+                const copyBtn = document.querySelector('.email-copy-btn');
+                const originalText = copyBtn.textContent;
+                copyBtn.textContent = 'Copied!';
+                copyBtn.style.background = '#4CAF50';
+                
+                setTimeout(() => {
+                    copyBtn.textContent = originalText;
+                    copyBtn.style.background = '';
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy email:', err);
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = email;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                const copyBtn = document.querySelector('.email-copy-btn');
+                const originalText = copyBtn.textContent;
+                copyBtn.textContent = 'Copied!';
+                copyBtn.style.background = '#4CAF50';
+                
+                setTimeout(() => {
+                    copyBtn.textContent = originalText;
+                    copyBtn.style.background = '';
+                }, 2000);
+            });
+        }
+
+        function subscribeNewsletter() {
+            const email = document.getElementById('newsletter-email').value;
+            if (email && email.includes('@')) {
+                // Show success message
+                const subscribeBtn = document.querySelector('.newsletter-subscribe-btn');
+                const originalText = subscribeBtn.textContent;
+                subscribeBtn.textContent = 'Subscribed!';
+                subscribeBtn.style.background = '#4CAF50';
+                
+                // Clear input
+                document.getElementById('newsletter-email').value = '';
+                
+                setTimeout(() => {
+                    subscribeBtn.textContent = originalText;
+                    subscribeBtn.style.background = '';
+                }, 2000);
+            }
+        }
+
+        function submitContactForm(event) {
+            event.preventDefault();
+            
+            const form = document.getElementById('contactForm');
+            const submitBtn = document.querySelector('.contact-submit-btn');
+            const originalText = submitBtn.textContent;
+            
+            // Disable submit button and show loading state
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+            
+            // Get form data
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData);
+            
+            // Submit to Netlify function
+            fetch('/.netlify/functions/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    // Show success message
+                    submitBtn.textContent = 'Message Sent!';
+                    submitBtn.style.background = '#4CAF50';
+                    
+                    // Clear form
+                    form.reset();
+                    
+                    // Show success notification
+                    showNotification('Thank you! Your message has been sent. We\'ll get back to you within 48 hours.', 'success');
+                } else {
+                    throw new Error(result.error || 'Failed to send message');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showNotification('Sorry, there was an error sending your message. Please try again or email us directly.', 'error');
+            })
+            .finally(() => {
+                // Reset button after delay
+                setTimeout(() => {
+                    submitBtn.textContent = originalText;
+                    submitBtn.style.background = '';
+                    submitBtn.disabled = false;
+                }, 3000);
+            });
+        }
+
+        function showNotification(message, type = 'info') {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.textContent = message;
+            
+            // Style the notification
+            notification.style.cssText = `
+                position: fixed;
+                top: 2rem;
+                right: 2rem;
+                background: ${type === 'success' ? '#4CAF50' : '#2196F3'};
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                z-index: 10000;
+                max-width: 400px;
+                font-weight: 500;
+            `;
+            
+            // Add to page
+            document.body.appendChild(notification);
+            
+            // Remove after 5 seconds
+            setTimeout(() => {
+                notification.remove();
+            }, 5000);
+        }
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Show/hide back to top button based on scroll position
+        window.addEventListener('scroll', () => {
+            const backToTopBtn = document.querySelector('.back-to-top');
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+    </script>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" onclick="scrollToTop()" aria-label="Back to top">
+        ▲
+    </button>
+  </body>
+  
+  </html>
