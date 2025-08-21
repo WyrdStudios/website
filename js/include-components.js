@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(response => response.text())
             .then(data => {
                 document.getElementById(componentId).innerHTML = data;
-                // After header is loaded, ensure theme icon is correct
+                // After header is loaded, ensure theme icon is correct and set active navigation
                 if (componentId === 'header') {
                     // Small delay to ensure DOM is fully ready
                     setTimeout(() => {
@@ -17,6 +17,10 @@ document.addEventListener('DOMContentLoaded', function() {
                                 toggleButton.innerHTML = currentTheme === 'dark' ? '☀️' : '🌙';
                                 toggleButton.title = currentTheme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode';
                             }
+                        }
+                        // Set active navigation after header is loaded
+                        if (typeof setActiveNavigation === 'function') {
+                            setActiveNavigation();
                         }
                     }, 10);
                 }

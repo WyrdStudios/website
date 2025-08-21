@@ -111,25 +111,50 @@
                 document.body.setAttribute('data-iframe', 'true');
             }
             
-            // Handle initial hash on page load
-            const hash = window.location.hash.substring(1);
-            if (hash) {
-                showSection(hash);
-            } else {
-                // If no hash, ensure home section is active and home nav is highlighted
-                showSection('home');
-            }
+            // Set active navigation state based on current page
+            setActiveNavigation();
         });
 
-        // Listen for hash changes (for direct links and browser back/forward)
-        window.addEventListener('hashchange', () => {
-            const hash = window.location.hash.substring(1);
-            if (hash) {
-                showSection(hash);
-            } else {
-                showSection('home');
+        // Function to set active navigation state based on current page
+        function setActiveNavigation() {
+            const currentPath = window.location.pathname;
+            const navItems = document.querySelectorAll('.nav-item');
+            
+            // Remove active class from all nav items
+            navItems.forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Determine which nav item should be active based on current page
+            let activeNavItem;
+            
+            if (currentPath === '/' || currentPath === '/index.html' || currentPath.endsWith('/') || currentPath.includes('index.html')) {
+                // Home page
+                activeNavItem = document.querySelector('.nav-item[href="index.html"]');
+            } else if (currentPath.includes('work.html')) {
+                // Work page
+                activeNavItem = document.querySelector('.nav-item[href="work.html"]');
+            } else if (currentPath.includes('founders.html')) {
+                // Founders page
+                activeNavItem = document.querySelector('.nav-item[href="founders.html"]');
+            } else if (currentPath.includes('workshops.html')) {
+                // Workshops page
+                activeNavItem = document.querySelector('.nav-item[href="workshops.html"]');
+            } else if (currentPath.includes('contact.html')) {
+                // Contact page
+                activeNavItem = document.querySelector('.nav-item[href="contact.html"]');
             }
-        });
+            
+            // Add active class to the appropriate nav item
+            if (activeNavItem) {
+                activeNavItem.classList.add('active');
+                console.log(`Active navigation set to: ${activeNavItem.textContent}`);
+            } else {
+                console.log(`No active navigation found for path: ${currentPath}`);
+            }
+        }
+
+
 
         // Setup click outside to close mobile menu
         function setupMobileMenuClickOutside() {
@@ -170,52 +195,7 @@
             mobileToggle.classList.remove('active');
         }
 
-        // Existing section navigation function
-        function showSection(sectionName) {
-            // Hide all sections
-            const sections = document.querySelectorAll('.section-content');
-            sections.forEach(section => {
-                section.classList.remove('active');
-            });
 
-            // Show selected section
-            const selectedSection = document.getElementById(sectionName);
-            if (selectedSection) {
-                selectedSection.classList.add('active');
-            }
-
-            // Update navigation - find and activate the correct nav item
-            const navItems = document.querySelectorAll('.nav-item');
-            navItems.forEach(item => {
-                item.classList.remove('active');
-            });
-
-            // Find the nav item that corresponds to this section and activate it
-            let targetNavItem;
-            if (sectionName === 'home') {
-                // For home section, find the nav item with onclick="showSection('home')"
-                targetNavItem = document.querySelector('.nav-item[onclick*="showSection(\'home\')"]');
-            } else {
-                // For other sections, find by href attribute
-                targetNavItem = document.querySelector(`.nav-item[href="#${sectionName}"]`);
-            }
-            
-            if (targetNavItem) {
-                targetNavItem.classList.add('active');
-            } else {
-                console.warn(`Could not find nav item for section: ${sectionName}`);
-            }
-
-            // Update URL hash (except for home)
-            if (sectionName === 'home') {
-                history.pushState(null, null, window.location.pathname);
-            } else {
-                history.pushState(null, null, `#${sectionName}`);
-            }
-
-            // Close mobile menu when navigation item is clicked
-            closeMobileMenu();
-        }
 
         // Footer functionality
         function copyEmail() {

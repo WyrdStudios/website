@@ -451,6 +451,88 @@
             text-align: left;
         }
 
+        /* Policy and Legal Pages */
+        .back-link {
+            display: inline-block;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            transition: color 0.2s ease;
+            font-weight: 500;
+        }
+
+        .back-link:hover {
+            color: var(--accent-primary);
+        }
+
+        .policy-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .policy-section {
+            margin-bottom: 3rem;
+        }
+
+        .policy-section h3 {
+            font-family: 'Syne Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            letter-spacing: -0.01em;
+        }
+
+        .policy-section h4 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 1.5rem 0 0.75rem 0;
+        }
+
+        .policy-section p {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .policy-section ul {
+            margin: 1rem 0 1rem 1.5rem;
+        }
+
+        .policy-section li {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+        }
+
+        .policy-explanation {
+            background: var(--overlay-light);
+            border-left: 4px solid var(--accent-primary);
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .policy-explanation strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .last-updated {
+            margin-bottom: 2rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 400;
+        }
+
+        .welcome-text {
+            margin-bottom: 2.5rem;
+        }
+
         /* Hero Section */
         .hero-section {
             text-align: center;
@@ -2113,7 +2195,6 @@
         .ml-form-formContent.horozintalForm .ml-form-horizontalRow .horizontal-fields { 
           box-sizing: border-box; 
           float: left; 
-          padding-right: 10px;  
         }
         
         #mlb2-29895363.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow input {
@@ -2126,9 +2207,8 @@
           font-family: 'Inter', sans-serif;
           font-size: 14px;
           line-height: 20px;
-          margin-bottom: 0;
-          margin-top: 0;
-          padding: 10px 10px;
+          margin: 0;
+          padding: 10px;
           width: 100%;
           box-sizing: border-box;
           overflow-y: initial;
@@ -2147,10 +2227,12 @@
           font-size: 14px !important;
           font-weight: 700;
           line-height: 20px;
-          margin: 0 !important;
-          padding: 10px !important;
+          margin: 0;
+          padding: 10px;
           width: 100%;
           height: auto;
+          min-height: 44px; /* Ensure touch target meets accessibility standards */
+          transition: all 0.2s ease;
         }
         
         #mlb2-29895363.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-horizontalRow button:hover {
@@ -2162,27 +2244,78 @@
           display: none; 
         }
         
-        @media only screen and (max-width: 400px) {
+        /* Ensure mobile button has same styling as horizontal button */
+        .ml-mobileButton-horizontal button {
+          background-color: #2E2E2E !important;
+          border-color: #2E2E2E;
+          border-style: solid;
+          border-width: 1px;
+          border-radius: 12px;
+          box-shadow: none;
+          color: #D7C10C !important;
+          cursor: pointer;
+          font-family: 'Inter', sans-serif;
+          font-size: 14px !important;
+          font-weight: 700;
+          line-height: 20px;
+          margin: 0 !important;
+          padding: 10px !important;
+          width: 100%;
+          height: auto;
+          transition: all 0.2s ease;
+        }
+        
+        .ml-mobileButton-horizontal button:hover {
+          background-color: #2E2E2E !important;
+          border-color: #2E2E2E !important;
+          transform: translateY(-1px);
+        }
+        
+                /* Stack form elements earlier for better button usability */
+        @media (max-width: 600px) {
+          .ml-form-embedWrapper.embedForm {
+            max-width: 100% !important;
+          }
+          
+          .ml-form-formContent.horozintalForm .ml-form-horizontalRow {
+            flex-direction: column;
+            gap: 1rem;
+          }
+          
+          .ml-form-formContent.horozintalForm .ml-form-horizontalRow .ml-input-horizontal,
+          .ml-form-formContent.horozintalForm .ml-form-horizontalRow .ml-button-horizontal {
+            width: 100% !important;
+          }
+        }
+        
+        /* Stack form elements at 480px breakpoint (consistent with site) */
+        @media (max-width: 480px) {
           .ml-form-embedWrapper.embedDefault, .ml-form-embedWrapper.embedPopup { 
             width: 100%!important; 
           }
           .ml-form-formContent.horozintalForm { 
-            float: left!important; 
+            float: none !important; 
           }
           .ml-form-formContent.horozintalForm .ml-form-horizontalRow { 
             height: auto!important; 
             width: 100%!important; 
-            float: left!important; 
+            float: none !important; 
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 1rem !important;
           }
           .ml-form-formContent.horozintalForm .ml-form-horizontalRow .ml-input-horizontal { 
             width: 100%!important; 
+            float: none !important; 
           }
           .ml-form-formContent.horozintalForm .ml-form-horizontalRow .ml-button-horizontal { 
             width: 100%!important; 
+            float: none !important; 
           }
           .ml-form-formContent.horozintalForm .ml-form-horizontalRow .horizontal-fields { 
             margin-bottom: 10px !important;
-            width: 100% !important;
+            width: 100% !important; 
+            float: none !important; 
           }
           .ml-hide-horizontal { 
             display: none !important; 
@@ -2193,7 +2326,7 @@
           .ml-mobileButton-horizontal { 
             display: inline-block !important; 
             margin-bottom: 20px;
-            width:100%; 
+            width: 100%; 
           }
         }
 
