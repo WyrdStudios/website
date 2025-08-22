@@ -57,6 +57,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Load header and footer (all files are now in root directory)
-    loadComponent('header', 'components/header.html');
-    loadComponent('footer', 'components/footer.html');
+    loadComponent('header', '/components/header.html');
+    loadComponent('footer', '/components/footer.html');
 });
