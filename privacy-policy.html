@@ -16,10 +16,20 @@
     <link rel="canonical" href="https://thewyrdstudios.com/privacy-policy.html">
     
     <!-- Security Headers -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com https://assets.mlcdn.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://assets.mlcdn.com; script-src 'self'; img-src 'self' data:;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com https://assets.mlcdn.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://assets.mlcdn.com; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com; img-src 'self' data: https://www.google-analytics.com;">
     <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains">
     <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LF47E8ZTES"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-LF47E8ZTES');
+    </script>
     
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
@@ -98,6 +108,7 @@
                         <ul>
                             <li>Our email service provider (MailerLite) for newsletter delivery</li>
                             <li>Our website hosting provider for site functionality</li>
+                            <li>Google Analytics for website performance monitoring (data is anonymized)</li>
                         </ul>
                         <p>All third-party services are bound by strict data protection agreements.</p>
                     </div>
@@ -105,14 +116,20 @@
                     <div class="policy-section">
                         <h3>5. Cookies and Tracking</h3>
                         <div class="policy-explanation">
-                            <strong>What this means:</strong> We use minimal, privacy-respecting tracking.
+                            <strong>What this means:</strong> We use minimal, privacy-respecting tracking for website improvement.
                         </div>
                         <p>We use essential cookies for:</p>
                         <ul>
                             <li>Website functionality and security</li>
                             <li>Theme preference storage</li>
                         </ul>
-                        <p>We do not use marketing cookies, tracking pixels, or analytics.</p>
+                        <p>We use Google Analytics to understand website performance and user experience:</p>
+                        <ul>
+                            <li>Page views and navigation patterns</li>
+                            <li>Website performance metrics</li>
+                            <li>User interaction data (anonymized)</li>
+                        </ul>
+                        <p>Google Analytics data is anonymized and does not identify individual users. We do not use marketing cookies.</p>
                     </div>
 
                     <div class="policy-section">
@@ -125,6 +142,7 @@
                             <li>Unsubscribe from newsletters at any time</li>
                             <li>Request deletion of your data by emailing us</li>
                             <li>Request a copy of your data</li>
+                            <li>Opt out of Google Analytics tracking using browser extensions or Google's opt-out tools</li>
                         </ul>
                     </div>
 
