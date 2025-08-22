@@ -25,16 +25,28 @@
             body: `fields[email]=${encodeURIComponent(email)}&ml-submit=1&anticsrf=true`
           })
           .then(response => {
-            // Show success message inline
-            const formContent = form.closest('.ml-form-embedBody');
-            formContent.innerHTML = `
-              <div class="ml-form-successBody row-success">
-                <div class="ml-form-successContent">
-                  <h4>Success!</h4>
-                  <p>You have successfully joined our mailing list.</p>
-                </div>
-              </div>
-            `;
+            // Show success message below form
+            const formContainer = form.closest('.ml-form-embedBody');
+            const successMessage = formContainer.querySelector('.ml-form-successBody');
+            
+            if (successMessage) {
+              successMessage.style.display = 'block';
+            } else {
+              // Fallback: try to find by ID
+              const fallbackSuccess = document.querySelector('#mlb2-29895363 .ml-form-successBody');
+              if (fallbackSuccess) {
+                fallbackSuccess.style.display = 'block';
+              } else {
+                console.error('Success message element not found');
+              }
+            }
+            
+            // Clear the email input
+            emailInput.value = '';
+            
+            // Reset button state
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
           })
           .catch(error => {
             console.error('Subscription error:', error);

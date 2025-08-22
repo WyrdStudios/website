@@ -1990,6 +1990,24 @@
           padding: 0 20px 0 20px;
         }
         
+        /* Success message styling */
+        #mlb2-29895363.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody {
+          margin-top: 8px;
+          padding-left: 5px !important;
+        }
+        
+        #mlb2-29895363.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .success-message {
+          color: #2E2E2E;
+          font-family: 'Inter', sans-serif;
+          font-size: 13px;
+          font-weight: 500;
+          margin: 0;
+          text-align: left;
+          opacity: 0.9;
+          margin-left: 0;
+          padding-left: 0;
+        }
+        
         #mlb2-29895363.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedContent,
         #mlb2-29895363.ml-form-embedContainer .ml-form-embedWrapper .ml-form-successBody .ml-form-successContent {
           text-align: left;
