@@ -131,18 +131,18 @@
             if (currentPath === '/' || currentPath === '/index.html' || currentPath.endsWith('/') || currentPath.includes('index.html')) {
                 // Home page
                 activeNavItem = document.querySelector('.nav-item[href="/"]');
-            } else if (currentPath.includes('/work') || currentPath.includes('work.html')) {
+            } else if (currentPath === '/work' || currentPath === '/work/' || currentPath.includes('work.html')) {
                 // Work page
-                activeNavItem = document.querySelector('.nav-item[href="/work/"]');
-            } else if (currentPath.includes('/founders') || currentPath.includes('founders.html')) {
+                activeNavItem = document.querySelector('.nav-item[href="/work"]');
+            } else if (currentPath === '/founders' || currentPath === '/founders/' || currentPath.includes('founders.html')) {
                 // Founders page
-                activeNavItem = document.querySelector('.nav-item[href="/founders/"]');
-            } else if (currentPath.includes('/workshops') || currentPath.includes('workshops.html')) {
+                activeNavItem = document.querySelector('.nav-item[href="/founders"]');
+            } else if (currentPath === '/workshops' || currentPath === '/workshops/' || currentPath.includes('workshops.html')) {
                 // Workshops page
-                activeNavItem = document.querySelector('.nav-item[href="/workshops/"]');
-            } else if (currentPath.includes('/contact') || currentPath.includes('contact.html')) {
+                activeNavItem = document.querySelector('.nav-item[href="/workshops"]');
+            } else if (currentPath === '/contact' || currentPath === '/contact/' || currentPath.includes('contact.html')) {
                 // Contact page
-                activeNavItem = document.querySelector('.nav-item[href="/contact/"]');
+                activeNavItem = document.querySelector('.nav-item[href="/contact"]');
             }
             
             // Add active class to the appropriate nav item
