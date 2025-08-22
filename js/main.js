@@ -1,3 +1,24 @@
+/**
+ * Wyrd Studios Website - Main JavaScript Functionality
+ * 
+ * Copyright (c) 2025 Wyrd Studios, Inc. All rights reserved.
+ * 
+ * This software is proprietary and confidential. Unauthorized copying, 
+ * distribution, modification, public display, or public performance of 
+ * this software is strictly prohibited.
+ * 
+ * This software is the confidential and proprietary information of 
+ * Wyrd Studios, Inc. It is protected by copyright law and international 
+ * treaties. Unauthorized reproduction or distribution of this software, 
+ * or any portion of it, may result in severe civil and criminal penalties, 
+ * and will be prosecuted to the maximum extent possible under the law.
+ * 
+ * For licensing inquiries, contact: info@thewyrdstudios.com
+ * 
+ * Wyrd Studios, Inc.
+ * Building technology that serves humanity.
+ */
+
         function handleNewsletterSubmit(event) {
           event.preventDefault();
           
