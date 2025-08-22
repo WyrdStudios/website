@@ -1,0 +1,27 @@
+{
+  "name": "website",
+  "version": "1.0.0",
+  "description": "Proprietary website for Wyrd Studios, Inc. - Human-centered technology products",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WyrdStudios/website.git"
+  },
+  "keywords": ["proprietary", "technology", "human-centered", "AI", "privacy-first"],
+  "author": "Wyrd Studios, Inc. <info@thewyrdstudios.com>",
+  "license": "UNLICENSED",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/WyrdStudios/website/issues"
+  },
+  "homepage": "https://thewyrdstudios.com",
+  "private": true,
+  "devDependencies": {
+    "clean-css-cli": "^5.6.3",
+    "cssnano": "^7.1.0",
+    "terser": "^5.43.1"
+  }
+}

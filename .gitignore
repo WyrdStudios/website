@@ -1,6 +1,9 @@
-# Build tools
-tools/
-
 # OS files
 **/**/.DS_Store
 Thumbs.db
+
+# Node.js dependencies
+node_modules/
+
+# Python dependencies
+__pycache__/
