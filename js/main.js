@@ -148,9 +148,6 @@
             // Add active class to the appropriate nav item
             if (activeNavItem) {
                 activeNavItem.classList.add('active');
-                console.log(`Active navigation set to: ${activeNavItem.textContent}`);
-            } else {
-                console.log(`No active navigation found for path: ${currentPath}`);
             }
         }
 

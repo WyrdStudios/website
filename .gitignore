@@ -1,1 +1,6 @@
+# Build tools (not deployed)
+tools/
+
+# OS files
 .DS_Store
+Thumbs.db
