@@ -7,3 +7,6 @@ node_modules/
 
 # Python dependencies
 __pycache__/
+
+# Cursor rules
+.cursor/
