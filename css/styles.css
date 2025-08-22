@@ -22,6 +22,16 @@
             --icon-color: #666;
             --nav-bg: rgba(251, 251, 251, 0.95);
             --nav-bg-secondary: rgba(255, 255, 255, 0.95);
+            
+            /* Responsive Design Variables */
+            --mobile-hero-headline: clamp(1.75rem, 4vw, 2.25rem);
+            --mobile-title: clamp(2rem, 4.5vw, 2.75rem);
+            --mobile-section-title: clamp(1.375rem, 3.5vw, 1.75rem);
+            --mobile-hero-subheadline: clamp(1.25rem, 3vw, 1.5rem);
+            --mobile-section-text: clamp(1rem, 2.5vw, 1.125rem);
+            --mobile-padding: clamp(0.75rem, 2vw, 1.5rem);
+            --mobile-gap: clamp(0.5rem, 1.5vw, 1.5rem);
+            --mobile-button-padding: clamp(0.75rem, 2.5vw, 1rem);
         }
 
         [data-theme="dark"] {
@@ -47,6 +57,16 @@
             --icon-color: #B0B0B0;
             --nav-bg: rgba(26, 26, 26, 0.95);
             --nav-bg-secondary: rgba(46, 46, 46, 0.95);
+            
+            /* Responsive Design Variables */
+            --mobile-hero-headline: clamp(1.75rem, 4vw, 2.25rem);
+            --mobile-title: clamp(2rem, 4.5vw, 2.75rem);
+            --mobile-section-title: clamp(1.375rem, 3.5vw, 1.75rem);
+            --mobile-hero-subheadline: clamp(1.25rem, 3vw, 1.5rem);
+            --mobile-section-text: clamp(1rem, 2.5vw, 1.125rem);
+            --mobile-padding: clamp(0.75rem, 2vw, 1.5rem);
+            --mobile-gap: clamp(0.5rem, 1.5vw, 1.5rem);
+            --mobile-button-padding: clamp(0.75rem, 2.5vw, 1rem);
         }
 
         /* Dark theme logo adjustments */
@@ -82,6 +102,16 @@
                 --icon-color: #B0B0B0;
                 --nav-bg: rgba(26, 26, 26, 0.95);
                 --nav-bg-secondary: rgba(46, 46, 46, 0.95);
+                
+                /* Responsive Design Variables */
+                --mobile-hero-headline: clamp(1.75rem, 4vw, 2.25rem);
+                --mobile-title: clamp(2rem, 4.5vw, 2.75rem);
+                --mobile-section-title: clamp(1.375rem, 3.5vw, 1.75rem);
+                --mobile-hero-subheadline: clamp(1.25rem, 3vw, 1.5rem);
+                --mobile-section-text: clamp(1rem, 2.5vw, 1.125rem);
+                --mobile-padding: clamp(0.75rem, 2vw, 1.5rem);
+                --mobile-gap: clamp(0.5rem, 1.5vw, 1.5rem);
+                --mobile-button-padding: clamp(0.75rem, 2.5vw, 1rem);
             }
 
             /* System dark mode logo adjustments */
@@ -136,6 +166,7 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             transition: color 0.3s ease, background 0.3s ease;
+            min-width: 320px;
         }
 
         .container {
@@ -554,17 +585,7 @@
             position: relative;
         }
 
-        .hero-headline::before {
-            content: '';
-            position: absolute;
-            top: -2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 4px;
-            background: linear-gradient(90deg, #D7C10C 0%, #D09FB6 100%);
-            border-radius: 4px;
-        }
+
 
         .hero-subheadline {
             font-size: 1.5rem;
@@ -898,19 +919,19 @@
 
         /* Mobile responsive for founders section */
         @media (max-width: 768px) {
+            /* ===== CONSOLIDATED MOBILE STYLES ===== */
+            
+            /* Founders Section */
             .founders-bios-grid {
                 grid-template-columns: 1fr;
                 gap: 2rem;
             }
             
             .founders-photo-container {
-                justify-content: center;
+                justify-content: flex-start;
             }
             
-            .founder-image {
-                width: 250px;
-                height: 167px;
-            }
+
         }
 
         .founder-content {
@@ -1125,7 +1146,7 @@
             }
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 940px) {
             /* Mobile Navigation */
             .mobile-nav-toggle {
                 display: flex;
@@ -1177,24 +1198,6 @@
                 align-self: flex-start;
             }
 
-            /* Typography */
-            .hero-headline {
-                font-size: 2.25rem;
-            }
-
-            .title {
-                font-size: 2.75rem;
-            }
-
-            .section-title {
-                font-size: 1.75rem;
-            }
-
-            .cta-container {
-                flex-direction: column;
-                align-items: center;
-            }
-
             .nav-container {
                 padding: 0 1rem;
                 position: relative;
@@ -1212,9 +1215,29 @@
             .logo {
                 font-size: 1.5rem;
             }
+        }
+
+        @media (max-width: 768px) {
+            /* Typography */
+            .hero-headline {
+                font-size: var(--mobile-hero-headline);
+            }
+
+            .title {
+                font-size: var(--mobile-title);
+            }
+
+            .section-title {
+                font-size: var(--mobile-section-title);
+            }
+
+            .cta-container {
+                flex-direction: column;
+                align-items: center;
+            }
 
             .content {
-                padding: 5rem 0.75rem 1rem; /* Reduced from 6rem 0.75rem 1.5rem for tighter spacing */
+                padding: 6.5rem 0.75rem 1rem; /* Increased top padding to prevent content cutoff */
             }
 
             .hero-section {
@@ -1236,41 +1259,38 @@
             /* Value Props Mobile */
             .value-props {
                 grid-template-columns: 1fr;
-                gap: 2rem;
+                gap: var(--mobile-gap);
             }
 
             .value-prop {
                 text-align: center;
             }
 
-            .founder-image {
-                width: 150px;
-                height: 150px;
-            }
+
 
             /* Focus Areas Mobile */
             .focus-areas {
                 grid-template-columns: 1fr;
-                gap: 1.5rem;
+                gap: var(--mobile-gap);
             }
 
             .focus-area {
-                padding: 1.5rem 0 1.5rem 1.5rem;
+                padding: var(--mobile-padding) 0 var(--mobile-padding) var(--mobile-padding);
             }
 
             .founder-name {
-                font-size: 2rem;
+                font-size: var(--mobile-section-title);
             }
 
             /* Workshop tiles mobile optimization */
             .workshop-categories {
                 grid-template-columns: 1fr !important; /* Force single column on mobile */
-                gap: 1.25rem;
+                gap: var(--mobile-gap);
                 margin: 1.5rem 0;
             }
 
             .workshop-category {
-                padding: 1rem;
+                padding: var(--mobile-padding);
                 max-width: none;
             }
 
@@ -1297,6 +1317,25 @@
             .focus-area-text,
             .dont-build-text {
                 text-align: left;
+            }
+
+
+        }
+
+        /* Newsletter Form Stacking at Medium Screens */
+        @media (max-width: 840px) {
+            .ml-form-embedWrapper.embedForm {
+                max-width: 100% !important;
+            }
+            
+            .ml-form-formContent.horozintalForm .ml-form-horizontalRow {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .ml-form-formContent.horozintalForm .ml-form-horizontalRow .ml-input-horizontal,
+            .ml-form-formContent.horozintalForm .ml-form-horizontalRow .ml-button-horizontal {
+                width: 100% !important;
             }
         }
 
@@ -1388,181 +1427,25 @@
         @media (max-width: 768px) {
             .founder-philosophy {
                 grid-template-columns: 1fr;
-                gap: 1.5rem;
+                gap: var(--mobile-gap);
             }
 
             .philosophy-subtitle {
-                font-size: 1.5rem;
+                font-size: var(--mobile-section-title);
             }
 
             .philosophy-mission,
             .founder-philosophy-item {
-                padding: 1.5rem;
+                padding: var(--mobile-padding);
             }
         }
 
-        /* Small Mobile Devices (iPhone SE, small Android phones) */
-        @media (max-width: 480px) {
-            /* Typography Optimization */
-            .hero-headline {
-                font-size: 2rem;
-                line-height: 1.1;
-            }
-
-            .title {
-                font-size: 2.25rem;
-                line-height: 1.0;
-            }
-
-            .section-title {
-                font-size: 1.5rem;
-            }
-
-            .hero-subheadline {
-                font-size: 1.25rem;
-                line-height: 1.3;
-            }
-
-            .section-text {
-                font-size: 1rem;
-                line-height: 1.4; /* Tighter line spacing for small mobile */
-            }
-
-            /* Additional line-height adjustments for small mobile */
-            .value-prop-text,
-            .focus-area-text,
-            .workshop-description {
-                line-height: 1.4; /* Slightly tighter for small screens */
-            }
-
-            /* Layout Optimization */
-            .nav-container {
-                padding: 0 0.75rem;
-            }
-
-            .content {
-                padding: 5rem 0.75rem 1rem; /* Increased top padding for small mobile */
-            }
-
-            .header {
-                padding: 8rem 2rem 4rem 2rem; /* Increased left padding to avoid yellow bar */
-                margin-bottom: 1.5rem; /* Extra spacing below header */
-            }
-
-            .hero-section {
-                padding: 3.5rem 0; /* Increased hero padding for small mobile */
-            }
-
-            /* Grid and Component Spacing */
-            .workshop-categories,
-            .value-props,
-            .focus-areas,
-            .founder-philosophy {
-                gap: 0.5rem; /* Reduced from 0.75rem */
-            }
-
-            .workshop-categories {
-                grid-template-columns: 1fr !important; /* Ensure single column on small mobile */
-            }
-
-            .value-prop,
-            .focus-area,
-            .workshop-category,
-            .philosophy-mission,
-            .founder-philosophy-item {
-                padding: 1rem;
-            }
-
-            .workshop-category {
-                padding: 1.25rem; /* Extra padding for better touch targets */
-                text-align: center;
-            }
-
-            /* Button Optimization */
-            .primary-cta, .secondary-cta {
-                padding: 0.875rem 1.5rem;
-                font-size: 0.85rem;
-                min-height: 48px;
-            }
-
-            .cta-container {
-                gap: 0.5rem;
-            }
-        }
-
-        /* Extra Small Mobile Devices */
-        @media (max-width: 375px) {
-            /* Ultra-compact typography */
-            .hero-headline {
-                font-size: 1.75rem;
-            }
-
-            .title {
-                font-size: 2rem;
-            }
-
-            .section-title {
-                font-size: 1.375rem;
-            }
-
-            .logo {
-                font-size: 1.5rem;
-            }
-
-            .brand-logo {
-                width: 28px;
-                height: 28px;
-            }
-
-            .brand-container {
-                gap: 0.4rem;
-            }
 
 
 
-            /* Ultra-compact layout */
-            .nav-container,
-            .content {
-                padding-left: 0.75rem;
-                padding-right: 0.75rem;
-            }
-
-            .header {
-                padding-left: 1.5rem; /* Increased to avoid yellow bar overlap */
-                padding-right: 1rem;
-            }
-
-            .content {
-                padding-top: 6.5rem; /* Ensure adequate spacing from header */
-            }
-
-            .hero-section {
-                padding: 3rem 0; /* Maintain hero spacing on ultra-small */
-            }
-
-            .nav-item {
-                padding: 0.875rem 1.5rem;
-                font-size: 0.85rem;
-                line-height: 1.2;
-            }
-
-            .primary-cta, .secondary-cta {
-                padding: 0.75rem 1.25rem;
-                font-size: 0.8rem;
-            }
-
-            /* Reduce visual complexity on very small screens */
-            .value-prop-number {
-                font-size: 2.5rem;
-            }
-
-            .workshop-icon {
-                font-size: 1.75rem;
-            }
-        }
 
         /* Mobile Touch Target Optimization */
-        @media (max-width: 768px) {
+        @media (max-width: 940px) {
             /* Ensure all interactive elements meet touch target minimum sizes */
             .nav-item,
             .primary-cta,
@@ -1645,13 +1528,7 @@
 
             /* Mobile Layout Flow Optimization */
             .hero-section {
-                text-align: center;
                 padding: 2rem 0;
-            }
-
-            .hero-headline,
-            .hero-subheadline {
-                text-align: center;
             }
 
             /* Mobile Typography Line-Height Optimization */
@@ -1683,20 +1560,7 @@
 
             /* Optimize founder section for mobile */
             .founders-grid {
-                text-align: center;
                 gap: 2.5rem;
-            }
-
-            .founder-image {
-                margin: 0 auto 1.5rem;
-            }
-
-            .founder-name,
-            .founder-title,
-            .founder-bio,
-            .founder-quote,
-            .founder-expertise {
-                text-align: center;
             }
 
             /* Mobile grid spacing optimization */
@@ -1713,11 +1577,9 @@
             /* Ensure proper vertical rhythm on mobile */
             .section-title {
                 margin-bottom: 2rem;
-                text-align: center;
             }
 
             .section-text {
-                text-align: center;
                 margin: 0 auto 2rem;
                 max-width: none;
             }
@@ -1726,37 +1588,22 @@
             .value-prop,
             .focus-area,
             .workshop-category {
-                text-align: center;
                 box-shadow: 0 2px 8px rgba(0,0,0,0.05);
                 border: 1px solid var(--border-color);
             }
 
             /* Philosophy section mobile optimization */
             .philosophy-mission {
-                text-align: center;
                 margin-bottom: 3rem;
             }
 
-            .philosophy-subtitle {
-                text-align: center;
-            }
-
             .philosophy-text {
-                text-align: center;
                 margin: 0 auto 1.5rem;
-            }
-
-            .founder-philosophy-item {
-                text-align: center;
-            }
-
-            .founder-philosophy-text {
-                text-align: center;
             }
         }
 
         /* Mobile Performance Optimizations */
-        @media (max-width: 768px) {
+        @media (max-width: 940px) {
             /* Reduce complex visual effects on mobile for better performance */
             .container::before {
                 opacity: 0.3; /* Reduce background gradient complexity */
@@ -2266,64 +2113,7 @@
           transform: translateY(-1px);
         }
         
-                /* Stack form elements earlier for better button usability */
-        @media (max-width: 600px) {
-          .ml-form-embedWrapper.embedForm {
-            max-width: 100% !important;
-          }
-          
-          .ml-form-formContent.horozintalForm .ml-form-horizontalRow {
-            flex-direction: column;
-            gap: 1rem;
-          }
-          
-          .ml-form-formContent.horozintalForm .ml-form-horizontalRow .ml-input-horizontal,
-          .ml-form-formContent.horozintalForm .ml-form-horizontalRow .ml-button-horizontal {
-            width: 100% !important;
-          }
-        }
-        
-        /* Stack form elements at 480px breakpoint (consistent with site) */
-        @media (max-width: 480px) {
-          .ml-form-embedWrapper.embedDefault, .ml-form-embedWrapper.embedPopup { 
-            width: 100%!important; 
-          }
-          .ml-form-formContent.horozintalForm { 
-            float: none !important; 
-          }
-          .ml-form-formContent.horozintalForm .ml-form-horizontalRow { 
-            height: auto!important; 
-            width: 100%!important; 
-            float: none !important; 
-            display: flex !important;
-            flex-direction: column !important;
-            gap: 1rem !important;
-          }
-          .ml-form-formContent.horozintalForm .ml-form-horizontalRow .ml-input-horizontal { 
-            width: 100%!important; 
-            float: none !important; 
-          }
-          .ml-form-formContent.horozintalForm .ml-form-horizontalRow .ml-button-horizontal { 
-            width: 100%!important; 
-            float: none !important; 
-          }
-          .ml-form-formContent.horozintalForm .ml-form-horizontalRow .horizontal-fields { 
-            margin-bottom: 10px !important;
-            width: 100% !important; 
-            float: none !important; 
-          }
-          .ml-hide-horizontal { 
-            display: none !important; 
-          }
-          .ml-form-formContent.horozintalForm .ml-button-horizontal { 
-            display: none!important; 
-          }
-          .ml-mobileButton-horizontal { 
-            display: inline-block !important; 
-            margin-bottom: 20px;
-            width: 100%; 
-          }
-        }
+
 
         /* Navigation Section */
         .footer-nav {
@@ -2493,24 +2283,4 @@
             }
         }
 
-        @media (max-width: 480px) {
-            .footer {
-                padding: 1rem 0 0.5rem 0;
-            }
 
-            .footer-container {
-                padding: 0 1rem;
-            }
-
-            .newsletter-form {
-                gap: 0.5rem;
-            }
-
-            .back-to-top {
-                bottom: 1rem;
-                right: 1rem;
-                width: 40px;
-                height: 40px;
-                font-size: 1.1rem;
-            }
-        }
