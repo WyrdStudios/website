@@ -18,6 +18,13 @@ document.addEventListener('DOMContentLoaded', function() {
                                 toggleButton.title = currentTheme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode';
                             }
                         }
+                        
+                        // Attach theme toggle event listener
+                        const themeToggleButton = document.querySelector('.theme-toggle');
+                        if (themeToggleButton && typeof toggleTheme === 'function') {
+                            themeToggleButton.addEventListener('click', toggleTheme);
+                        }
+                        
                         // Set active navigation after header is loaded
                         if (typeof setActiveNavigation === 'function') {
                             setActiveNavigation();
