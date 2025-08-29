@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://thewyrdstudios.com/</loc>
     <lastmod>2025-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <image:image>
-      <image:loc>https://thewyrdstudios.com/images/wyrd-logo-web.webp</image:loc>
-      <image:title>Wyrd Studios Logo</image:title>
-      <image:caption>Wyrd Studios - Human-Centered Technology Products</image:caption>
-    </image:image>
   </url>
   <url>
     <loc>https://thewyrdstudios.com/work</loc>
@@ -23,11 +17,6 @@
     <lastmod>2025-08-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <image:image>
-      <image:loc>https://thewyrdstudios.com/images/RandyandOlivia.webp</image:loc>
-      <image:title>Randy and Olivia Olson - Wyrd Studios Founders</image:title>
-      <image:caption>Meet the co-founders of Wyrd Studios</image:caption>
-    </image:image>
   </url>
   <url>
     <loc>https://thewyrdstudios.com/workshops</loc>
