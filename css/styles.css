@@ -1036,6 +1036,12 @@
             margin-top: 2rem;
         }
 
+        @media (min-width: 769px) {
+            .contact-simple {
+                justify-content: flex-start;
+            }
+        }
+
         .contact-email-section {
             background: linear-gradient(135deg, var(--card-bg) 0%, var(--bg-secondary) 100%);
             padding: 2rem;
