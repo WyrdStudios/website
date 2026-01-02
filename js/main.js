@@ -1,7 +1,7 @@
 /**
  * Wyrd Studios Website - Main JavaScript Functionality
  * 
- * Copyright (c) 2025 Wyrd Studios, Inc. All rights reserved.
+ * Copyright (c) 2026 Wyrd Studios, Inc. All rights reserved.
  * 
  * This software is proprietary and confidential. Unauthorized copying, 
  * distribution, modification, public display, or public performance of 
